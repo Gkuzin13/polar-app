@@ -9,7 +9,7 @@ const Post = ({ dispatch, data }) => {
   return (
     <div
       className='flex justify-center flex-col cursor-pointer 
-    border-solid border-2 hover:border-gray-300'
+    border-solid border-2 hover:border-gray-300 mb-3 mt-3'
     >
       {/* Post Main Info */}
       <div className='flex items-center justify-start p-1 '>
@@ -32,8 +32,8 @@ const Post = ({ dispatch, data }) => {
       </div>
 
       {/* Post Actions */}
-      <div className='text-gray-600 flex justify-between w-5/12 items-center p-1 pl-2 '>
-        <div className='flex items-center '>
+      <div className='text-gray-600 flex justify-between w-1/2 items-center p-1 pl-2 '>
+        <div className='flex items-center w-full '>
           <ArrowUpIcon
             className='h-4 w-4 hover:text-green-400 transition-colors'
             onClick={() =>
@@ -45,7 +45,7 @@ const Post = ({ dispatch, data }) => {
           />
           <span className='pl-1 pr-1'>{data.postVotes}</span>
           <ArrowDownIcon
-            className='h-4 w-4 hover:text-red-400 transition-colors'
+            className={`h-4 w-4 hover:text-red-400 transition-colors`}
             onClick={() =>
               dispatch({
                 type: ACTIONS.DOWNVOTE_POST,
@@ -55,8 +55,8 @@ const Post = ({ dispatch, data }) => {
           />
         </div>
         <div
-          className='pl-2 pr-2 ml-2 mr-2 text-black-500 flex items-center justify-around
-          hover:text-blue-600 transition-colors
+          className='pl-2 pr-2 ml-2 mr-2 text-black-500 flex items-center 
+          hover:text-blue-600 transition-colors w-full
         '
         >
           <ChatAltIcon className='h-5 w-5' />
@@ -67,7 +67,7 @@ const Post = ({ dispatch, data }) => {
         hover:text-green-600 transition-colors'
         >
           <BookmarkIcon className='h-5 w-5 ' />
-          <span className='pl-1 '>Save</span>
+          <span>Save</span>
         </div>
       </div>
     </div>
