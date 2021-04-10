@@ -1,8 +1,13 @@
 import React, { useReducer, useState, useEffect } from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { reducer } from '../reducers/reducers';
+import { db } from '../firebase/firebase';
+import Post from './Post';
+import Navbar from './Navbar';
+import SignUp from './SignUp';
+import SignIn from './SignIn';
+import { AuthProvider } from '../Auth';
 import { v4 as uuid } from 'uuid';
-import db from './firebase';
-import Post from './components/Post';
-import { reducer } from './reducers/reducers';
 
 const App = () => {
   const [loading, setLoading] = useState(true);
@@ -43,11 +48,18 @@ const App = () => {
   }
 
   return (
-    <div>
-      {[...data].map((data, i) => {
-        return <Post key={i} dispatch={dispatch} data={data} />;
-      })}
-    </div>
+    <AuthProvider>
+      <Router basename='/'>
+        <Navbar />
+
+        <Route path='/signup' render={() => <SignUp />} />
+        <Route path='/signin' component={SignIn} />
+
+        {[...data].map((data, i) => {
+          return <Post key={i} dispatch={dispatch} data={data} />;
+        })}
+      </Router>
+    </AuthProvider>
   );
 };
 

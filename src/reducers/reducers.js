@@ -1,4 +1,4 @@
-import db from '../firebase';
+import { db } from '../firebase/firebase';
 
 export const ACTIONS = {
   SET_DATA: 'setdata',
