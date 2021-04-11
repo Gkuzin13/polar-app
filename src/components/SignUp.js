@@ -22,12 +22,22 @@ const SignUp = ({ history }) => {
           .auth()
           .createUserWithEmailAndPassword(email.value, password.value);
 
+        await app.auth().currentUser.updateProfile({ displayName: '123' });
+
+        if (currentUser) {
+          await db.ref('users/' + currentUser.uid).set({
+            userUid: currentUser.uid,
+            userEmail: currentUser.email,
+            userNickname: nickname.value,
+          });
+        }
+
         history.push('/');
       } catch (err) {
         alert(err);
       }
     },
-    [history]
+    [history, currentUser]
   );
 
   return (
