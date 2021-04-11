@@ -1,27 +1,38 @@
-import React, { useCallback } from 'react';
+import React, { useContext } from 'react';
+import { Redirect } from 'react-router-dom';
+import { AuthContext } from '../Auth';
 import app from '../firebase/firebase';
 import { Link } from 'react-router-dom';
+import { XIcon } from '@heroicons/react/solid';
+import Loader from './Loader';
 
-const SignIn = ({ history }) => {
-  const handleSignIn = useCallback(
-    async (e) => {
-      e.preventDefault();
-      const { email, password } = e.target.elements;
+const SignIn = ({ loading, setLoading }) => {
+  const { currentUser } = useContext(AuthContext);
 
-      try {
-        await app
-          .auth()
-          .signInWithEmailAndPassword(email.value, password.value);
-        history.push('/');
-      } catch (err) {
-        alert(err);
-      }
-    },
-    [history]
-  );
+  const handleSignIn = async (e) => {
+    e.preventDefault();
+    const { email, password } = e.target.elements;
+
+    setLoading(() => true);
+    try {
+      await app.auth().signInWithEmailAndPassword(email.value, password.value);
+
+      setLoading(() => false);
+    } catch (err) {
+      alert(err);
+      setLoading(() => false);
+    }
+  };
+
+  if (currentUser) {
+    return <Redirect to='/' />;
+  }
 
   return (
-    <div>
+    <div className='border-black border-2 my-0 mx-auto w-4/5'>
+      <div className='m-4 flex justify-end items-center'>
+        <XIcon className='w-8 h-8  cursor-pointer text-gray-500' />
+      </div>
       <div className='bg-grey-lighter my-10  flex flex-col'>
         <form
           onSubmit={handleSignIn}
@@ -49,12 +60,14 @@ const SignIn = ({ history }) => {
               className='w-full text-center py-3 rounded bg-purple-500 text-white hover:bg-purple-600
                focus:outline-none my-1 transition-colors'
             >
-              Login
+              <div className='flex justify-center items-center'>
+                {loading ? <Loader /> : 'Sign In'}
+              </div>
             </button>
           </div>
 
           <div className='text-grey-dark mt-6'>
-            Don't have an account?
+            New to my app?
             <Link
               className='no-underline border-b border-blue text-blue'
               to='/signup'

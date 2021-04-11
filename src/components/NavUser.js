@@ -1,25 +1,18 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import app from '../firebase/firebase';
 
 const NavUser = ({ history }) => {
   const [dropDown, setDropDown] = useState(false);
   const displayName = app.auth().currentUser.displayName;
 
-  const handleSignOut = useCallback(
-    async (e) => {
-      e.preventDefault();
+  const handleSignOut = async (e) => {
+    e.preventDefault();
 
-      try {
-        await app.auth().signOut();
-      } catch (err) {
-        alert(err);
-      }
-    },
-    [history]
-  );
-
-  const updateName = async () => {
-    console.log(app.auth().currentUser);
+    try {
+      await app.auth().signOut();
+    } catch (err) {
+      alert(err);
+    }
   };
 
   return (
@@ -31,7 +24,7 @@ const NavUser = ({ history }) => {
         >
           <img
             className='h-full w-full object-cover'
-            src={`https://eu.ui-avatars.com/api/?name=${displayName}&length=5`}
+            src={`https://eu.ui-avatars.com/api/?name=${displayName}&length=1`}
             alt='avatar'
           />
         </button>
@@ -40,10 +33,7 @@ const NavUser = ({ history }) => {
           className='absolute right-0 w-40 mt-2 py-2 bg-white border rounded shadow-xl'
           style={dropDown ? { display: 'block' } : { display: 'none' }}
         >
-          <button
-            onClick={updateName}
-            className='w-full text-left transition-colors duration-200 block px-4 py-2 text-normal text-gray-900 rounded hover:bg-purple-500 hover:text-white'
-          >
+          <button className='w-full text-left transition-colors duration-200 block px-4 py-2 text-normal text-gray-900 rounded hover:bg-purple-500 hover:text-white'>
             Settings
           </button>
           <div className='py-2'>

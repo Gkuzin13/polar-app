@@ -1,5 +1,5 @@
 import React, { useReducer, useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { reducer } from '../reducers/reducers';
 import { db } from '../firebase/firebase';
 import Post from './Post';
@@ -10,24 +10,31 @@ import { AuthProvider } from '../Auth';
 import { v4 as uuid } from 'uuid';
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
   const [data, dispatch] = useReducer(reducer, []);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    db.ref('posts')
-      .get()
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          dispatch({ type: 'setdata', data: Object.values(snapshot.val()) });
-        } else {
-          console.log('oops');
-        }
-        setLoading(false);
-      })
-
-      .catch((err) => {
+    const fetchPosts = async () => {
+      try {
+        await db
+          .ref('posts')
+          .get()
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              dispatch({
+                type: 'setdata',
+                data: Object.values(snapshot.val()),
+              });
+            } else {
+              console.log('oops');
+            }
+          });
+      } catch (err) {
         console.log(err);
-      });
+      }
+    };
+
+    fetchPosts();
   }, []);
 
   function writePostData(postContent, postId) {
@@ -43,18 +50,20 @@ const App = () => {
     });
   }
 
-  if (loading) {
-    return <div>Loading..</div>;
-  }
-
   return (
     <AuthProvider>
       <Router basename='/'>
         <Navbar />
-
-        <Route path='/signup' render={() => <SignUp />} />
-        <Route path='/signin' component={SignIn} />
-
+        <Switch>
+          <Route
+            path='/signup'
+            render={() => <SignUp loading={loading} setLoading={setLoading} />}
+          />
+          <Route
+            path='/signin'
+            render={() => <SignIn loading={loading} setLoading={setLoading} />}
+          />
+        </Switch>
         {[...data].map((data, i) => {
           return <Post key={i} dispatch={dispatch} data={data} />;
         })}
