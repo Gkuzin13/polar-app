@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+import { AuthContext } from '../Auth';
 import { ArrowUpIcon } from '@heroicons/react/solid';
 import { ArrowDownIcon } from '@heroicons/react/solid';
 import { ChatAltIcon } from '@heroicons/react/solid';
@@ -5,7 +7,9 @@ import { UserCircleIcon } from '@heroicons/react/solid';
 import { BookmarkIcon } from '@heroicons/react/solid';
 import { ACTIONS } from '../reducers/reducers';
 
-const Post = ({ dispatch, data }) => {
+const Post = ({ runReducer, data }) => {
+  const { currentUser } = useContext(AuthContext);
+
   return (
     <div
       className='flex justify-center flex-col cursor-pointer 
@@ -37,20 +41,14 @@ const Post = ({ dispatch, data }) => {
           <ArrowUpIcon
             className='h-4 w-4 hover:text-green-400 transition-colors'
             onClick={() =>
-              dispatch({
-                type: ACTIONS.UPVOTE_POST,
-                payload: { id: data.postId },
-              })
+              runReducer(ACTIONS.UPVOTE_POST, currentUser.uid, data)
             }
           />
           <span className='pl-1 pr-1'>{data.postVotes}</span>
           <ArrowDownIcon
             className={`h-4 w-4 hover:text-red-400 transition-colors`}
             onClick={() =>
-              dispatch({
-                type: ACTIONS.DOWNVOTE_POST,
-                payload: { id: data.postId },
-              })
+              runReducer(ACTIONS.DOWNVOTE_POST, currentUser.uid, data)
             }
           />
         </div>
@@ -63,6 +61,7 @@ const Post = ({ dispatch, data }) => {
           <span className='pl-1'>{data.comments}</span>
         </div>
         <div
+          onClick={() => runReducer(ACTIONS.SAVE_POST, currentUser.uid, data)}
           className='flex justify-evenly items-center 
         hover:text-green-600 transition-colors'
         >

@@ -3,7 +3,7 @@ import app from '../firebase/firebase';
 
 const NavUser = ({ history }) => {
   const [dropDown, setDropDown] = useState(false);
-  const displayName = app.auth().currentUser.displayName;
+  const displayName = app.auth().currentUser?.displayName;
 
   const handleSignOut = async (e) => {
     e.preventDefault();

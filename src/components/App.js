@@ -1,16 +1,18 @@
-import React, { useReducer, useState, useEffect } from 'react';
+import React, { useReducer, useState, useEffect, useCallback } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { reducer } from '../reducers/reducers';
 import { db } from '../firebase/firebase';
 import Post from './Post';
 import Navbar from './Navbar';
 import SignUp from './SignUp';
-import SignIn from './SignIn';
+import Login from './Login';
 import { AuthProvider } from '../Auth';
 import { v4 as uuid } from 'uuid';
 
 const App = () => {
   const [data, dispatch] = useReducer(reducer, []);
+  const [loginWindow, setLoginWindow] = useState(false);
+  const [signUpWindow, setSignUpWindow] = useState(false);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -37,6 +39,25 @@ const App = () => {
     fetchPosts();
   }, []);
 
+  const runReducer = (action, userId, postData) => {
+    dispatch({
+      type: action,
+      payload: { id: postData.postId, user: userId },
+    });
+  };
+
+  const manageLoginWindow = (action) => {
+    setLoginWindow(action);
+  };
+
+  const manageSignUpWindow = (action) => {
+    setSignUpWindow(action);
+  };
+
+  const manageLoader = (action) => {
+    setLoading(action);
+  };
+
   function writePostData(postContent, postId) {
     db.ref('posts/' + postId).set({
       postId: postId,
@@ -53,19 +74,31 @@ const App = () => {
   return (
     <AuthProvider>
       <Router basename='/'>
-        <Navbar />
-        <Switch>
-          <Route
-            path='/signup'
-            render={() => <SignUp loading={loading} setLoading={setLoading} />}
+        <Navbar
+          signUpWindow={signUpWindow}
+          loginWindow={loginWindow}
+          manageLoginWindow={manageLoginWindow}
+          manageSignUpWindow={manageSignUpWindow}
+        />
+
+        {loginWindow ? (
+          <Login
+            loginWindow={loginWindow}
+            manageLoginWindow={manageLoginWindow}
+            manageLoader={manageLoader}
+            loading={loading}
           />
-          <Route
-            path='/signin'
-            render={() => <SignIn loading={loading} setLoading={setLoading} />}
+        ) : null}
+        {signUpWindow ? (
+          <SignUp
+            signUpWindow={signUpWindow}
+            manageSignUpWindow={manageSignUpWindow}
+            manageLoader={manageLoader}
+            loading={loading}
           />
-        </Switch>
+        ) : null}
         {[...data].map((data, i) => {
-          return <Post key={i} dispatch={dispatch} data={data} />;
+          return <Post key={i} runReducer={runReducer} data={data} />;
         })}
       </Router>
     </AuthProvider>
