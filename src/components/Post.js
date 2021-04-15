@@ -207,7 +207,7 @@ const Post = ({ dispatch, postData }) => {
           <div
             key={i}
             className='flex justify-center flex-col cursor-pointer 
-            border-solid border-2 hover:border-gray-300 mb-3 mt-3'
+            border-solid border-2 hover:border-gray-300 mb-3 mx-1'
           >
             {/* Post Main Info */}
             <div className='flex items-center justify-start p-1 '>
@@ -250,7 +250,7 @@ const Post = ({ dispatch, postData }) => {
                 <ArrowDownIcon
                   className={`h-4 w-4 ${
                     userVoteData()?.downVoted ? 'text-blue-500' : null
-                  }  transition-colors`}
+                  }  transition-colors hover:text-blue-400`}
                   onClick={() =>
                     votePost(ACTIONS.DOWNVOTE_POST, post, userVoteData())
                   }

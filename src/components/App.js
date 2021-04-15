@@ -4,10 +4,13 @@ import { reducer } from '../reducers/reducers';
 import { db } from '../firebase/firebase';
 import { AuthContext } from '../Auth';
 import Post from './Post';
+import Selection from './Selection';
+import AddPostButton from './AddPostButton';
 import Navbar from './Navbar';
 import SignUp from './SignUp';
 import Login from './Login';
 import { v4 as uuid } from 'uuid';
+import Loader from './Loader';
 
 const App = () => {
   const [postData, dispatch] = useReducer(reducer, []);
@@ -19,6 +22,7 @@ const App = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
+      setLoading(true);
       try {
         await db
           .ref('posts')
@@ -33,8 +37,10 @@ const App = () => {
               console.log('oops');
             }
           });
+        setLoading(false);
       } catch (err) {
         console.log(err);
+        setLoading(false);
       }
     };
 
@@ -91,7 +97,19 @@ const App = () => {
           loading={loading}
         />
       ) : null}
-      <Post dispatch={dispatch} postData={postData} />
+
+      {loading ? <Loader /> : null}
+
+      <div>
+        <div className='flex justify-between mx-1 mb-2 sticky'>
+          <Selection />
+          {currentUser ? <AddPostButton /> : null}
+        </div>
+
+        <div>
+          <Post dispatch={dispatch} postData={postData} />
+        </div>
+      </div>
     </Router>
   );
 };
