@@ -1,4 +1,11 @@
 import { useEffect, useState, useContext } from 'react';
+import {
+  getUserSavedPosts,
+  getUserVotedPosts,
+  updateSavedPosts,
+  updateUpVote,
+  updateDownVote,
+} from '../services/postHandler';
 import { AuthContext } from '../Auth';
 import { ArrowUpIcon } from '@heroicons/react/solid';
 import { ArrowDownIcon } from '@heroicons/react/solid';
@@ -15,52 +22,38 @@ const Post = ({ dispatch, postData }) => {
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
-    const getUserVotedPosts = async () => {
-      try {
-        await db
-          .ref(`users/${currentUser.uid}/votedPosts`)
-          .on('value', (snapshot) => {
-            if (!snapshot.val()) {
-              return;
-            }
-            setVotedPosts(Object.values(snapshot.val()));
-          });
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
     if (currentUser) {
-      getUserVotedPosts();
+      getUserVotedPosts(currentUser.uid).then((posts) => {
+        console.log(posts);
+        setVotedPosts(() => posts);
+      });
+
+      getUserSavedPosts(currentUser.uid).then((posts) => {
+        setSavedPosts(() => posts);
+      });
     }
   }, [currentUser]);
 
-  useEffect(() => {
-    const getUserSavedPosts = async () => {
-      try {
-        await db
-          .ref(`users/${currentUser.uid}/savedPosts`)
-          .on('value', (snapshot) => {
-            if (!snapshot.val()) {
-              return;
-            }
-            setSavedPosts(Object.keys(snapshot.val()));
-          });
-      } catch (err) {
-        console.log(err);
-      }
-    };
-
-    if (currentUser) {
-      getUserSavedPosts();
-    }
-  }, [currentUser]);
-
-  const votePost = async (action, thisPost, postVoteData) => {
-    if (!currentUser) {
-      return;
+  const toggleSavePost = (thisPost, postId) => {
+    console.log(savedPosts);
+    if (!thisPost) {
+      updateSavedPosts(thisPost, postId, currentUser.uid).then(() => {
+        setSavedPosts((prev) => [...prev, postId]);
+      });
     }
 
+    if (thisPost) {
+      updateSavedPosts(thisPost, postId, currentUser.uid).then(() => {
+        const newSavedPosts = [...savedPosts].filter(
+          (post) => post !== thisPost
+        );
+
+        setSavedPosts(() => newSavedPosts);
+      });
+    }
+  };
+
+  const toggleUpVote = (thisPost, postVoteData) => {
     if (typeof postVoteData === 'undefined') {
       postVoteData = {
         upVoted: false,
@@ -69,29 +62,21 @@ const Post = ({ dispatch, postData }) => {
       };
     }
 
-    try {
-      if (action === ACTIONS.UPVOTE_POST) {
-        const updatedVote = {
-          ...postVoteData,
-          upVoted: !postVoteData.upVoted,
-          downVoted: false,
-        };
+    const toggledVote = {
+      ...postVoteData,
+      upVoted: !postVoteData.upVoted,
+      downVoted: false,
+    };
 
-        await db
-          .ref(`users/${currentUser.uid}/votedPosts`)
-          .child(thisPost.postId)
-          .update(updatedVote);
+    const filteredPosts = [...votedPosts].filter(
+      (posts) => posts.postId !== thisPost.postId
+    );
 
-        await db
-          .ref(`posts/${thisPost.postId}`)
-          .child('postVotes')
-          .transaction((votes) => {
-            if (postVoteData.upVoted) {
-              return votes - 1;
-            }
+    const updatedVotedPosts = [...filteredPosts, toggledVote];
 
-            return votes + 1;
-          });
+    updateUpVote(thisPost, postVoteData, currentUser.uid, toggledVote).then(
+      () => {
+        setVotedPosts(updatedVotedPosts);
 
         if (postVoteData.upVoted) {
           dispatch({
@@ -105,34 +90,33 @@ const Post = ({ dispatch, postData }) => {
           });
         }
       }
+    );
+  };
 
-      if (action === ACTIONS.DOWNVOTE_POST) {
-        const updatedVote = {
-          ...postVoteData,
-          upVoted: false,
-          downVoted: !postVoteData.downVoted,
-        };
+  const toggleDownVote = (thisPost, postVoteData) => {
+    if (typeof postVoteData === 'undefined') {
+      postVoteData = {
+        upVoted: false,
+        downVoted: false,
+        postId: thisPost.postId,
+      };
+    }
 
-        console.log(postVoteData);
+    const toggledVote = {
+      ...postVoteData,
+      upVoted: false,
+      downVoted: !postVoteData.downVoted,
+    };
 
-        await db
-          .ref(`users/${currentUser.uid}/votedPosts`)
-          .child(thisPost.postId)
-          .update(updatedVote);
+    const filteredPosts = [...votedPosts].filter(
+      (posts) => posts.postId !== thisPost.postId
+    );
 
-        await db
-          .ref(`posts/${thisPost.postId}`)
-          .child('postVotes')
-          .transaction((votes) => {
-            if (postVoteData.downVoted) {
-              console.log(postVoteData);
-              return votes + 1;
-            }
+    const updatedVotedPosts = [...filteredPosts, toggledVote];
 
-            console.log(postVoteData);
-
-            return votes - 1;
-          });
+    updateDownVote(thisPost, postVoteData, currentUser.uid, toggledVote).then(
+      () => {
+        setVotedPosts(updatedVotedPosts);
 
         if (postVoteData.downVoted) {
           dispatch({
@@ -146,49 +130,14 @@ const Post = ({ dispatch, postData }) => {
           });
         }
       }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const savePost = async (thisPost, thisPostId) => {
-    if (!currentUser) {
-      return;
-    }
-
-    const savedPostsCopy = [...savedPosts];
-
-    try {
-      if (!thisPost) {
-        await db
-          .ref(`users/${currentUser.uid}/savedPosts/${thisPostId}`)
-          .set(true);
-
-        setSavedPosts((prev) => [...prev, thisPostId]);
-      }
-
-      if (thisPost) {
-        await db
-          .ref(`users/${currentUser.uid}/savedPosts`)
-          .child(thisPost)
-          .remove();
-
-        const newSavedPosts = [...savedPostsCopy].filter(
-          (post) => post !== thisPost
-        );
-
-        setSavedPosts(newSavedPosts);
-      }
-    } catch (err) {
-      console.log(err);
-    }
+    );
   };
 
   return (
     <>
       {[...postData].map((post, i) => {
         const userVoteData = () => {
-          if (!votedPosts && !currentUser) {
+          if (!votedPosts) {
             return;
           }
 
@@ -196,7 +145,7 @@ const Post = ({ dispatch, postData }) => {
         };
 
         const userSavedPosts = () => {
-          if (!savedPosts && !currentUser) {
+          if (!savedPosts) {
             return;
           }
 
@@ -242,18 +191,14 @@ const Post = ({ dispatch, postData }) => {
                   className={`h-4 w-5 ${
                     userVoteData()?.upVoted ? 'text-red-500' : null
                   }  transition-colors hover:text-red-400 `}
-                  onClick={() =>
-                    votePost(ACTIONS.UPVOTE_POST, post, userVoteData())
-                  }
+                  onClick={() => toggleUpVote(post, userVoteData())}
                 />
                 <span className='pl-1 pr-1'>{post.postVotes}</span>
                 <ArrowDownIcon
                   className={`h-4 w-4 ${
                     userVoteData()?.downVoted ? 'text-blue-500' : null
                   }  transition-colors hover:text-blue-400`}
-                  onClick={() =>
-                    votePost(ACTIONS.DOWNVOTE_POST, post, userVoteData())
-                  }
+                  onClick={() => toggleDownVote(post, userVoteData())}
                 />
               </div>
               <div
@@ -266,7 +211,7 @@ const Post = ({ dispatch, postData }) => {
                 <span>Comments</span>
               </div>
               <div
-                onClick={() => savePost(userSavedPosts(), post.postId)}
+                onClick={() => toggleSavePost(userSavedPosts(), post.postId)}
                 className={`flex justify-evenly items-center 
               hover:text-green-600 transition-colors ${
                 userSavedPosts() ? 'text-green-700' : null

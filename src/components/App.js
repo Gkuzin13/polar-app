@@ -1,16 +1,16 @@
 import React, { useReducer, useState, useEffect, useContext } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { reducer } from '../reducers/reducers';
-import { db } from '../firebase/firebase';
 import { AuthContext } from '../Auth';
+import { fetchPosts } from '../services/postHandler';
 import Post from './Post';
 import Selection from './Selection';
 import AddPostButton from './AddPostButton';
 import Navbar from './Navbar';
 import SignUp from './SignUp';
 import Login from './Login';
-import { v4 as uuid } from 'uuid';
 import Loader from './Loader';
+import { ACTIONS } from '../reducers/reducers';
 
 const App = () => {
   const [postData, dispatch] = useReducer(reducer, []);
@@ -21,30 +21,15 @@ const App = () => {
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      setLoading(true);
-      try {
-        await db
-          .ref('posts')
-          .get()
-          .then((snapshot) => {
-            if (snapshot.exists()) {
-              dispatch({
-                type: 'setdata',
-                data: Object.values(snapshot.val()),
-              });
-            } else {
-              console.log('oops');
-            }
-          });
-        setLoading(false);
-      } catch (err) {
-        console.log(err);
-        setLoading(false);
-      }
-    };
+    setLoading(true);
 
-    fetchPosts();
+    fetchPosts().then((posts) => {
+      dispatch({
+        type: ACTIONS.SET_DATA,
+        data: posts,
+      });
+      setLoading(false);
+    });
   }, []);
 
   const manageLoginWindow = (action) => {
@@ -58,19 +43,6 @@ const App = () => {
   const manageLoader = (action) => {
     setLoading(action);
   };
-
-  function writePostData(postContent, postId) {
-    db.ref('posts/' + postId).set({
-      postId: postId,
-      postVotes: 0,
-      votedByUser: false,
-      comments: 0,
-      postOwner: 'JessicaPl2',
-      postDate: Date.now(),
-      postSubGroup: '/videos',
-      postContent: postContent,
-    });
-  }
 
   return (
     <Router basename='/'>
