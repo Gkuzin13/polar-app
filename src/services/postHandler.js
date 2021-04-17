@@ -23,7 +23,10 @@ export const getUserVotedPosts = async (currentUserUid) => {
       .ref(`users/${currentUserUid}/votedPosts`)
       .get()
       .then((snapshot) => {
-        return Object.values(snapshot.val());
+        if (snapshot.exists()) {
+          return Object.values(snapshot.val());
+        }
+        return [];
       });
   } catch (err) {
     return console.log(err);

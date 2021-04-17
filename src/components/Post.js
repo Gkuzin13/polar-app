@@ -13,29 +13,28 @@ import { ChatAltIcon } from '@heroicons/react/solid';
 import { UserCircleIcon } from '@heroicons/react/solid';
 import { BookmarkIcon } from '@heroicons/react/solid';
 import { ACTIONS } from '../reducers/reducers';
-import { db } from '../firebase/firebase';
 
 const Post = ({ dispatch, postData }) => {
   const [votedPosts, setVotedPosts] = useState([]);
   const [savedPosts, setSavedPosts] = useState([]);
-
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
     if (currentUser) {
       getUserVotedPosts(currentUser.uid).then((posts) => {
-        console.log(posts);
         setVotedPosts(() => posts);
       });
 
       getUserSavedPosts(currentUser.uid).then((posts) => {
         setSavedPosts(() => posts);
       });
+    } else {
+      setSavedPosts(() => []);
+      setVotedPosts(() => []);
     }
   }, [currentUser]);
 
   const toggleSavePost = (thisPost, postId) => {
-    console.log(savedPosts);
     if (!thisPost) {
       updateSavedPosts(thisPost, postId, currentUser.uid).then(() => {
         setSavedPosts((prev) => [...prev, postId]);
@@ -67,6 +66,8 @@ const Post = ({ dispatch, postData }) => {
       upVoted: !postVoteData.upVoted,
       downVoted: false,
     };
+
+    console.log(votedPosts);
 
     const filteredPosts = [...votedPosts].filter(
       (posts) => posts.postId !== thisPost.postId

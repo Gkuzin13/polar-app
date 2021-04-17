@@ -16,7 +16,7 @@ const NavUser = ({ history }) => {
   };
 
   return (
-    <div className='flex justify-center '>
+    <div className='flex justify-center z-10'>
       <div className='relative'>
         <button
           className='block h-10 w-10 rounded-full overflow-hidden focus:outline-none'

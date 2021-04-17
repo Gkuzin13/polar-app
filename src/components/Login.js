@@ -1,27 +1,22 @@
 import React, { useContext } from 'react';
 import { Redirect } from 'react-router-dom';
+import loginHandler from '../services/loginHandler';
 import { AuthContext } from '../Auth';
-import app from '../firebase/firebase';
-import { Link } from 'react-router-dom';
 import { XIcon } from '@heroicons/react/solid';
 import Loader from './Loader';
 
-const Login = ({ manageLoader, loading, manageLoginWindow, loginWindow }) => {
+const Login = ({ manageLoader, loading, manageLoginWindow }) => {
   const { currentUser } = useContext(AuthContext);
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
     const { email, password } = e.target.elements;
 
     manageLoader(true);
-    try {
-      await app.auth().signInWithEmailAndPassword(email.value, password.value);
 
+    loginHandler(email, password).then(() => {
       manageLoader(false);
-    } catch (err) {
-      alert(err);
-      manageLoader(false);
-    }
+    });
   };
 
   if (currentUser) {

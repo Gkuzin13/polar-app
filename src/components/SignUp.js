@@ -1,20 +1,14 @@
 import React, { useContext } from 'react';
 import { Redirect, withRouter } from 'react-router';
-import app, { db } from '../firebase/firebase';
-import { Link } from 'react-router-dom';
+import { createNewUser, pushNewUserToDb } from '../services/signUpHandler';
 import { AuthContext } from '../Auth';
 import { XIcon } from '@heroicons/react/solid';
 import Loader from './Loader';
 
-const SignUp = ({
-  loading,
-  manageLoader,
-  manageSignUpWindow,
-  signUpWindow,
-}) => {
+const SignUp = ({ loading, manageLoader, manageSignUpWindow }) => {
   const { currentUser } = useContext(AuthContext);
 
-  const handleSignUp = async (e) => {
+  const handleSignUp = (e) => {
     e.preventDefault();
 
     const { email, password, confirmpassword, nickname } = e.target.elements;
@@ -25,39 +19,20 @@ const SignUp = ({
 
     manageLoader(true);
 
-    try {
-      await (
-        await app
-          .auth()
-          .createUserWithEmailAndPassword(email.value, password.value)
-      ).user.updateProfile({ displayName: nickname.value });
-
-      manageLoader(false);
-    } catch (err) {
-      alert(err);
-      manageLoader(false);
-    }
-  };
-
-  const pushNewUserToDb = async (id, email, nickname) => {
-    try {
-      await db.ref('users/' + id).set({
-        userUid: id,
-        userEmail: email,
-        userNickname: nickname,
-      });
-    } catch (err) {
-      alert(err);
-    }
+    createNewUser(email, password, nickname).then(() => {
+      if (currentUser) {
+        pushNewUserToDb(
+          currentUser.uid,
+          currentUser.email,
+          currentUser.displayName
+        ).then(() => {
+          manageLoader(false);
+        });
+      }
+    });
   };
 
   if (currentUser) {
-    pushNewUserToDb(
-      currentUser.uid,
-      currentUser.email,
-      currentUser.displayName
-    );
-
     return <Redirect to='/' />;
   }
 

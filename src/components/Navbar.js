@@ -1,9 +1,7 @@
-import React, { useContext, useState } from 'react';
-import { UserIcon } from '@heroicons/react/solid';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AuthContext } from '../Auth';
 import NavUser from './NavUser';
-import Loader from './Loader';
 
 const Navbar = ({
   manageLoginWindow,
