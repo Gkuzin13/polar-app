@@ -1,19 +1,8 @@
 import React, { useState } from 'react';
-import app from '../firebase/firebase';
+import { handleSignOut } from '../services/logOutHandler';
 
 const NavUser = ({ history }) => {
   const [dropDown, setDropDown] = useState(false);
-  const displayName = app.auth().currentUser?.displayName;
-
-  const handleSignOut = async (e) => {
-    e.preventDefault();
-
-    try {
-      await app.auth().signOut();
-    } catch (err) {
-      alert(err);
-    }
-  };
 
   return (
     <div className='flex justify-center z-10'>
@@ -24,7 +13,7 @@ const NavUser = ({ history }) => {
         >
           <img
             className='h-full w-full object-cover'
-            src={`https://eu.ui-avatars.com/api/?name=${displayName}&length=1`}
+            src={`https://eu.ui-avatars.com/api/?name=hi&length=1`}
             alt='avatar'
           />
         </button>

@@ -1,6 +1,6 @@
-import groupList from '../GroupList';
+import groupList from '../groups';
 
-const Selection = () => {
+const GroupList = () => {
   return (
     <div className='w-full flex'>
       <select className='w-full p-2 cursor-pointer rounded font-semibold'>
@@ -16,4 +16,4 @@ const Selection = () => {
   );
 };
 
-export default Selection;
+export default GroupList;

@@ -7,6 +7,12 @@ export const createNewUser = async (email, password, nickname) => {
         .auth()
         .createUserWithEmailAndPassword(email.value, password.value)
     ).user.updateProfile({ displayName: nickname.value });
+
+    await app.auth().onAuthStateChanged(() => {
+      const userUid = app.auth().currentUser.uid;
+
+      pushNewUserToDb(userUid, email.value, nickname.value);
+    });
   } catch (err) {
     alert(err);
   }

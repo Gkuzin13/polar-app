@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Redirect, withRouter } from 'react-router';
-import { createNewUser, pushNewUserToDb } from '../services/signUpHandler';
+import { createNewUser } from '../services/signUpHandler';
 import { AuthContext } from '../Auth';
 import { XIcon } from '@heroicons/react/solid';
 import Loader from './Loader';
@@ -20,15 +20,7 @@ const SignUp = ({ loading, manageLoader, manageSignUpWindow }) => {
     manageLoader(true);
 
     createNewUser(email, password, nickname).then(() => {
-      if (currentUser) {
-        pushNewUserToDb(
-          currentUser.uid,
-          currentUser.email,
-          currentUser.displayName
-        ).then(() => {
-          manageLoader(false);
-        });
-      }
+      manageLoader(false);
     });
   };
 

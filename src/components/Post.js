@@ -13,11 +13,15 @@ import { ChatAltIcon } from '@heroicons/react/solid';
 import { UserCircleIcon } from '@heroicons/react/solid';
 import { BookmarkIcon } from '@heroicons/react/solid';
 import { ACTIONS } from '../reducers/reducers';
+import { Link } from 'react-router-dom';
 
-const Post = ({ dispatch, postData }) => {
+const Post = ({ dispatch, postData, setSignUpWindow }) => {
   const [votedPosts, setVotedPosts] = useState([]);
   const [savedPosts, setSavedPosts] = useState([]);
+
   const { currentUser } = useContext(AuthContext);
+
+  console.log(postData);
 
   useEffect(() => {
     if (currentUser) {
@@ -35,6 +39,10 @@ const Post = ({ dispatch, postData }) => {
   }, [currentUser]);
 
   const toggleSavePost = (thisPost, postId) => {
+    if (!currentUser) {
+      setSignUpWindow(true);
+      return;
+    }
     if (!thisPost) {
       updateSavedPosts(thisPost, postId, currentUser.uid).then(() => {
         setSavedPosts((prev) => [...prev, postId]);
@@ -53,6 +61,10 @@ const Post = ({ dispatch, postData }) => {
   };
 
   const toggleUpVote = (thisPost, postVoteData) => {
+    if (!currentUser) {
+      setSignUpWindow(true);
+      return;
+    }
     if (typeof postVoteData === 'undefined') {
       postVoteData = {
         upVoted: false,
@@ -95,6 +107,10 @@ const Post = ({ dispatch, postData }) => {
   };
 
   const toggleDownVote = (thisPost, postVoteData) => {
+    if (!currentUser) {
+      setSignUpWindow(true);
+      return;
+    }
     if (typeof postVoteData === 'undefined') {
       postVoteData = {
         upVoted: false,
@@ -136,7 +152,7 @@ const Post = ({ dispatch, postData }) => {
 
   return (
     <>
-      {[...postData].map((post, i) => {
+      {postData.map((post, i) => {
         const userVoteData = () => {
           if (!votedPosts) {
             return;
@@ -202,7 +218,14 @@ const Post = ({ dispatch, postData }) => {
                   onClick={() => toggleDownVote(post, userVoteData())}
                 />
               </div>
-              <div
+              <Link
+                to={`/g${post.postSubGroup}/${post.postId}`}
+                onClick={() =>
+                  dispatch({
+                    type: ACTIONS.SET_DATA,
+                    data: [post],
+                  })
+                }
                 className='mx-10 text-black-500 flex 
                 justify-center items-center 
                hover:text-blue-600 transition-colors '
@@ -210,7 +233,7 @@ const Post = ({ dispatch, postData }) => {
                 <ChatAltIcon className='h-5 w-5' />
                 <span className='px-1'>{post.comments} </span>
                 <span>Comments</span>
-              </div>
+              </Link>
               <div
                 onClick={() => toggleSavePost(userSavedPosts(), post.postId)}
                 className={`flex justify-evenly items-center 
