@@ -1,14 +1,15 @@
-import React, { useReducer, useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { reducer } from './reducers/reducers';
+import React, { useReducer, useState, useEffect, useContext } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import { AuthContext } from './Auth';
 import { fetchPosts } from './services/postHandler';
-import Post from './components/Post';
-import Selection from './components/GroupList';
+import { reducer } from './reducers/reducers';
+import { ACTIONS } from './reducers/reducers';
 import Navbar from './components/Navbar';
 import SignUp from './components/SignUp';
 import Login from './components/Login';
 import Loader from './components/Loader';
-import { ACTIONS } from './reducers/reducers';
+import Commentsview from './scenes/CommentsView';
+import Home from './scenes/Home';
 
 const App = () => {
   const [postData, dispatch] = useReducer(reducer, []);
@@ -16,15 +17,18 @@ const App = () => {
   const [signUpWindow, setSignUpWindow] = useState(false);
   const [loading, setLoading] = useState(false);
 
+  const { currentUser } = useContext(AuthContext);
+
   useEffect(() => {
-    setLoading(true);
+    manageLoader(true);
 
     fetchPosts().then((posts) => {
       dispatch({
         type: ACTIONS.SET_DATA,
         data: posts,
       });
-      setLoading(false);
+
+      manageLoader(false);
     });
   }, []);
 
@@ -41,7 +45,7 @@ const App = () => {
   };
 
   return (
-    <Router>
+    <Route>
       <Navbar
         signUpWindow={signUpWindow}
         loginWindow={loginWindow}
@@ -67,19 +71,35 @@ const App = () => {
         ) : null}
       </div>
 
-      {loading ? <Loader /> : null}
       <Switch>
-        <Route exact path='/'>
-          <Selection />
-
-          <Post
-            dispatch={dispatch}
-            postData={postData}
-            setSignUpWindow={setSignUpWindow}
-          />
-        </Route>
+        {loading ? <Loader /> : null}
+        <Route
+          exact
+          path='/'
+          render={() => (
+            <Home
+              currentUser={currentUser}
+              postData={postData}
+              dispatch={dispatch}
+              manageLoader={manageLoader}
+              setSignUpWindow={setSignUpWindow}
+            />
+          )}
+        />
+        <Route
+          path='/g/:groupId/:postId'
+          render={() => (
+            <Commentsview
+              currentUser={currentUser}
+              postData={postData}
+              dispatch={dispatch}
+              manageLoader={manageLoader}
+              setSignUpWindow={setSignUpWindow}
+            />
+          )}
+        />
       </Switch>
-    </Router>
+    </Route>
   );
 };
 

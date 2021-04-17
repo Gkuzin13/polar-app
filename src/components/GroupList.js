@@ -1,8 +1,9 @@
 import groupList from '../groups';
+import AddPostButton from './AddPostButton';
 
 const GroupList = () => {
   return (
-    <div className='w-full flex'>
+    <div className='w-full flex mx-1'>
       <select className='w-full p-2 cursor-pointer rounded font-semibold'>
         {groupList.map((group, i) => {
           return (
@@ -12,6 +13,7 @@ const GroupList = () => {
           );
         })}
       </select>
+      <AddPostButton />
     </div>
   );
 };

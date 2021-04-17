@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../Auth';
 import NavUser from './NavUser';
 
@@ -16,7 +16,7 @@ const Navbar = ({
       className='flex w-full justify-between items-center px-8 py-3 mb-5 
     shadow-md static'
     >
-      <NavLink to='/'>Logo</NavLink>
+      <Link to='/'>Logo</Link>
 
       <div className='text-sm flex justify-between items-center'>
         <button

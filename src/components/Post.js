@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import {
   getUserSavedPosts,
   getUserVotedPosts,
@@ -6,7 +6,6 @@ import {
   updateUpVote,
   updateDownVote,
 } from '../services/postHandler';
-import { AuthContext } from '../Auth';
 import { ArrowUpIcon } from '@heroicons/react/solid';
 import { ArrowDownIcon } from '@heroicons/react/solid';
 import { ChatAltIcon } from '@heroicons/react/solid';
@@ -15,13 +14,9 @@ import { BookmarkIcon } from '@heroicons/react/solid';
 import { ACTIONS } from '../reducers/reducers';
 import { Link } from 'react-router-dom';
 
-const Post = ({ dispatch, postData, setSignUpWindow }) => {
+const Post = ({ dispatch, postData, setSignUpWindow, currentUser }) => {
   const [votedPosts, setVotedPosts] = useState([]);
   const [savedPosts, setSavedPosts] = useState([]);
-
-  const { currentUser } = useContext(AuthContext);
-
-  console.log(postData);
 
   useEffect(() => {
     if (currentUser) {
@@ -32,10 +27,12 @@ const Post = ({ dispatch, postData, setSignUpWindow }) => {
       getUserSavedPosts(currentUser.uid).then((posts) => {
         setSavedPosts(() => posts);
       });
-    } else {
-      setSavedPosts(() => []);
-      setVotedPosts(() => []);
+
+      return;
     }
+
+    setSavedPosts(() => []);
+    setVotedPosts(() => []);
   }, [currentUser]);
 
   const toggleSavePost = (thisPost, postId) => {
@@ -78,8 +75,6 @@ const Post = ({ dispatch, postData, setSignUpWindow }) => {
       upVoted: !postVoteData.upVoted,
       downVoted: false,
     };
-
-    console.log(votedPosts);
 
     const filteredPosts = [...votedPosts].filter(
       (posts) => posts.postId !== thisPost.postId
