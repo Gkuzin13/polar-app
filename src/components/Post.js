@@ -168,7 +168,7 @@ const Post = ({
             <div className="flex items-center justify-start p-1 ">
               <UserCircleIcon className="h-5 w-5  cursor-pointer" />
               <span className="pr-2 pl-2 font-bold hover:underline ">
-                {post.postSubGroup}
+                {`/${post.postSubGroup}`}
               </span>
               <div className="text-sm text-gray-500">
                 <span>Posted by </span>
@@ -180,11 +180,13 @@ const Post = ({
             </div>
 
             {/* Post Content */}
+
             <div
               className="flex flex-col w-full text-left p-2 
             border-solid border-t-2 border-b-2"
             >
-              {post.postContent}
+              <h1>{post.postTitle}</h1>
+              <p>{post.postContent}</p>
             </div>
 
             {/* Post Actions */}

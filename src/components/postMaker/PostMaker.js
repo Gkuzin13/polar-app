@@ -59,7 +59,7 @@ const PostMaker = ({ currentUser }) => {
           {groupList.map((group, i) => {
             return (
               <option key={i} placeholder="Choose a group">
-                {group}
+                {`/${group}`}
               </option>
             );
           })}

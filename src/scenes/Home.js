@@ -52,7 +52,7 @@ const Home = ({
 
   return (
     <div>
-      <GroupList />
+      <GroupList postData={postData} dispatch={dispatch} />
 
       <Post
         currentUser={currentUser}
