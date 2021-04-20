@@ -1,6 +1,7 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchPosts } from "../services/postHandler";
 import { ACTIONS } from "../reducers/reducers";
+import { getUserData } from "../services/userDataHandler";
 import Post from "../components/Post";
 import GroupList from "../components/GroupList";
 import Loader from "../components/Loader";
@@ -9,14 +10,17 @@ const Home = ({
   setSignUpWindow,
   dispatch,
   postData,
-  userData,
   currentUser,
   manageLoader,
   loading,
 }) => {
+  const [userData, setUserData] = useState([]);
+
   useEffect(() => {
     let isMounted = true;
+
     manageLoader(true);
+
     fetchPosts().then((posts) => {
       if (isMounted) {
         dispatch({
@@ -24,18 +28,23 @@ const Home = ({
           data: posts,
         });
 
-        manageLoader(false);
+        manageLoader(() => false);
       }
+    });
+
+    getUserData(currentUser?.uid).then((data) => {
+      setUserData(() => data);
     });
 
     return () => {
       isMounted = false;
+
       dispatch({
         type: ACTIONS.SET_DATA,
         data: [],
       });
     };
-  }, []);
+  }, [dispatch, manageLoader, currentUser]);
 
   if (loading) {
     return <Loader />;

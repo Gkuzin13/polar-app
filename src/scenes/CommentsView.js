@@ -1,8 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Post from "../components/Post";
-import PostComment from "../components/PostComment";
+import PostComment from "../components/postComment/PostComment";
 import CommentMaker from "../components/CommentMaker";
 import { fetchCurrentPost } from "../services/postHandler";
+import { getUserData } from "../services/userDataHandler";
 import Loader from "../components/Loader";
 import { ACTIONS } from "../reducers/reducers";
 
@@ -11,12 +12,12 @@ const CommentsView = ({
   dispatch,
   postData,
   currentUser,
-  userData,
   match,
   manageLoader,
   loading,
 }) => {
-  const { postId } = match.params;
+  const [userData, setUserData] = useState([]);
+  const postId = match.params.postId;
 
   useEffect(() => {
     let isMounted = true;
@@ -25,11 +26,15 @@ const CommentsView = ({
     fetchCurrentPost(postId).then((post) => {
       if (isMounted) {
         dispatch({
-          type: "setdata",
+          type: ACTIONS.SET_DATA,
           data: [post],
         });
         manageLoader(false);
       }
+    });
+
+    getUserData(currentUser?.uid).then((data) => {
+      setUserData(() => data);
     });
 
     return () => {
@@ -40,12 +45,12 @@ const CommentsView = ({
         data: [],
       });
     };
-  }, []);
+  }, [dispatch, postId, manageLoader, currentUser]);
 
   const updatePostData = () => {
     fetchCurrentPost(postId).then((post) => {
       dispatch({
-        type: "setdata",
+        type: ACTIONS.SET_DATA,
         data: [post],
       });
     });

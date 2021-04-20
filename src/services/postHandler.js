@@ -38,6 +38,14 @@ export const fetchCurrentPost = async (postId) => {
   }
 };
 
+export const pushNewPostToDb = async (post) => {
+  try {
+    return await db.ref(`posts/${post.postId}/`).set(post);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
 export const updateUpVote = async (
   thisPost,
   postVoteData,

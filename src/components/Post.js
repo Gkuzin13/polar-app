@@ -20,8 +20,13 @@ const Post = ({
   const [savedPosts, setSavedPosts] = useState([]);
 
   useEffect(() => {
-    setSavedPosts(userData.userSavedPosts);
-    setVotedPosts(userData.userVotedPosts);
+    setSavedPosts(() => userData.userSavedPosts);
+    setVotedPosts(() => userData.userVotedPosts);
+
+    return () => {
+      setSavedPosts(() => []);
+      setVotedPosts(() => []);
+    };
   }, [userData]);
 
   const toggleSavePost = (thisPost, postId) => {
@@ -135,7 +140,7 @@ const Post = ({
   };
 
   return (
-    <>
+    <div>
       {postData.map((post, i) => {
         const userVoteData = () => {
           if (!votedPosts) {
@@ -203,7 +208,7 @@ const Post = ({
                 />
               </div>
               <Link
-                to={`/g${post.postSubGroup}/${post.postId}`}
+                to={`/g/${post.postSubGroup}/${post.postId}`}
                 className="mx-10 text-black-500 flex 
                 justify-center items-center 
                hover:text-blue-600 transition-colors "
@@ -230,7 +235,7 @@ const Post = ({
           </div>
         );
       })}
-    </>
+    </div>
   );
 };
 
