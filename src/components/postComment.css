@@ -1,0 +1,14 @@
+.post-comment-ctn {
+  padding: 1rem;
+  margin: 2rem 0.5rem;
+  border: 2px rgb(219, 219, 219) solid;
+}
+
+.comment-content-ctn {
+  padding: 0.75rem;
+}
+
+.comment-date {
+  color: gray;
+  font-size: 0.85rem;
+}

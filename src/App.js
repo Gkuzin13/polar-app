@@ -1,15 +1,15 @@
-import React, { useReducer, useState, useEffect, useContext } from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { AuthContext } from './Auth';
-import { fetchPosts } from './services/postHandler';
-import { reducer } from './reducers/reducers';
-import { ACTIONS } from './reducers/reducers';
-import Navbar from './components/Navbar';
-import SignUp from './components/SignUp';
-import Login from './components/Login';
-import Loader from './components/Loader';
-import Commentsview from './scenes/CommentsView';
-import Home from './scenes/Home';
+import React, { useReducer, useState, useEffect, useContext } from "react";
+import { Route, Switch } from "react-router-dom";
+import { AuthContext } from "./Auth";
+import { fetchPosts } from "./services/postHandler";
+import { reducer } from "./reducers/reducers";
+import { ACTIONS } from "./reducers/reducers";
+import Navbar from "./components/Navbar";
+import SignUp from "./components/SignUp";
+import Login from "./components/Login";
+import Loader from "./components/Loader";
+import Commentsview from "./scenes/CommentsView";
+import Home from "./scenes/Home";
 
 const App = () => {
   const [postData, dispatch] = useReducer(reducer, []);
@@ -75,7 +75,7 @@ const App = () => {
         {loading ? <Loader /> : null}
         <Route
           exact
-          path='/'
+          path="/"
           render={() => (
             <Home
               currentUser={currentUser}
@@ -87,11 +87,12 @@ const App = () => {
           )}
         />
         <Route
-          path='/g/:groupId/:postId'
-          render={() => (
+          path="/g/:groupId/:postId"
+          render={({ match }) => (
             <Commentsview
               currentUser={currentUser}
               postData={postData}
+              match={match}
               dispatch={dispatch}
               manageLoader={manageLoader}
               setSignUpWindow={setSignUpWindow}

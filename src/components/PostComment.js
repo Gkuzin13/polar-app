@@ -1,31 +1,29 @@
-import { useEffect, useState } from 'react';
+import "./postComment.css";
 
-const PostComment = ({ postData }) => {
-  const [comments, setComments] = useState([]);
-
-  const getPostComments = () => {
-    for (const key of postData) {
-      return Object.values(key.postComments);
-    }
-  };
-
-  useEffect(() => {
-    setComments(() => getPostComments());
-  }, [getPostComments]);
-
-  console.log(comments);
-
+const PostComment = ({ currentPost }) => {
   return (
     <div>
-      {comments.map((comment) => {
-        return (
-          <div>
-            <div>
-              <span>{comment.commentOwnerName}</span>
-              <span>18 days ago</span>
+      {currentPost.map((data, i) => {
+        if (!data.postComments) {
+          return <div key={i}>Pretty empty here...</div>;
+        }
+        const comments = Object.values(data.postComments);
+
+        return comments.map((comment, i) => {
+          return (
+            <div className="post-comment-ctn" key={i}>
+              <div>
+                <span className="comment-owner">
+                  {comment.commentOwnerName}
+                </span>
+                <span className="comment-date"> 18 hours ago</span>
+              </div>
+              <div className="comment-content-ctn">
+                <span>{comment.content}</span>
+              </div>
             </div>
-          </div>
-        );
+          );
+        });
       })}
     </div>
   );

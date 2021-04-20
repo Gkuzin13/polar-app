@@ -1,15 +1,36 @@
-import { db } from '../firebase/firebase';
+import { db } from "../firebase/firebase";
 
 export const fetchPosts = async () => {
   try {
     return await db
-      .ref('posts')
+      .ref("posts")
       .get()
       .then((snapshot) => {
         if (snapshot.exists()) {
           return Object.values(snapshot.val());
         } else {
-          console.log('oops');
+          console.log("oops");
+        }
+      });
+  } catch (err) {
+    return console.log(err);
+  }
+};
+
+export const fetchCurrentPost = async (postId) => {
+  if (typeof postId === "undefined") {
+    postId = "";
+  }
+
+  try {
+    return await db
+      .ref(`posts/${postId}`)
+      .get()
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          return snapshot.val();
+        } else {
+          console.log("oops");
         }
       });
   } catch (err) {
@@ -80,7 +101,7 @@ export const updateUpVote = async (
 
     await db
       .ref(`posts/${thisPost.postId}`)
-      .child('postVotes')
+      .child("postVotes")
       .transaction((votes) => {
         if (postVoteData.upVoted) {
           return votes - 1;
@@ -107,7 +128,7 @@ export const updateDownVote = async (
 
     await db
       .ref(`posts/${thisPost.postId}`)
-      .child('postVotes')
+      .child("postVotes")
       .transaction((votes) => {
         if (postVoteData.downVoted) {
           return votes + 1;

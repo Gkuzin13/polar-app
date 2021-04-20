@@ -1,17 +1,10 @@
-import { db } from '../firebase/firebase';
-import { v4 as uuid } from 'uuid';
+import { db } from "../firebase/firebase";
 
-export const pushCommentToDb = async (currentUser, content, postData) => {
+export const pushCommentToDb = async (commentData, postId, newCommentId) => {
   try {
-    const newCommentId = uuid();
-
-    await db.ref(`posts/${postData.postId}/postComments/${newCommentId}`).set({
-      commentOwnerUid: currentUser.uid,
-      commentOwnerName: currentUser.displayName,
-      content: content,
-      commentId: newCommentId,
-      commentDate: Date.now(),
-    });
+    await db
+      .ref(`posts/${postId}/postComments/${newCommentId}`)
+      .set(commentData);
   } catch (err) {
     console.log(err);
   }

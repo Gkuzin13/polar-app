@@ -1,18 +1,18 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 import {
   getUserSavedPosts,
   getUserVotedPosts,
   updateSavedPosts,
   updateUpVote,
   updateDownVote,
-} from '../services/postHandler';
-import { ArrowUpIcon } from '@heroicons/react/solid';
-import { ArrowDownIcon } from '@heroicons/react/solid';
-import { ChatAltIcon } from '@heroicons/react/solid';
-import { UserCircleIcon } from '@heroicons/react/solid';
-import { BookmarkIcon } from '@heroicons/react/solid';
-import { ACTIONS } from '../reducers/reducers';
-import { Link } from 'react-router-dom';
+} from "../services/postHandler";
+import { ArrowUpIcon } from "@heroicons/react/solid";
+import { ArrowDownIcon } from "@heroicons/react/solid";
+import { ChatAltIcon } from "@heroicons/react/solid";
+import { UserCircleIcon } from "@heroicons/react/solid";
+import { BookmarkIcon } from "@heroicons/react/solid";
+import { ACTIONS } from "../reducers/reducers";
+import { Link } from "react-router-dom";
 
 const Post = ({ dispatch, postData, setSignUpWindow, currentUser }) => {
   const [votedPosts, setVotedPosts] = useState([]);
@@ -62,7 +62,7 @@ const Post = ({ dispatch, postData, setSignUpWindow, currentUser }) => {
       setSignUpWindow(true);
       return;
     }
-    if (typeof postVoteData === 'undefined') {
+    if (typeof postVoteData === "undefined") {
       postVoteData = {
         upVoted: false,
         downVoted: false,
@@ -106,7 +106,7 @@ const Post = ({ dispatch, postData, setSignUpWindow, currentUser }) => {
       setSignUpWindow(true);
       return;
     }
-    if (typeof postVoteData === 'undefined') {
+    if (typeof postVoteData === "undefined") {
       postVoteData = {
         upVoted: false,
         downVoted: false,
@@ -167,18 +167,18 @@ const Post = ({ dispatch, postData, setSignUpWindow, currentUser }) => {
         return (
           <div
             key={i}
-            className='flex justify-center flex-col cursor-pointer 
-            border-solid border-2 hover:border-gray-300 mb-3 mx-1'
+            className="flex justify-center flex-col cursor-pointer 
+            border-solid border-2 hover:border-gray-300 mb-3 mx-1"
           >
             {/* Post Main Info */}
-            <div className='flex items-center justify-start p-1 '>
-              <UserCircleIcon className='h-5 w-5  cursor-pointer' />
-              <span className='pr-2 pl-2 font-bold hover:underline '>
+            <div className="flex items-center justify-start p-1 ">
+              <UserCircleIcon className="h-5 w-5  cursor-pointer" />
+              <span className="pr-2 pl-2 font-bold hover:underline ">
                 {post.postSubGroup}
               </span>
-              <div className='text-sm text-gray-500'>
+              <div className="text-sm text-gray-500">
                 <span>Posted by </span>
-                <span className='hover:underline font-semibold'>
+                <span className="hover:underline font-semibold">
                   {post.postOwner}
                 </span>
                 <span> {post.postDate} Hours ago</span>
@@ -187,56 +187,54 @@ const Post = ({ dispatch, postData, setSignUpWindow, currentUser }) => {
 
             {/* Post Content */}
             <div
-              className='flex flex-col w-full text-left p-2 
-            border-solid border-t-2 border-b-2'
+              className="flex flex-col w-full text-left p-2 
+            border-solid border-t-2 border-b-2"
             >
               {post.postContent}
             </div>
 
             {/* Post Actions */}
             <div
-              className='text-gray-600 flex justify-between w-1/2
-               items-center p-1 pl-2 '
+              className="text-gray-600 flex justify-between w-1/2
+               items-center p-1 pl-2 "
             >
-              <div className='flex items-center w-full '>
+              <div className="flex items-center w-full ">
                 <ArrowUpIcon
                   className={`h-4 w-5 ${
-                    userVoteData()?.upVoted ? 'text-red-500' : null
+                    userVoteData()?.upVoted ? "text-red-500" : null
                   }  transition-colors hover:text-red-400 `}
                   onClick={() => toggleUpVote(post, userVoteData())}
                 />
-                <span className='pl-1 pr-1'>{post.postVotes}</span>
+                <span className="pl-1 pr-1">{post.postVotes}</span>
                 <ArrowDownIcon
                   className={`h-4 w-4 ${
-                    userVoteData()?.downVoted ? 'text-blue-500' : null
+                    userVoteData()?.downVoted ? "text-blue-500" : null
                   }  transition-colors hover:text-blue-400`}
                   onClick={() => toggleDownVote(post, userVoteData())}
                 />
               </div>
               <Link
                 to={`/g${post.postSubGroup}/${post.postId}`}
-                onClick={() =>
-                  dispatch({
-                    type: ACTIONS.SET_DATA,
-                    data: [post],
-                  })
-                }
-                className='mx-10 text-black-500 flex 
+                className="mx-10 text-black-500 flex 
                 justify-center items-center 
-               hover:text-blue-600 transition-colors '
+               hover:text-blue-600 transition-colors "
               >
-                <ChatAltIcon className='h-5 w-5' />
-                <span className='px-1'>{post.comments} </span>
+                <ChatAltIcon className="h-5 w-5" />
+                <span className="px-1">
+                  {post.postComments
+                    ? Object.values(post.postComments).length
+                    : 0}
+                </span>
                 <span>Comments</span>
               </Link>
               <div
                 onClick={() => toggleSavePost(userSavedPosts(), post.postId)}
                 className={`flex justify-evenly items-center 
               hover:text-green-600 transition-colors ${
-                userSavedPosts() ? 'text-green-700' : null
+                userSavedPosts() ? "text-green-700" : null
               }`}
               >
-                <BookmarkIcon className='h-5 w-5 ' />
+                <BookmarkIcon className="h-5 w-5 " />
                 <span>Save</span>
               </div>
             </div>
