@@ -1,18 +1,17 @@
-import React, { useReducer, useState, useEffect, useContext } from "react";
+import React, { useReducer, useState, useContext, useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { AuthContext } from "./Auth";
-import { fetchPosts } from "./services/postHandler";
 import { reducer } from "./reducers/reducers";
-import { ACTIONS } from "./reducers/reducers";
+import { getUserData } from "./services/userDataHandler";
 import Navbar from "./components/Navbar";
 import SignUp from "./components/SignUp";
 import Login from "./components/Login";
-import Loader from "./components/Loader";
 import Commentsview from "./scenes/CommentsView";
 import Home from "./scenes/Home";
 
 const App = () => {
   const [postData, dispatch] = useReducer(reducer, []);
+  const [userData, setUserData] = useState([]);
   const [loginWindow, setLoginWindow] = useState(false);
   const [signUpWindow, setSignUpWindow] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -20,17 +19,10 @@ const App = () => {
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
-    manageLoader(true);
-
-    fetchPosts().then((posts) => {
-      dispatch({
-        type: ACTIONS.SET_DATA,
-        data: posts,
-      });
-
-      manageLoader(false);
+    getUserData(currentUser?.uid).then((data) => {
+      setUserData(data);
     });
-  }, []);
+  }, [currentUser]);
 
   const manageLoginWindow = (action) => {
     setLoginWindow(action);
@@ -72,7 +64,6 @@ const App = () => {
       </div>
 
       <Switch>
-        {loading ? <Loader /> : null}
         <Route
           exact
           path="/"
@@ -80,9 +71,11 @@ const App = () => {
             <Home
               currentUser={currentUser}
               postData={postData}
+              userData={userData}
               dispatch={dispatch}
               manageLoader={manageLoader}
               setSignUpWindow={setSignUpWindow}
+              loading={loading}
             />
           )}
         />
@@ -92,9 +85,11 @@ const App = () => {
             <Commentsview
               currentUser={currentUser}
               postData={postData}
+              userData={userData}
               match={match}
               dispatch={dispatch}
               manageLoader={manageLoader}
+              loading={loading}
               setSignUpWindow={setSignUpWindow}
             />
           )}

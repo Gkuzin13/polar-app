@@ -1,11 +1,6 @@
 import { useEffect, useState } from "react";
-import {
-  getUserSavedPosts,
-  getUserVotedPosts,
-  updateSavedPosts,
-  updateUpVote,
-  updateDownVote,
-} from "../services/postHandler";
+import { updateUpVote, updateDownVote } from "../services/postHandler";
+import { updateSavedPosts } from "../services/userDataHandler";
 import { ArrowUpIcon } from "@heroicons/react/solid";
 import { ArrowDownIcon } from "@heroicons/react/solid";
 import { ChatAltIcon } from "@heroicons/react/solid";
@@ -14,26 +9,20 @@ import { BookmarkIcon } from "@heroicons/react/solid";
 import { ACTIONS } from "../reducers/reducers";
 import { Link } from "react-router-dom";
 
-const Post = ({ dispatch, postData, setSignUpWindow, currentUser }) => {
+const Post = ({
+  dispatch,
+  postData,
+  setSignUpWindow,
+  currentUser,
+  userData,
+}) => {
   const [votedPosts, setVotedPosts] = useState([]);
   const [savedPosts, setSavedPosts] = useState([]);
 
   useEffect(() => {
-    if (currentUser) {
-      getUserVotedPosts(currentUser.uid).then((posts) => {
-        setVotedPosts(() => posts);
-      });
-
-      getUserSavedPosts(currentUser.uid).then((posts) => {
-        setSavedPosts(() => posts);
-      });
-
-      return;
-    }
-
-    setSavedPosts(() => []);
-    setVotedPosts(() => []);
-  }, [currentUser]);
+    setSavedPosts(userData.userSavedPosts);
+    setVotedPosts(userData.userVotedPosts);
+  }, [userData]);
 
   const toggleSavePost = (thisPost, postId) => {
     if (!currentUser) {
