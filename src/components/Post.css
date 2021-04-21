@@ -1,0 +1,15 @@
+.post-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.post-content-url {
+  color: rgb(71, 71, 71);
+  text-decoration: underline;
+  margin-bottom: 0.5rem;
+}
+
+.post-content-url:hover {
+  color: rgb(24, 24, 24);
+}

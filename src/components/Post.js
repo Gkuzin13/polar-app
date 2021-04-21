@@ -8,6 +8,7 @@ import { UserCircleIcon } from "@heroicons/react/solid";
 import { BookmarkIcon } from "@heroicons/react/solid";
 import { ACTIONS } from "../reducers/reducers";
 import { Link } from "react-router-dom";
+import "./Post.css";
 
 const Post = ({
   dispatch,
@@ -185,8 +186,17 @@ const Post = ({
               className="flex flex-col w-full text-left p-2 
             border-solid border-t-2 border-b-2"
             >
-              <h1>{post.postTitle}</h1>
-              <p>{post.postContent}</p>
+              <h1 className="post-title">{post.postTitle}</h1>
+              <p>{post?.postContent}</p>
+
+              {/* Checks if url exists */}
+              {!post.postContentUrl ? null : (
+                <a href={post.postContentUrl} className="post-content-url">
+                  {post.postContentUrl.length > 60
+                    ? `${post.postContentUrl.slice(0, 60)}...`
+                    : post.postContentUrl}
+                </a>
+              )}
             </div>
 
             {/* Post Actions */}

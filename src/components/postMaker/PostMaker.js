@@ -4,9 +4,12 @@ import { pushNewPostToDb } from "../../services/postHandler";
 import { v4 as uuid } from "uuid";
 import "./PostMaker.css";
 import groupList from "../../groups";
+import TextMode from "./TextMode";
+import LinkMode from "./LinkMode";
 
 const initialState = {
   postContent: "",
+  postContentUrl: "",
   postTitle: "",
   postSubGroup: "all",
   postContentType: "text",
@@ -43,6 +46,8 @@ const PostMaker = ({ currentUser }) => {
     setSubmited(true);
   };
 
+  console.log(values);
+
   if (submited) {
     return <Redirect to="/" />;
   }
@@ -67,37 +72,32 @@ const PostMaker = ({ currentUser }) => {
       </div>
       <div className="post-options-ctn">
         <button
-          style={values.postContentType === "text" ? { color: "purple" } : null}
-          className="options-btn"
+          className={
+            values.postContentType === "text"
+              ? "options-btn active-option"
+              : "options-btn"
+          }
           onClick={() =>
             setValues({
               ...values,
+              postContentUrl: "",
               postContentType: "text",
             })
           }
         >
           Post
         </button>
+
         <button
-          style={
-            values.postContentType === "media" ? { color: "purple" } : null
+          className={
+            values.postContentType === "link"
+              ? "options-btn active-option"
+              : "options-btn"
           }
-          className="options-btn"
           onClick={() =>
             setValues({
               ...values,
-              postContentType: "media",
-            })
-          }
-        >
-          Images {"&"} Video
-        </button>
-        <button
-          style={values.postContentType === "link" ? { color: "purple" } : null}
-          className="options-btn"
-          onClick={() =>
-            setValues({
-              ...values,
+              postContent: "",
               postContentType: "link",
             })
           }
@@ -114,25 +114,22 @@ const PostMaker = ({ currentUser }) => {
           onChange={(e) => handleInputChange(e)}
         ></input>
       </div>
-      <div className="text-ctn">
-        <textarea
-          name="postContent"
-          rows="5"
-          cols="33"
-          placeholder="Text (Optional)"
-          value={values.postContent}
-          onChange={(e) => handleInputChange(e)}
-        ></textarea>
-      </div>
-      <div className="post-submit-ctn">
-        <button
-          type="button"
-          className="post-submit-btn"
-          onClick={submitNewPost}
-        >
-          Post
-        </button>
-      </div>
+
+      {values.postContentType === "text" ? (
+        <TextMode
+          values={values}
+          handleInputChange={handleInputChange}
+          submitNewPost={submitNewPost}
+        />
+      ) : null}
+
+      {values.postContentType === "link" ? (
+        <LinkMode
+          values={values}
+          handleInputChange={handleInputChange}
+          submitNewPost={submitNewPost}
+        />
+      ) : null}
     </div>
   );
 };

@@ -1,6 +1,6 @@
 .post-maker-ctn {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   margin: 0 3rem;
@@ -19,18 +19,35 @@
 
 .post-options-ctn {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  border: 2px rgb(223, 223, 223) solid;
   width: 100%;
 }
 
 .options-btn {
   padding: 1.5rem;
   font-weight: 700;
-  color: rgb(128, 128, 128);
-  margin: 0 0.75rem;
+  color: rgb(119, 119, 119);
   font-size: 1.1rem;
+  background-color: rgb(233, 233, 233);
+  width: 100%;
+  height: 100%;
+  border-bottom: 3px rgb(233, 233, 233) solid;
+  outline: none;
+  transition: all 0.1s linear;
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -ms-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+}
+
+.options-btn:focus {
+  outline: 0;
+}
+
+.active-option {
+  color: rgb(120, 62, 212);
+  border-bottom: 3px rgb(120, 62, 212) solid;
 }
 
 .options-btn:hover {
@@ -69,11 +86,40 @@
   -o-border-radius: 2px;
 }
 
+.text-mode-ctn {
+  width: 100%;
+}
+
 .text-ctn textarea {
   padding: 0.5rem;
   width: 100%;
   height: 100%;
   resize: vertical;
+}
+
+.link-input-ctn {
+  border: 2px rgb(219, 219, 219) solid;
+  width: 100%;
+  height: 100%;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+}
+
+.link-mode-ctn {
+  width: 100%;
+}
+
+.link-input-ctn input {
+  padding: 0.5rem;
+  width: 100%;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
 }
 
 .post-submit-ctn {
@@ -102,4 +148,9 @@
 
 .post-submit-btn:hover {
   background-color: rgb(113, 80, 233);
+}
+
+.post-submit-btn:disabled {
+  cursor: auto;
+  background-color: rgb(175, 175, 175);
 }
