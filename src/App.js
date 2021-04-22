@@ -39,6 +39,8 @@ const App = () => {
         loginWindow={loginWindow}
         manageLoginWindow={manageLoginWindow}
         manageSignUpWindow={manageSignUpWindow}
+        currentUser={currentUser}
+        loading={loading}
       />
       <div>
         {loginWindow ? (

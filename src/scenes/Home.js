@@ -3,7 +3,7 @@ import { fetchPosts } from "../services/postHandler";
 import { ACTIONS } from "../reducers/reducers";
 import { getUserData } from "../services/userDataHandler";
 import Post from "../components/Post";
-import GroupList from "../components/GroupList";
+import HomeActions from "../components/HomeActions";
 import Loader from "../components/Loader";
 
 const Home = ({
@@ -52,7 +52,7 @@ const Home = ({
 
   return (
     <div>
-      <GroupList postData={postData} dispatch={dispatch} />
+      <HomeActions postData={postData} dispatch={dispatch} />
 
       <Post
         currentUser={currentUser}

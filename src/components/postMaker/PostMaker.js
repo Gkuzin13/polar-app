@@ -46,27 +46,23 @@ const PostMaker = ({ currentUser }) => {
     setSubmited(true);
   };
 
-  console.log(values);
-
   if (submited) {
     return <Redirect to="/" />;
   }
 
   return (
     <div className="post-maker-ctn">
-      <div>
+      <h1>Create a post</h1>
+      <span className="borderline"></span>
+      <div className="group-select-ctn">
         <select
-          className="group-select-ctn"
+          className="group-select"
           onChange={(e) => handleInputChange(e)}
           value={values.postSubGroup}
           name="postSubGroup"
         >
           {groupList.map((group, i) => {
-            return (
-              <option key={i} placeholder="Choose a group">
-                {`/${group}`}
-              </option>
-            );
+            return <option key={i}>{`/${group}`}</option>;
           })}
         </select>
       </div>

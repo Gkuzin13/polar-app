@@ -6,15 +6,48 @@
   margin: 0 3rem;
 }
 
-.group-select-ctn {
-  border-radius: 2px;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
+.post-maker-ctn h1 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: rgb(179, 178, 178);
+  align-self: flex-start;
+  padding: 0 0.25rem;
+  margin-top: 1rem;
+}
+
+.borderline {
+  border: 1px rgb(236, 236, 236) solid;
   width: 100%;
-  margin: 0.5rem;
-  padding: 0.5rem;
+  margin: 0.5rem 0;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+}
+
+.group-select-ctn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px rgb(240, 240, 240) solid;
+  margin: 0 0.25rem 1rem 0.25rem;
+  width: 100%;
+  margin-top: 2rem;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+}
+
+.group-select-ctn select {
+  font-weight: 600;
+  padding: 0.6rem;
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+  border: 2px rgb(240, 240, 240) solid;
+  width: 100%;
 }
 
 .post-options-ctn {
@@ -29,7 +62,7 @@
   font-weight: 700;
   color: rgb(119, 119, 119);
   font-size: 1.1rem;
-  background-color: rgb(233, 233, 233);
+  background-color: rgb(240, 240, 240);
   width: 100%;
   height: 100%;
   border-bottom: 3px rgb(233, 233, 233) solid;
@@ -46,11 +79,13 @@
 }
 
 .active-option {
+  background-color: rgb(233, 233, 233);
   color: rgb(120, 62, 212);
   border-bottom: 3px rgb(120, 62, 212) solid;
 }
 
 .options-btn:hover {
+  background-color: rgb(233, 233, 233);
   color: rgb(120, 62, 212);
 }
 
@@ -58,32 +93,32 @@
   border: 2px rgb(219, 219, 219) solid;
   margin: 1rem;
   width: 100%;
-  border-radius: 2px;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
 }
 
 .title-ctn input {
   padding: 0.5rem;
   width: 100%;
-  border-radius: 2px;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
 }
 
 .text-ctn {
   border: 2px rgb(219, 219, 219) solid;
   width: 100%;
   height: 100%;
-  border-radius: 2px;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
 }
 
 .text-mode-ctn {
@@ -101,11 +136,11 @@
   border: 2px rgb(219, 219, 219) solid;
   width: 100%;
   height: 100%;
-  border-radius: 2px;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
 }
 
 .link-mode-ctn {
@@ -115,11 +150,11 @@
 .link-input-ctn input {
   padding: 0.5rem;
   width: 100%;
-  border-radius: 2px;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
 }
 
 .post-submit-ctn {
@@ -133,12 +168,12 @@
   color: white;
   font-weight: 600;
   padding: 0.5rem 1rem;
-  margin: 1rem;
-  border-radius: 2px;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
+  margin: 1rem 0;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
   transition: background-color 0.15s linear;
   -webkit-transition: background-color 0.15s linear;
   -moz-transition: background-color 0.15s linear;

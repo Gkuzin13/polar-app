@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { fetchPosts } from "../services/postHandler";
 import groupList from "../groups";
 import { ACTIONS } from "../reducers/reducers";
-import AddPostButton from "./AddPostButton";
+import "./HomeActions.css";
 
-const GroupList = ({ dispatch }) => {
+const HomeActions = ({ dispatch }) => {
   const [value, setValue] = useState("all");
 
   useEffect(() => {
@@ -36,23 +36,28 @@ const GroupList = ({ dispatch }) => {
   };
 
   return (
-    <div className="w-full flex mx-1">
-      <select
-        value={value}
-        onChange={(e) => onValuechange(e)}
-        className="w-full p-2 cursor-pointer rounded font-semibold"
-      >
-        {groupList.map((group, i) => {
-          return (
-            <option value={group} key={i}>
-              {`/${group}`}
-            </option>
-          );
-        })}
-      </select>
-      <AddPostButton />
+    <div className="home-actions-ctn">
+      <div className="group-select">
+        <select value={value} onChange={(e) => onValuechange(e)}>
+          {groupList.map((group, i) => {
+            return (
+              <option value={group} key={i}>
+                {`/${group}`}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+
+      <div>
+        <a href="/create">
+          <button type="button" className="add-post-btn">
+            Create Post
+          </button>
+        </a>
+      </div>
     </div>
   );
 };
 
-export default GroupList;
+export default HomeActions;

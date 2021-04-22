@@ -1,0 +1,53 @@
+.home-actions-ctn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 2px rgb(240, 240, 240) solid;
+  margin: 0.5rem 0.25rem;
+}
+
+.group-select {
+  padding: 0.5rem;
+  flex-grow: 1;
+}
+
+.group-select select {
+  font-weight: 600;
+  padding: 0.6rem;
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+  border: 2px rgb(240, 240, 240) solid;
+  width: 100%;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+}
+
+.group-select select option {
+  font-weight: 600;
+}
+
+.add-post-btn {
+  background-color: rgb(124, 92, 243);
+  color: white;
+  font-weight: 600;
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px rgb(124, 92, 243) solid;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  transition: background-color 0.15s linear;
+  -webkit-transition: background-color 0.15s linear;
+  -moz-transition: background-color 0.15s linear;
+  -ms-transition: background-color 0.15s linear;
+  -o-transition: background-color 0.15s linear;
+}
+
+.add-post-btn:hover {
+  background-color: rgb(113, 81, 228);
+}
