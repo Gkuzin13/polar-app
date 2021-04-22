@@ -6,9 +6,11 @@ import { ArrowDownIcon } from "@heroicons/react/solid";
 import { ChatAltIcon } from "@heroicons/react/solid";
 import { UserCircleIcon } from "@heroicons/react/solid";
 import { BookmarkIcon } from "@heroicons/react/solid";
+import { ExternalLinkIcon } from "@heroicons/react/solid";
 import { ACTIONS } from "../reducers/reducers";
 import { Link } from "react-router-dom";
 import "./Post.css";
+import ReactTimeAgo from "react-time-ago";
 
 const Post = ({
   dispatch,
@@ -19,6 +21,12 @@ const Post = ({
 }) => {
   const [votedPosts, setVotedPosts] = useState([]);
   const [savedPosts, setSavedPosts] = useState([]);
+
+  const sorted = [...postData].sort((a, b) => {
+    return b.postDate - a.postDate;
+  });
+
+  console.log(sorted);
 
   useEffect(() => {
     setSavedPosts(() => userData.userSavedPosts);
@@ -142,7 +150,7 @@ const Post = ({
 
   return (
     <div>
-      {postData.map((post, i) => {
+      {sorted.map((post, i) => {
         const userVoteData = () => {
           if (!votedPosts) {
             return;
@@ -160,23 +168,18 @@ const Post = ({
         };
 
         return (
-          <div
-            key={i}
-            className="flex justify-center flex-col cursor-pointer 
-            border-solid border-2 hover:border-gray-300 mb-3 mx-1"
-          >
+          <div key={i} className="post-ctn">
             {/* Post Main Info */}
-            <div className="flex items-center justify-start p-1 ">
-              <UserCircleIcon className="h-5 w-5  cursor-pointer" />
-              <span className="pr-2 pl-2 font-bold hover:underline ">
-                {`/${post.postSubGroup}`}
-              </span>
-              <div className="text-sm text-gray-500">
-                <span>Posted by </span>
-                <span className="hover:underline font-semibold">
-                  {post.postOwner}
+            <div className="post-info-ctn">
+              <UserCircleIcon className="icon" />
+              <span className="post-info-group">{`g/${post.postSubGroup}`}</span>
+              <div className="op-info">
+                <span>
+                  Posted by <strong>{post.postOwner}</strong>
                 </span>
-                <span> {post.postDate} Hours ago</span>
+                <div className="post-date">
+                  <ReactTimeAgo date={post.postDate} />
+                </div>
               </div>
             </div>
 
@@ -195,6 +198,7 @@ const Post = ({
                   {post.postContentUrl.length > 60
                     ? `${post.postContentUrl.slice(0, 60)}...`
                     : post.postContentUrl}
+                  <ExternalLinkIcon className="icon" />
                 </a>
               )}
             </div>

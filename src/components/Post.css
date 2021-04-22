@@ -1,3 +1,36 @@
+.post-ctn {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  cursor: pointer;
+  border: 2px rgb(209, 209, 209) solid;
+  margin: 0 0.25rem 0.5rem 0.25rem;
+}
+
+.post-info-ctn {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0.5rem;
+  text-align: start;
+  font-size: 0.9rem;
+}
+
+.post-info-group {
+  margin: 0 0.5rem;
+  font-weight: 700;
+}
+
+.op-info {
+  display: flex;
+  justify-content: space-evenly;
+  color: rgb(141, 141, 141);
+}
+
+.post-date {
+  margin: 0 0.25rem;
+}
+
 .post-title {
   font-size: 1.2rem;
   font-weight: 700;
@@ -5,6 +38,9 @@
 }
 
 .post-content-url {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   color: rgb(71, 71, 71);
   text-decoration: underline;
   margin-bottom: 0.5rem;

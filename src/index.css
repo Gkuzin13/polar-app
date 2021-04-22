@@ -19,3 +19,9 @@ select {
   cursor: inherit;
   line-height: inherit;
 }
+
+.icon {
+  width: 1.3rem;
+  height: 1.3rem;
+  cursor: pointer;
+}
