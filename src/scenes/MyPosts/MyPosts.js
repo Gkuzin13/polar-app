@@ -3,7 +3,7 @@ import { AuthContext } from "../../Auth";
 import { fetchPosts } from "../../services/postHandler";
 import { getUserData } from "../../services/userDataHandler";
 import { ACTIONS } from "../../reducers/reducers";
-import Post from "../../components/Post";
+import Post from "../../components/post/Post";
 import "./MyPosts.css";
 
 const MyPosts = ({ dispatch, manageLoader, postData }) => {

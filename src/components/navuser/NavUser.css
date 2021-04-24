@@ -1,0 +1,51 @@
+.navuser-btn {
+  height: 2.5rem;
+  width: 2.5rem;
+  overflow: hidden;
+  background-color: rgb(235, 235, 235);
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+}
+
+.navuser-btn:hover,
+.navuser-btn:focus {
+  background-color: rgb(235, 235, 235);
+  outline: none;
+}
+
+.navuser-dropdown {
+  position: absolute;
+  right: 1.5rem;
+  width: 25%;
+  margin-top: 0.25rem;
+  padding: 0.5rem 0.25rem;
+  background-color: rgb(235, 235, 235);
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+}
+
+.navuser-dropdown button {
+  background-color: rgb(235, 235, 235);
+}
+
+.navuser-dropdown button {
+  text-align: left;
+  width: 100%;
+  color: black;
+}
+
+.navuser-dropdown button:hover {
+  background-color: rgb(124, 92, 243);
+  color: white;
+}
+
+.dropdown-border {
+  margin: 0.35rem 0.75rem;
+  border-top: 2px rgb(221, 221, 221) solid;
+}

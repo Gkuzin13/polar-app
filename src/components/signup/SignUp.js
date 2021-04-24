@@ -4,7 +4,6 @@ import { createNewUser } from "../../services/signUpHandler";
 import { AuthContext } from "../../Auth";
 import { XIcon } from "@heroicons/react/solid";
 import Loader from "../Loader";
-import { Link } from "react-router-dom";
 import "./SignUp.css";
 
 const SignUp = ({

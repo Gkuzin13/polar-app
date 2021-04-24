@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { updateUpVote, updateDownVote } from "../services/postHandler";
-import { updateSavedPosts } from "../services/userDataHandler";
+import { updateUpVote, updateDownVote } from "../../services/postHandler";
+import { updateSavedPosts } from "../../services/userDataHandler";
 import { ArrowUpIcon } from "@heroicons/react/solid";
 import { ArrowDownIcon } from "@heroicons/react/solid";
 import { ChatAltIcon } from "@heroicons/react/solid";
 import { UserCircleIcon } from "@heroicons/react/solid";
 import { BookmarkIcon } from "@heroicons/react/solid";
 import { ExternalLinkIcon } from "@heroicons/react/solid";
-import { ACTIONS } from "../reducers/reducers";
+import { ACTIONS } from "../../reducers/reducers";
 import "./Post.css";
 import ReactTimeAgo from "react-time-ago";
 
@@ -82,23 +82,32 @@ const Post = ({
 
     const updatedVotedPosts = [...filteredPosts, toggledVote];
 
-    updateUpVote(thisPost, postVoteData, currentUser.uid, toggledVote).then(
-      () => {
-        setVotedPosts(updatedVotedPosts);
+    updateUpVote(thisPost, postVoteData, currentUser.uid, toggledVote);
 
-        if (postVoteData.upVoted) {
-          dispatch({
-            type: ACTIONS.DOWNVOTE_POST,
-            payload: { id: thisPost.postId, user: currentUser.uid },
-          });
-        } else {
-          dispatch({
-            type: ACTIONS.UPVOTE_POST,
-            payload: { id: thisPost.postId, user: currentUser.uid },
-          });
-        }
-      }
-    );
+    setVotedPosts(updatedVotedPosts);
+
+    if (postVoteData.downVoted) {
+      dispatch({
+        type: ACTIONS.UPVOTE_FROM_DOWNVOTE,
+        payload: { id: thisPost.postId, user: currentUser.uid },
+      });
+
+      return;
+    }
+
+    if (postVoteData.upVoted) {
+      dispatch({
+        type: ACTIONS.DOWNVOTE_POST,
+        payload: { id: thisPost.postId, user: currentUser.uid },
+      });
+
+      return;
+    }
+
+    dispatch({
+      type: ACTIONS.UPVOTE_POST,
+      payload: { id: thisPost.postId, user: currentUser.uid },
+    });
   };
 
   const toggleDownVote = (thisPost, postVoteData) => {
@@ -126,23 +135,32 @@ const Post = ({
 
     const updatedVotedPosts = [...filteredPosts, toggledVote];
 
-    updateDownVote(thisPost, postVoteData, currentUser.uid, toggledVote).then(
-      () => {
-        setVotedPosts(updatedVotedPosts);
+    updateDownVote(thisPost, postVoteData, currentUser.uid, toggledVote);
 
-        if (postVoteData.downVoted) {
-          dispatch({
-            type: ACTIONS.UPVOTE_POST,
-            payload: { id: thisPost.postId, user: currentUser.uid },
-          });
-        } else {
-          dispatch({
-            type: ACTIONS.DOWNVOTE_POST,
-            payload: { id: thisPost.postId, user: currentUser.uid },
-          });
-        }
-      }
-    );
+    setVotedPosts(updatedVotedPosts);
+
+    if (postVoteData.upVoted) {
+      dispatch({
+        type: ACTIONS.DOWNVOTE_FROM_UPVOTE,
+        payload: { id: thisPost.postId, user: currentUser.uid },
+      });
+
+      return;
+    }
+
+    if (postVoteData.downVoted) {
+      dispatch({
+        type: ACTIONS.UPVOTE_POST,
+        payload: { id: thisPost.postId, user: currentUser.uid },
+      });
+
+      return;
+    }
+
+    dispatch({
+      type: ACTIONS.DOWNVOTE_POST,
+      payload: { id: thisPost.postId, user: currentUser.uid },
+    });
   };
 
   return (
@@ -182,10 +200,7 @@ const Post = ({
 
             {/* Post Content */}
 
-            <div
-              className="flex flex-col w-full text-left p-2 
-            border-solid border-t-2 border-b-2"
-            >
+            <div className="post-content-ctn">
               <h1 className="post-title">{post.postTitle}</h1>
               <p>{post?.postContent}</p>
 
@@ -201,49 +216,50 @@ const Post = ({
             </div>
 
             {/* Post Actions */}
-            <div
-              className="text-gray-600 flex justify-between w-1/2
-               items-center p-1 pl-2 "
-            >
-              <div className="flex items-center w-full ">
+            <div className="post-actions-ctn">
+              <div className="arrow-ctn">
                 <ArrowUpIcon
-                  className={`h-4 w-5 ${
-                    userVoteData()?.upVoted ? "text-red-500" : null
-                  }  transition-colors hover:text-red-400 `}
+                  style={userVoteData()?.upVoted ? { color: "red" } : null}
+                  className="icon arrow-up-icon"
                   onClick={() => toggleUpVote(post, userVoteData())}
                 />
-                <span className="pl-1 pr-1">{post.postVotes}</span>
+
+                <span>{post.postVotes}</span>
+
                 <ArrowDownIcon
-                  className={`h-4 w-4 ${
-                    userVoteData()?.downVoted ? "text-blue-500" : null
-                  }  transition-colors hover:text-blue-400`}
+                  style={userVoteData()?.downVoted ? { color: "blue" } : null}
+                  className="icon arrow-down-icon"
                   onClick={() => toggleDownVote(post, userVoteData())}
                 />
               </div>
-              <a
-                href={`/g/${post.postSubGroup}/${post.postId}`}
-                className="mx-10 text-black-500 flex 
-                justify-center items-center 
-               hover:text-blue-600 transition-colors "
-              >
-                <ChatAltIcon className="h-5 w-5" />
-                <span className="px-1">
-                  {post.postComments
-                    ? Object.values(post.postComments).length
-                    : 0}
-                </span>
-                <span>Comments</span>
-              </a>
-              <div
-                onClick={() => toggleSavePost(userSavedPosts(), post.postId)}
-                className={`flex justify-evenly items-center 
-              hover:text-green-600 transition-colors ${
-                userSavedPosts() ? "text-green-700" : null
-              }`}
-              >
-                <BookmarkIcon className="h-5 w-5 " />
-                <span>Save</span>
+
+              <div>
+                <a
+                  href={`/g/${post.postSubGroup}/${post.postId}`}
+                  className="post-comments-ctn"
+                >
+                  <span>
+                    <ChatAltIcon className="icon" />
+                  </span>
+                  <span>
+                    {post.postComments
+                      ? Object.values(post.postComments).length
+                      : 0}
+                  </span>
+                  <span>Comments</span>
+                </a>
               </div>
+
+              {currentUser ? (
+                <div
+                  style={userSavedPosts() ? { color: "green" } : null}
+                  onClick={() => toggleSavePost(userSavedPosts(), post.postId)}
+                  className="post-save-ctn"
+                >
+                  <BookmarkIcon className="icon" />
+                  <span>Save</span>
+                </div>
+              ) : null}
             </div>
           </div>
         );

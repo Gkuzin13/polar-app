@@ -1,6 +1,8 @@
 import "./postComment.css";
+import ReactTimeAgo from "react-time-ago";
 
 const PostComment = ({ currentPost }) => {
+  console.log(currentPost);
   return (
     <div>
       {currentPost.map((data, i) => {
@@ -16,7 +18,9 @@ const PostComment = ({ currentPost }) => {
                 <span className="comment-owner">
                   {comment.commentOwnerName}
                 </span>
-                <span className="comment-date"> 18 hours ago</span>
+                <span className="comment-date">
+                  {""} <ReactTimeAgo date={comment.commentDate} />
+                </span>
               </div>
               <div className="comment-content-ctn">
                 <span>{comment.content}</span>

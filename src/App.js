@@ -2,7 +2,7 @@ import React, { useReducer, useState, useCallback } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { AuthProvider } from "./Auth";
 import { reducer } from "./reducers/reducers";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/navbar/Navbar";
 import SignUp from "./components/signup/SignUp";
 import Login from "./components/Login/Login";
 import Commentsview from "./scenes/CommentsView";

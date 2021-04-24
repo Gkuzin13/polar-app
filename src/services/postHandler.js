@@ -63,6 +63,10 @@ export const updateUpVote = async (
       .ref(`posts/${thisPost.postId}`)
       .child("postVotes")
       .transaction((votes) => {
+        if (postVoteData.downVoted) {
+          return votes + 2;
+        }
+
         if (postVoteData.upVoted) {
           return votes - 1;
         }
@@ -90,6 +94,10 @@ export const updateDownVote = async (
       .ref(`posts/${thisPost.postId}`)
       .child("postVotes")
       .transaction((votes) => {
+        if (postVoteData.upVoted) {
+          return votes - 2;
+        }
+
         if (postVoteData.downVoted) {
           return votes + 1;
         }

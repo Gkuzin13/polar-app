@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../Auth";
-import Post from "../components/Post";
+import Post from "../components/post/Post";
 import PostComment from "../components/postComment/PostComment";
 import CommentMaker from "../components/CommentMaker";
 import { fetchCurrentPost } from "../services/postHandler";

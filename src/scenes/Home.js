@@ -3,7 +3,7 @@ import { AuthContext } from "../Auth";
 import { fetchPosts } from "../services/postHandler";
 import { ACTIONS } from "../reducers/reducers";
 import { getUserData } from "../services/userDataHandler";
-import Post from "../components/Post";
+import Post from "../components/post/Post";
 import HomeActions from "../components/homeActions/HomeActions";
 import Loader from "../components/Loader";
 import app from "../firebase/firebase";

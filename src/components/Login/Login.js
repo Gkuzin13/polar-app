@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import loginHandler from "../../services/loginHandler";
 import { AuthContext } from "../../Auth";
 import { XIcon } from "@heroicons/react/solid";

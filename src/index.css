@@ -4,13 +4,21 @@
 
 html,
 body {
+  padding: 0;
+  margin: 0;
   font-size: 14px;
+  line-height: 1.5rem;
 }
 
 .icon {
-  width: 1.3rem;
-  height: 1.3rem;
+  width: 1.25rem;
+  height: 1.25rem;
   cursor: pointer;
+  transition: color 0.1s linear;
+  -webkit-transition: color 0.1s linear;
+  -moz-transition: color 0.1s linear;
+  -ms-transition: color 0.1s linear;
+  -o-transition: color 0.1s linear;
 }
 
 button {
@@ -18,17 +26,16 @@ button {
   color: white;
   font-weight: 600;
   padding: 0.5rem 1rem;
-  margin: 1rem 0;
   border-radius: 3px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
-  transition: background-color 0.15s linear;
-  -webkit-transition: background-color 0.15s linear;
-  -moz-transition: background-color 0.15s linear;
-  -ms-transition: background-color 0.15s linear;
-  -o-transition: background-color 0.15s linear;
+  transition: background-color 0.05s linear;
+  -webkit-transition: background-color 0.05s linear;
+  -moz-transition: background-color 0.05s linear;
+  -ms-transition: background-color 0.05s linear;
+  -o-transition: background-color 0.05s linear;
 }
 
 button:hover {
