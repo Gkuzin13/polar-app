@@ -1,26 +1,29 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../Auth";
 import Post from "../components/Post";
 import PostComment from "../components/postComment/PostComment";
 import CommentMaker from "../components/CommentMaker";
 import { fetchCurrentPost } from "../services/postHandler";
 import { getUserData } from "../services/userDataHandler";
-import Loader from "../components/Loader";
 import { ACTIONS } from "../reducers/reducers";
 
 const CommentsView = ({
   setSignUpWindow,
   dispatch,
   postData,
-  currentUser,
   match,
   manageLoader,
   loading,
 }) => {
   const [userData, setUserData] = useState([]);
+
+  const { currentUser } = useContext(AuthContext);
+
   const postId = match.params.postId;
 
   useEffect(() => {
     let isMounted = true;
+
     manageLoader(true);
 
     fetchCurrentPost(postId).then((post) => {
@@ -55,10 +58,6 @@ const CommentsView = ({
       });
     });
   };
-
-  if (loading) {
-    return <Loader />;
-  }
 
   return (
     <div>

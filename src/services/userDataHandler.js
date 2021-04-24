@@ -2,29 +2,21 @@ import { db } from "../firebase/firebase";
 
 export const getUserData = async (currentUserUid) => {
   try {
-    const userVotedPosts = await db
-      .ref(`users/${currentUserUid}/votedPosts`)
+    const data = await db
+      .ref(`users/${currentUserUid}`)
       .get()
       .then((snapshot) => {
         if (snapshot.exists()) {
-          return Object.values(snapshot.val());
+          return snapshot.val();
         }
-        return [];
-      });
 
-    const userSavedPosts = await db
-      .ref(`users/${currentUserUid}/savedPosts`)
-      .get()
-      .then((snapshot) => {
-        if (snapshot.exists()) {
-          return Object.keys(snapshot.val());
-        }
-        return [];
+        return;
       });
 
     return {
-      userSavedPosts: userSavedPosts,
-      userVotedPosts: userVotedPosts,
+      userSavedPosts: Object.keys(data?.savedPosts ? data.savedPosts : []),
+      userVotedPosts: Object.values(data?.votedPosts ? data.votedPosts : []),
+      userPosts: data?.userPosts ? data.userPosts : [],
     };
   } catch (err) {
     console.log(err);
@@ -75,6 +67,14 @@ export const updateSavedPosts = async (thisPost, postId, currentUserUid) => {
         .child(thisPost)
         .remove();
     }
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const updateUserPosts = async (postId, currentUserUid) => {
+  try {
+    await db.ref(`users/${currentUserUid}/userPosts`).set(postId);
   } catch (err) {
     console.log(err);
   }

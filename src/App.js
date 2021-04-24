@@ -1,28 +1,31 @@
-import React, { useReducer, useState, useContext, useCallback } from "react";
-import { Route, Switch } from "react-router-dom";
-import { AuthContext } from "./Auth";
+import React, { useReducer, useState, useCallback } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { AuthProvider } from "./Auth";
 import { reducer } from "./reducers/reducers";
 import Navbar from "./components/Navbar";
-import SignUp from "./components/SignUp";
-import Login from "./components/Login";
+import SignUp from "./components/signup/SignUp";
+import Login from "./components/Login/Login";
 import Commentsview from "./scenes/CommentsView";
 import Home from "./scenes/Home";
 import CreateNewPost from "./scenes/CreateNewPost";
+import SavedPosts from "./scenes/SavedPosts/SavedPosts";
+import MyPosts from "./scenes/MyPosts/MyPosts";
+import PrivateRoute from "./components/PrivateRoute";
 
 const App = () => {
   const [postData, dispatch] = useReducer(reducer, []);
+  const [loading, setLoading] = useState(false);
   const [loginWindow, setLoginWindow] = useState(false);
   const [signUpWindow, setSignUpWindow] = useState(false);
-  const [loading, setLoading] = useState(false);
-
-  const { currentUser } = useContext(AuthContext);
 
   const manageLoginWindow = (action) => {
     setLoginWindow(action);
+    setSignUpWindow(false);
   };
 
   const manageSignUpWindow = (action) => {
     setSignUpWindow(action);
+    setLoginWindow(false);
   };
 
   const manageLoader = useCallback(
@@ -33,70 +36,80 @@ const App = () => {
   );
 
   return (
-    <Route>
-      <Navbar
-        signUpWindow={signUpWindow}
-        loginWindow={loginWindow}
-        manageLoginWindow={manageLoginWindow}
-        manageSignUpWindow={manageSignUpWindow}
-        currentUser={currentUser}
-        loading={loading}
-      />
-      <div>
+    <AuthProvider>
+      <Router>
         {loginWindow ? (
           <Login
-            loginWindow={loginWindow}
-            manageLoginWindow={manageLoginWindow}
             manageLoader={manageLoader}
             loading={loading}
+            manageLoginWindow={manageLoginWindow}
+            manageSignUpWindow={manageSignUpWindow}
           />
         ) : null}
+
         {signUpWindow ? (
           <SignUp
-            signUpWindow={signUpWindow}
-            manageSignUpWindow={manageSignUpWindow}
             manageLoader={manageLoader}
             loading={loading}
+            manageSignUpWindow={manageSignUpWindow}
+            manageLoginWindow={manageLoginWindow}
           />
         ) : null}
-      </div>
 
-      <Switch>
-        <Route
-          exact
-          path="/"
-          render={() => (
-            <Home
-              currentUser={currentUser}
-              postData={postData}
-              dispatch={dispatch}
-              manageLoader={manageLoader}
-              setSignUpWindow={setSignUpWindow}
-              loading={loading}
-            />
-          )}
-        />
-        <Route
-          path="/g/:groupId/:postId"
-          render={({ match }) => (
-            <Commentsview
-              currentUser={currentUser}
-              postData={postData}
-              match={match}
-              dispatch={dispatch}
-              manageLoader={manageLoader}
-              loading={loading}
-              setSignUpWindow={setSignUpWindow}
-            />
-          )}
+        <Navbar
+          loading={loading}
+          manageLoginWindow={manageLoginWindow}
+          manageSignUpWindow={manageSignUpWindow}
+          loginWindow={loginWindow}
+          signUpWindow={signUpWindow}
         />
 
-        <Route
-          path="/create"
-          render={() => <CreateNewPost currentUser={currentUser} />}
-        />
-      </Switch>
-    </Route>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <Home
+                postData={postData}
+                dispatch={dispatch}
+                manageLoader={manageLoader}
+                loading={loading}
+              />
+            )}
+          />
+          <Route
+            path="/g/:groupId/:postId"
+            render={({ match }) => (
+              <Commentsview
+                postData={postData}
+                match={match}
+                dispatch={dispatch}
+                manageLoader={manageLoader}
+                loading={loading}
+              />
+            )}
+          />
+
+          <PrivateRoute
+            path="/myposts"
+            component={MyPosts}
+            postData={postData}
+            dispatch={dispatch}
+            manageLoader={manageLoader}
+          />
+
+          <PrivateRoute
+            path="/savedposts"
+            component={SavedPosts}
+            postData={postData}
+            dispatch={dispatch}
+            manageLoader={manageLoader}
+          />
+
+          <PrivateRoute path="/create" component={CreateNewPost} />
+        </Switch>
+      </Router>
+    </AuthProvider>
   );
 };
 

@@ -8,7 +8,6 @@ import { UserCircleIcon } from "@heroicons/react/solid";
 import { BookmarkIcon } from "@heroicons/react/solid";
 import { ExternalLinkIcon } from "@heroicons/react/solid";
 import { ACTIONS } from "../reducers/reducers";
-import { Link } from "react-router-dom";
 import "./Post.css";
 import ReactTimeAgo from "react-time-ago";
 
@@ -26,11 +25,9 @@ const Post = ({
     return b.postDate - a.postDate;
   });
 
-  console.log(sorted);
-
   useEffect(() => {
-    setSavedPosts(() => userData.userSavedPosts);
-    setVotedPosts(() => userData.userVotedPosts);
+    setSavedPosts(() => userData?.userSavedPosts);
+    setVotedPosts(() => userData?.userVotedPosts);
 
     return () => {
       setSavedPosts(() => []);
@@ -223,8 +220,8 @@ const Post = ({
                   onClick={() => toggleDownVote(post, userVoteData())}
                 />
               </div>
-              <Link
-                to={`/g/${post.postSubGroup}/${post.postId}`}
+              <a
+                href={`/g/${post.postSubGroup}/${post.postId}`}
                 className="mx-10 text-black-500 flex 
                 justify-center items-center 
                hover:text-blue-600 transition-colors "
@@ -236,7 +233,7 @@ const Post = ({
                     : 0}
                 </span>
                 <span>Comments</span>
-              </Link>
+              </a>
               <div
                 onClick={() => toggleSavePost(userSavedPosts(), post.postId)}
                 className={`flex justify-evenly items-center 

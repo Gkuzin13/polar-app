@@ -1,20 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../Auth";
 import { fetchPosts } from "../services/postHandler";
 import { ACTIONS } from "../reducers/reducers";
 import { getUserData } from "../services/userDataHandler";
 import Post from "../components/Post";
-import HomeActions from "../components/HomeActions";
+import HomeActions from "../components/homeActions/HomeActions";
 import Loader from "../components/Loader";
+import app from "../firebase/firebase";
 
 const Home = ({
   setSignUpWindow,
   dispatch,
   postData,
-  currentUser,
   manageLoader,
   loading,
 }) => {
   const [userData, setUserData] = useState([]);
+
+  const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
     let isMounted = true;
@@ -27,13 +30,19 @@ const Home = ({
           type: ACTIONS.SET_DATA,
           data: posts,
         });
-
-        manageLoader(() => false);
       }
     });
 
-    getUserData(currentUser?.uid).then((data) => {
-      setUserData(() => data);
+    app.auth().onAuthStateChanged((user) => {
+      if (user) {
+        getUserData(currentUser?.uid).then((data) => {
+          setUserData(() => data);
+        });
+
+        manageLoader(() => false);
+      }
+
+      manageLoader(() => false);
     });
 
     return () => {
@@ -52,7 +61,7 @@ const Home = ({
 
   return (
     <div>
-      <HomeActions postData={postData} dispatch={dispatch} />
+      <HomeActions currentUser={currentUser} dispatch={dispatch} />
 
       <Post
         currentUser={currentUser}

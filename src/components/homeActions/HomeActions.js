@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
-import { fetchPosts } from "../services/postHandler";
-import groupList from "../groups";
-import { ACTIONS } from "../reducers/reducers";
+import { fetchPosts } from "../../services/postHandler";
+import groupList from "../../groups";
+import { ACTIONS } from "../../reducers/reducers";
 import "./HomeActions.css";
+import { Link } from "react-router-dom";
 
-const HomeActions = ({ dispatch }) => {
+const HomeActions = ({ dispatch, currentUser }) => {
   const [value, setValue] = useState("all");
 
   useEffect(() => {
@@ -49,13 +50,15 @@ const HomeActions = ({ dispatch }) => {
         </select>
       </div>
 
-      <div>
-        <a href="/create">
-          <button type="button" className="add-post-btn">
-            Create Post
-          </button>
-        </a>
-      </div>
+      {currentUser ? (
+        <div>
+          <Link to="/create">
+            <button type="button" className="add-post-btn">
+              Create Post
+            </button>
+          </Link>
+        </div>
+      ) : null}
     </div>
   );
 };

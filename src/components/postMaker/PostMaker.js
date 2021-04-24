@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { pushNewPostToDb } from "../../services/postHandler";
+import { updateUserPosts } from "../../services/userDataHandler";
 import { v4 as uuid } from "uuid";
 import "./PostMaker.css";
 import groupList from "../../groups";
@@ -29,9 +30,11 @@ const PostMaker = ({ currentUser }) => {
   };
 
   const submitNewPost = () => {
+    const newPostId = uuid();
+
     const newPost = {
       ...values,
-      postId: uuid(),
+      postId: newPostId,
       postDate: Date.now(),
       postOwnerId: currentUser.uid,
       postOwner: currentUser.displayName,
@@ -40,6 +43,8 @@ const PostMaker = ({ currentUser }) => {
     };
 
     pushNewPostToDb(newPost);
+
+    updateUserPosts(newPostId, currentUser.uid);
 
     setValues(initialState);
 
@@ -62,7 +67,7 @@ const PostMaker = ({ currentUser }) => {
           name="postSubGroup"
         >
           {groupList.map((group, i) => {
-            return <option key={i}>{`/${group}`}</option>;
+            return <option key={i}>{`${group}`}</option>;
           })}
         </select>
       </div>

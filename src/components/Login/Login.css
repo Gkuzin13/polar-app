@@ -1,0 +1,86 @@
+.form-window-ctn {
+  background-color: rgba(0, 0, 0, 0.308);
+  width: 100%;
+  height: 100vh;
+  z-index: 9;
+  display: grid;
+  place-items: center;
+  position: absolute;
+}
+
+.window-inner-ctn {
+  margin: 1rem;
+  background-color: rgb(255, 255, 255);
+  width: 90vw;
+  box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.205);
+  padding-bottom: 2rem;
+}
+
+.window-exit-ctn {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.75rem;
+}
+
+.exit-icon {
+  cursor: pointer;
+  width: 2rem;
+  height: 2rem;
+  color: rgb(145, 145, 145);
+  transition: all 0.1s linear;
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -ms-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+}
+
+.exit-icon:hover {
+  color: rgb(97, 97, 97);
+}
+
+.form-ctn {
+  padding: 1rem 3.5rem;
+}
+
+.form-ctn h1 {
+  margin-top: 2rem;
+  color: rgb(66, 66, 66);
+}
+
+.form-ctn input {
+  border: 1px rgb(197, 197, 197) solid;
+  width: 100%;
+  padding: 0.5rem;
+  margin-bottom: 1rem;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+}
+
+.form-btn {
+  width: 100%;
+}
+
+.form-btn-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.15rem;
+}
+
+.form-footer-ctn {
+  text-align: center;
+  margin: 1rem 0;
+  color: rgb(51, 51, 51);
+}
+
+.form-footer-ctn strong {
+  color: rgb(112, 79, 231);
+  cursor: pointer;
+}
+
+.form-footer-ctn strong:hover {
+  text-decoration: underline;
+}

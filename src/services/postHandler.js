@@ -2,16 +2,17 @@ import { db } from "../firebase/firebase";
 
 export const fetchPosts = async () => {
   try {
-    return await db
+    const posts = await db
       .ref("posts")
       .get()
       .then((snapshot) => {
         if (snapshot.exists()) {
           return Object.values(snapshot.val());
         } else {
-          console.log("oops");
+          return;
         }
       });
+    return posts ? posts : [];
   } catch (err) {
     return console.log(err);
   }
