@@ -2,10 +2,11 @@ import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../Auth";
 import Post from "../components/post/Post";
 import PostComment from "../components/postComment/PostComment";
-import CommentMaker from "../components/CommentMaker";
+import CommentMaker from "../components/CommentMaker/CommentMaker";
 import { fetchCurrentPost } from "../services/postHandler";
 import { getUserData } from "../services/userDataHandler";
 import { ACTIONS } from "../reducers/reducers";
+import Loader from "../components/Loader/Loader";
 
 const CommentsView = ({
   manageLoginWindow,
@@ -15,6 +16,7 @@ const CommentsView = ({
   manageLoader,
 }) => {
   const [userData, setUserData] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const { currentUser } = useContext(AuthContext);
 
@@ -23,7 +25,7 @@ const CommentsView = ({
   useEffect(() => {
     let isMounted = true;
 
-    manageLoader(true);
+    setLoading(true);
 
     fetchCurrentPost(postId).then((post) => {
       if (isMounted) {
@@ -31,12 +33,12 @@ const CommentsView = ({
           type: ACTIONS.SET_DATA,
           data: [post],
         });
-        manageLoader(false);
       }
     });
 
     getUserData(currentUser?.uid).then((data) => {
       setUserData(() => data);
+      setLoading(false);
     });
 
     return () => {
@@ -57,6 +59,10 @@ const CommentsView = ({
       });
     });
   };
+
+  if (loading) {
+    return <Loader />;
+  }
 
   return (
     <div>

@@ -5,7 +5,7 @@ import { ACTIONS } from "../reducers/reducers";
 import { getUserData } from "../services/userDataHandler";
 import Post from "../components/post/Post";
 import HomeActions from "../components/homeActions/HomeActions";
-import Loader from "../components/Loader";
+import Loader from "../components/Loader/Loader";
 import app from "../firebase/firebase";
 
 const Home = ({

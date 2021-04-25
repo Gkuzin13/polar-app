@@ -1,15 +1,23 @@
 import "./postComment.css";
 import ReactTimeAgo from "react-time-ago";
+import { ChatAlt2Icon } from "@heroicons/react/solid";
 
 const PostComment = ({ currentPost }) => {
-  console.log(currentPost);
   return (
     <div>
       {currentPost.map((data, i) => {
         if (!data.postComments) {
-          return <div key={i}>Pretty empty here...</div>;
+          return (
+            <div key={i} className="no-comments-ctn">
+              <div className="no-comments-main">
+                <ChatAlt2Icon className="chat-icon" />
+                <span>No Comments Yet</span>
+                <span>Be the first one to share his thoughts!</span>
+              </div>
+            </div>
+          );
         }
-        const comments = Object.values(data.postComments);
+        const comments = Object.values(data?.postComments);
 
         return comments.map((comment, i) => {
           return (
@@ -19,7 +27,8 @@ const PostComment = ({ currentPost }) => {
                   {comment.commentOwnerName}
                 </span>
                 <span className="comment-date">
-                  {""} <ReactTimeAgo date={comment.commentDate} />
+                  {" "}
+                  <ReactTimeAgo date={comment.commentDate} />
                 </span>
               </div>
               <div className="comment-content-ctn">

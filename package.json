@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@craco/craco": "^6.1.1",
     "@heroicons/react": "^1.0.0",
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
@@ -12,7 +11,6 @@
     "firebase": "^8.3.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-onclickoutside": "^6.10.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "react-time-ago": "^6.2.2",
@@ -47,7 +45,6 @@
     "@tailwindcss/postcss7-compat": "^2.1.0",
     "autoprefixer": "^9.8.6",
     "jest": "^26.6.0",
-    "postcss": "^7.0.35",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.1.0"
+    "postcss": "^7.0.35"
   }
 }

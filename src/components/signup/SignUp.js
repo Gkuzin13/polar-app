@@ -3,7 +3,7 @@ import { Redirect, withRouter } from "react-router";
 import { createNewUser } from "../../services/signUpHandler";
 import { AuthContext } from "../../Auth";
 import { XIcon } from "@heroicons/react/solid";
-import Loader from "../Loader";
+import Loader from "../Loader/Loader";
 import "./SignUp.css";
 
 const SignUp = ({

@@ -12,3 +12,33 @@
   color: gray;
   font-size: 0.85rem;
 }
+
+.comment-owner {
+  font-weight: 600;
+  color: rgb(107, 107, 107);
+}
+
+.no-comments-ctn {
+  display: grid;
+  place-items: auto center;
+}
+
+.no-comments-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 22rem;
+}
+
+.no-comments-main span {
+  font-size: 1.2rem;
+  padding: 0.25rem;
+  color: rgb(148, 148, 148);
+}
+
+.chat-icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  color: rgb(148, 144, 138);
+}
