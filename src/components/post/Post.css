@@ -85,7 +85,7 @@
 }
 
 .arrow-up-icon:hover {
-  color: rgb(221, 97, 48);
+  color: rgb(251, 86, 7);
 }
 
 .arrow-up-icon {
@@ -97,7 +97,7 @@
 }
 
 .arrow-down-icon:hover {
-  color: rgb(50, 109, 218);
+  color: rgb(58, 134, 255);
 }
 
 .post-comments-ctn {
@@ -112,7 +112,7 @@
 }
 
 .post-comments-ctn:hover {
-  color: rgb(42, 87, 233);
+  color: rgb(34, 96, 184);
 }
 
 .post-save-ctn {

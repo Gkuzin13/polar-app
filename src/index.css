@@ -1,16 +1,23 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&display=swap");
+
+:root {
+  --main-button-color: rgb(78, 88, 230);
+  --main-gray-color: rgb(219, 219, 219);
+  --main-black-color: rgb(69, 70, 90);
+}
 
 html,
 body {
-  padding: 0;
-  margin: 0;
+  font-family: "Rubik", sans-serif;
   font-size: 14px;
   line-height: 1.5rem;
+  margin: 0;
 }
 
 .icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 1.25rem;
   height: 1.25rem;
   cursor: pointer;
@@ -21,9 +28,18 @@ body {
   -o-transition: color 0.1s linear;
 }
 
+a,
+a:visited {
+  color: var(--main-black-color);
+  text-decoration: none;
+  background-color: transparent;
+}
+
 button {
-  background-color: rgb(124, 92, 243);
+  cursor: pointer;
+  background-color: var(--main-button-color);
   color: white;
+  border: none;
   font-weight: 600;
   padding: 0.5rem 1rem;
   border-radius: 3px;
@@ -31,13 +47,13 @@ button {
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
-  transition: background-color 0.05s linear;
-  -webkit-transition: background-color 0.05s linear;
-  -moz-transition: background-color 0.05s linear;
-  -ms-transition: background-color 0.05s linear;
-  -o-transition: background-color 0.05s linear;
+  transition: all 0.1s linear;
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -ms-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
 }
 
 button:hover {
-  background-color: rgb(112, 79, 231);
+  background-color: rgb(62, 72, 202);
 }

@@ -222,7 +222,11 @@ const Post = ({
             <div className="post-actions-ctn">
               <div className="arrow-ctn">
                 <ArrowUpIcon
-                  style={userVoteData()?.upVoted ? { color: "red" } : null}
+                  style={
+                    userVoteData()?.upVoted
+                      ? { color: "rgb(251, 86, 7)" }
+                      : null
+                  }
                   className="icon arrow-up-icon"
                   onClick={() => toggleUpVote(post, userVoteData())}
                 />
@@ -230,7 +234,11 @@ const Post = ({
                 <span>{post.postVotes}</span>
 
                 <ArrowDownIcon
-                  style={userVoteData()?.downVoted ? { color: "blue" } : null}
+                  style={
+                    userVoteData()?.downVoted
+                      ? { color: "rgb(58, 134, 255)" }
+                      : null
+                  }
                   className="icon arrow-down-icon"
                   onClick={() => toggleDownVote(post, userVoteData())}
                 />
@@ -242,8 +250,9 @@ const Post = ({
                   className="post-comments-ctn"
                 >
                   <span>
-                    <ChatAltIcon className="icon" />
+                    <ChatAltIcon className="icon comments-icon" />
                   </span>
+
                   <span>
                     {post.postComments
                       ? Object.values(post.postComments).length
@@ -255,7 +264,9 @@ const Post = ({
 
               {currentUser ? (
                 <div
-                  style={userSavedPosts() ? { color: "green" } : null}
+                  style={
+                    userSavedPosts() ? { color: "rgb(26, 147, 111)" } : null
+                  }
                   onClick={() => toggleSavePost(userSavedPosts(), post.postId)}
                   className="post-save-ctn"
                 >
