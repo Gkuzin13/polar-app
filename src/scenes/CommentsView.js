@@ -8,12 +8,11 @@ import { getUserData } from "../services/userDataHandler";
 import { ACTIONS } from "../reducers/reducers";
 
 const CommentsView = ({
-  setSignUpWindow,
+  manageLoginWindow,
   dispatch,
   postData,
   match,
   manageLoader,
-  loading,
 }) => {
   const [userData, setUserData] = useState([]);
 
@@ -66,7 +65,7 @@ const CommentsView = ({
         postData={postData}
         userData={userData}
         dispatch={dispatch}
-        setSignUpWindow={setSignUpWindow}
+        manageLoginWindow={manageLoginWindow}
       />
       {currentUser ? (
         <CommentMaker

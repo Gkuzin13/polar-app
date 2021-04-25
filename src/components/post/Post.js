@@ -4,7 +4,6 @@ import { updateSavedPosts } from "../../services/userDataHandler";
 import { ArrowUpIcon } from "@heroicons/react/solid";
 import { ArrowDownIcon } from "@heroicons/react/solid";
 import { ChatAltIcon } from "@heroicons/react/solid";
-import { UserCircleIcon } from "@heroicons/react/solid";
 import { BookmarkIcon } from "@heroicons/react/solid";
 import { ExternalLinkIcon } from "@heroicons/react/solid";
 import { ACTIONS } from "../../reducers/reducers";
@@ -14,7 +13,7 @@ import ReactTimeAgo from "react-time-ago";
 const Post = ({
   dispatch,
   postData,
-  setSignUpWindow,
+  manageLoginWindow,
   currentUser,
   userData,
 }) => {
@@ -29,15 +28,20 @@ const Post = ({
     setSavedPosts(() => userData?.userSavedPosts);
     setVotedPosts(() => userData?.userVotedPosts);
 
+    if (!currentUser) {
+      setSavedPosts(() => []);
+      setVotedPosts(() => []);
+    }
+
     return () => {
       setSavedPosts(() => []);
       setVotedPosts(() => []);
     };
-  }, [userData]);
+  }, [userData, currentUser]);
 
   const toggleSavePost = (thisPost, postId) => {
     if (!currentUser) {
-      setSignUpWindow(true);
+      manageLoginWindow(true);
       return;
     }
     if (!thisPost) {
@@ -59,7 +63,7 @@ const Post = ({
 
   const toggleUpVote = (thisPost, postVoteData) => {
     if (!currentUser) {
-      setSignUpWindow(true);
+      manageLoginWindow(true);
       return;
     }
     if (typeof postVoteData === "undefined") {
@@ -112,7 +116,7 @@ const Post = ({
 
   const toggleDownVote = (thisPost, postVoteData) => {
     if (!currentUser) {
-      setSignUpWindow(true);
+      manageLoginWindow(true);
       return;
     }
     if (typeof postVoteData === "undefined") {
@@ -186,7 +190,6 @@ const Post = ({
           <div key={i} className="post-ctn">
             {/* Post Main Info */}
             <div className="post-info-ctn">
-              <UserCircleIcon className="icon" />
               <span className="post-info-group">{`g/${post.postSubGroup}`}</span>
               <div className="op-info">
                 <span>

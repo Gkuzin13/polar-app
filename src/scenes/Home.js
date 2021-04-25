@@ -9,7 +9,7 @@ import Loader from "../components/Loader";
 import app from "../firebase/firebase";
 
 const Home = ({
-  setSignUpWindow,
+  manageLoginWindow,
   dispatch,
   postData,
   manageLoader,
@@ -68,7 +68,7 @@ const Home = ({
         dispatch={dispatch}
         postData={postData}
         userData={userData}
-        setSignUpWindow={setSignUpWindow}
+        manageLoginWindow={manageLoginWindow}
       />
     </div>
   );

@@ -6,7 +6,7 @@ import { ACTIONS } from "../../reducers/reducers";
 import Post from "../../components/post/Post";
 import "./MyPosts.css";
 
-const MyPosts = ({ dispatch, manageLoader, postData }) => {
+const MyPosts = ({ dispatch, manageLoader, postData, manageLoginWindow }) => {
   const [userData, setUserData] = useState([]);
 
   const { currentUser } = useContext(AuthContext);
@@ -58,6 +58,7 @@ const MyPosts = ({ dispatch, manageLoader, postData }) => {
         dispatch={dispatch}
         postData={postData}
         userData={userData}
+        manageLoginWindow={manageLoginWindow}
       />
     </div>
   );

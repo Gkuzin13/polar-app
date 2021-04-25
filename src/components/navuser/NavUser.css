@@ -1,18 +1,33 @@
 .navuser-btn {
-  height: 2.5rem;
-  width: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   overflow: hidden;
-  background-color: rgb(235, 235, 235);
+  background-color: rgba(255, 255, 255, 0.158);
   border-radius: 3px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
+  padding: 0.25rem;
+  margin: 0;
+}
+
+.user-icon {
+  width: 2rem;
+  height: 2rem;
+  color: rgb(179, 179, 179);
+}
+
+.chevron-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: rgb(179, 179, 179);
 }
 
 .navuser-btn:hover,
 .navuser-btn:focus {
-  background-color: rgb(235, 235, 235);
+  background-color: rgba(235, 235, 235, 0.5);
   outline: none;
 }
 
