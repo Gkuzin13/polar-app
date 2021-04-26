@@ -276,7 +276,9 @@ const Post = ({
                   onClick={() => toggleSavePost(userSavedPosts(), post.postId)}
                   className="post-save-ctn"
                 >
-                  <BookmarkIcon className="icon" />
+                  <div>
+                    <BookmarkIcon className="icon" />
+                  </div>
 
                   <span>Save</span>
                 </div>

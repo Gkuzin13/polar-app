@@ -12,6 +12,16 @@ const Navbar = ({
 }) => {
   const { currentUser } = useContext(AuthContext);
 
+  if (loading) {
+    return (
+      <nav className="navbar-ctn">
+        <a href="/" className="logo">
+          Squid.
+        </a>
+      </nav>
+    );
+  }
+
   return (
     <nav className="navbar-ctn">
       <a href="/" className="logo">
@@ -22,14 +32,14 @@ const Navbar = ({
         <button
           className="nav-login-btn"
           onClick={() => manageLoginWindow(!loginWindow)}
-          style={currentUser || loading ? { visibility: "hidden" } : null}
+          style={currentUser ? { display: "none" } : null}
         >
           Log In
         </button>
 
         <button
           onClick={() => manageSignUpWindow(!signUpWindow)}
-          style={currentUser || loading ? { visibility: "hidden" } : null}
+          style={currentUser ? { display: "none" } : null}
         >
           Sign Up
         </button>

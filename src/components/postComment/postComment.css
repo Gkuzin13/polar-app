@@ -1,5 +1,5 @@
 .post-comment-ctn {
-  padding: 1rem;
+  padding: 0.75rem;
   margin: 2rem 0.5rem;
   border: 2px rgb(219, 219, 219) solid;
 }
@@ -9,13 +9,13 @@
 }
 
 .comment-date {
-  color: gray;
+  color: rgb(99, 99, 99);
   font-size: 0.85rem;
 }
 
 .comment-owner {
   font-weight: 600;
-  color: rgb(107, 107, 107);
+  color: rgb(75, 75, 75);
 }
 
 .no-comments-ctn {

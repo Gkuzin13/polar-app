@@ -9,7 +9,9 @@
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
-  margin: 0.5rem 0.25rem;
+  margin: 0.5rem 0.5rem;
+  margin-bottom: 1.25rem;
+  background-color: var(--element-bg-color);
 }
 
 .post-info-ctn {
@@ -24,12 +26,14 @@
 .post-info-group {
   margin: 0 0.5rem;
   font-weight: 700;
+  color: var(--main-button-color);
 }
 
 .op-info {
   display: flex;
   justify-content: space-evenly;
-  color: rgb(141, 141, 141);
+  align-items: center;
+  color: rgb(109, 109, 109);
 }
 
 .post-date {
@@ -77,8 +81,6 @@
 
 .votes-ctn {
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .number-ctn {
@@ -96,8 +98,6 @@
 
 .post-comments-ctn {
   display: flex;
-  justify-content: center;
-  align-items: center;
   margin: 0 3rem;
 }
 
@@ -111,12 +111,11 @@
 
 .post-save-ctn {
   display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
-.post-save-ctn span {
-  margin-left: 0.15rem;
+.post-save-ctn .icon {
+  width: 1.2rem;
+  margin-right: 0.15rem;
 }
 
 .post-save-ctn:hover {

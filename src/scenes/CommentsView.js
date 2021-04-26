@@ -14,9 +14,9 @@ const CommentsView = ({
   postData,
   match,
   manageLoader,
+  loading,
 }) => {
   const [userData, setUserData] = useState([]);
-  const [loading, setLoading] = useState(false);
 
   const { currentUser } = useContext(AuthContext);
 
@@ -25,7 +25,7 @@ const CommentsView = ({
   useEffect(() => {
     let isMounted = true;
 
-    setLoading(true);
+    manageLoader(true);
 
     fetchCurrentPost(postId).then((post) => {
       if (isMounted) {
@@ -38,7 +38,7 @@ const CommentsView = ({
 
     getUserData(currentUser?.uid).then((data) => {
       setUserData(() => data);
-      setLoading(false);
+      manageLoader(false);
     });
 
     return () => {
@@ -73,6 +73,7 @@ const CommentsView = ({
         dispatch={dispatch}
         manageLoginWindow={manageLoginWindow}
       />
+
       {currentUser ? (
         <CommentMaker
           currentUser={currentUser}
@@ -80,6 +81,9 @@ const CommentsView = ({
           updatePostData={updatePostData}
         />
       ) : null}
+
+      <div className="borderline"></div>
+
       <PostComment currentPost={postData} />
     </div>
   );

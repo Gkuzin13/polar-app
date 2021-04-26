@@ -54,8 +54,6 @@ const CommentMaker = ({ currentUser, postId, updatePostData }) => {
           {loading ? <Loader /> : "Comment"}
         </button>
       </div>
-
-      <div className="borderline" />
     </div>
   );
 };

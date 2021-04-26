@@ -58,7 +58,7 @@ const PostMaker = ({ currentUser }) => {
   return (
     <div className="post-maker-ctn">
       <h1>Create a post</h1>
-      <span className="borderline"></span>
+      <span className="post-maker-border"></span>
       <div className="group-select-ctn">
         <select
           className="group-select"

@@ -18,6 +18,8 @@ const App = () => {
   const [loginWindow, setLoginWindow] = useState(false);
   const [signUpWindow, setSignUpWindow] = useState(false);
 
+  console.log(loading);
+
   const manageLoginWindow = (action) => {
     setLoginWindow(action);
     setSignUpWindow(false);

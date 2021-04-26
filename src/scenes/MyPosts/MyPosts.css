@@ -3,6 +3,7 @@
   justify-content: space-between;
   flex-direction: column;
   margin: 0 1rem;
+  background-color: var(--element-bg-color);
 }
 
 .my-posts-ctn h1 {
