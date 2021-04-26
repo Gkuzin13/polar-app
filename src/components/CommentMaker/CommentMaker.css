@@ -11,7 +11,7 @@
 
 .comment-username {
   font-weight: 600;
-  color: rgb(84, 44, 230);
+  color: var(--main-button-color);
 }
 
 .comment-maker-text {

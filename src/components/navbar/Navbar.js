@@ -34,7 +34,7 @@ const Navbar = ({
           Sign Up
         </button>
 
-        {currentUser ? <NavUser /> : null}
+        {currentUser ? <NavUser currentUser={currentUser} /> : null}
       </div>
     </nav>
   );

@@ -52,8 +52,9 @@
 }
 
 .form-ctn input {
+  font-weight: 600;
   border: 2px var(--main-gray-color) solid;
-  color: var(--main-gray-color);
+  color: var(--main-black-color);
   width: 100%;
   padding: 0.5rem;
   margin-bottom: 1rem;
@@ -65,8 +66,7 @@
 }
 
 .form-btn {
-  width: 100%;
-  margin-bottom: 1rem;
+  margin: 0.5rem 0 2.5rem 0;
 }
 
 .form-btn-content {

@@ -1,10 +1,10 @@
-import app from '../firebase/firebase';
+import app from "../firebase/firebase";
 
 const loginHandler = async (email, password) => {
   try {
     await app.auth().signInWithEmailAndPassword(email.value, password.value);
   } catch (err) {
-    alert(err);
+    return err;
   }
 };
 

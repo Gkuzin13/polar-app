@@ -3,7 +3,7 @@
   justify-content: space-between;
   align-items: center;
   border: 2px rgb(240, 240, 240) solid;
-  margin: 0.5rem 0.25rem;
+  margin: 0.5rem 0.25rem 1rem 0.25rem;
 }
 
 .group-select {
@@ -30,12 +30,12 @@
 }
 
 .add-post-btn {
-  background-color: rgb(124, 92, 243);
+  background-color: var(--main-button-color);
   color: white;
   font-weight: 600;
   margin: 0.5rem;
   padding: 0.5rem 1rem;
-  border: 1px rgb(124, 92, 243) solid;
+  border: 1px var(--main-button-color) solid;
   border-radius: 3px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -46,8 +46,4 @@
   -moz-transition: background-color 0.15s linear;
   -ms-transition: background-color 0.15s linear;
   -o-transition: background-color 0.15s linear;
-}
-
-.add-post-btn:hover {
-  background-color: rgb(113, 81, 228);
 }

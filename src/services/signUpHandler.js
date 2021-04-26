@@ -1,4 +1,4 @@
-import app, { db } from '../firebase/firebase';
+import app, { db } from "../firebase/firebase";
 
 export const createNewUser = async (email, password, nickname) => {
   try {
@@ -14,18 +14,18 @@ export const createNewUser = async (email, password, nickname) => {
       pushNewUserToDb(userUid, email.value, nickname.value);
     });
   } catch (err) {
-    alert(err);
+    return err;
   }
 };
 
 export const pushNewUserToDb = async (id, email, nickname) => {
   try {
-    await db.ref('users/' + id).set({
+    await db.ref("users/" + id).set({
       userUid: id,
       userEmail: email,
       userNickname: nickname,
     });
   } catch (err) {
-    alert(err);
+    return err;
   }
 };

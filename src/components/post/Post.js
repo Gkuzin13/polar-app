@@ -220,47 +220,53 @@ const Post = ({
 
             {/* Post Actions */}
             <div className="post-actions-ctn">
-              <div className="arrow-ctn">
-                <ArrowUpIcon
-                  style={
-                    userVoteData()?.upVoted
-                      ? { color: "rgb(251, 86, 7)" }
-                      : null
-                  }
-                  className="icon arrow-up-icon"
-                  onClick={() => toggleUpVote(post, userVoteData())}
-                />
+              <div className="votes-ctn">
+                <div className="icon-ctn">
+                  <ArrowUpIcon
+                    style={
+                      userVoteData()?.upVoted
+                        ? { color: "rgb(251, 86, 7)" }
+                        : null
+                    }
+                    className="icon arrow-up-icon"
+                    onClick={() => toggleUpVote(post, userVoteData())}
+                  />
+                </div>
 
-                <span>{post.postVotes}</span>
+                <div className="number-ctn">
+                  <span>{post.postVotes}</span>
+                </div>
 
-                <ArrowDownIcon
-                  style={
-                    userVoteData()?.downVoted
-                      ? { color: "rgb(58, 134, 255)" }
-                      : null
-                  }
-                  className="icon arrow-down-icon"
-                  onClick={() => toggleDownVote(post, userVoteData())}
-                />
+                <div className="icon-ctn">
+                  <ArrowDownIcon
+                    style={
+                      userVoteData()?.downVoted
+                        ? { color: "rgb(58, 134, 255)" }
+                        : null
+                    }
+                    className="icon arrow-down-icon"
+                    onClick={() => toggleDownVote(post, userVoteData())}
+                  />
+                </div>
               </div>
 
-              <div>
-                <a
-                  href={`/g/${post.postSubGroup}/${post.postId}`}
-                  className="post-comments-ctn"
-                >
-                  <span>
-                    <ChatAltIcon className="icon comments-icon" />
-                  </span>
+              <a href={`/g/${post.postSubGroup}/${post.postId}`}>
+                <div className="post-comments-ctn">
+                  <div className="icon-ctn">
+                    <ChatAltIcon className="icon" />
+                  </div>
 
-                  <span>
+                  <div className="number-ctn">
                     {post.postComments
                       ? Object.values(post.postComments).length
                       : 0}
-                  </span>
-                  <span>Comments</span>
-                </a>
-              </div>
+                  </div>
+
+                  <div>
+                    <span> Comments</span>
+                  </div>
+                </div>
+              </a>
 
               {currentUser ? (
                 <div
@@ -271,6 +277,7 @@ const Post = ({
                   className="post-save-ctn"
                 >
                   <BookmarkIcon className="icon" />
+
                   <span>Save</span>
                 </div>
               ) : null}

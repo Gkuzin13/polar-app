@@ -4,7 +4,7 @@ import { handleSignOut } from "../../services/logOutHandler";
 import { UserCircleIcon, ChevronDownIcon } from "@heroicons/react/solid";
 import "./NavUser.css";
 
-const NavUser = () => {
+const NavUser = ({ currentUser }) => {
   const [dropDown, setDropDown] = useState(false);
 
   const modalRef = useRef();
@@ -41,8 +41,14 @@ const NavUser = () => {
         className="navuser-dropdown"
         style={dropDown ? { display: "block" } : { display: "none" }}
       >
+        <div className="dropdown-user">
+          Hi, <strong>{currentUser?.displayName}</strong>
+        </div>
+
+        <div className="dropdown-border"></div>
+
         <Link to="/">
-          <button onClick={() => setDropDown(false)}>Home</button>
+          <button onClick={() => setDropDown(false)}>Home Page</button>
         </Link>
 
         <Link to="/myposts">
@@ -53,9 +59,8 @@ const NavUser = () => {
           <button onClick={() => setDropDown(false)}>Saved Posts</button>
         </Link>
 
-        <div className="dropdown-border">
-          <hr></hr>
-        </div>
+        <div className="dropdown-border"></div>
+
         <button onClick={(e) => handleSignOut(e)}>Logout</button>
       </div>
     </div>

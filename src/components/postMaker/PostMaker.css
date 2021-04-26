@@ -30,10 +30,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 2px rgb(240, 240, 240) solid;
+  border: 2px var(--main-gray-color) solid;
   margin: 0 0.25rem 1rem 0.25rem;
   width: 100%;
-  margin-top: 2rem;
+  margin-top: 1rem;
   border-radius: 3px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -46,7 +46,7 @@
   padding: 0.6rem;
   cursor: pointer;
   background-color: rgb(255, 255, 255);
-  border: 2px rgb(240, 240, 240) solid;
+  border: 2px var(--main-gray-color) solid;
   width: 100%;
 }
 
@@ -80,13 +80,13 @@
 
 .active-option {
   background-color: rgb(233, 233, 233);
-  color: rgb(120, 62, 212);
-  border-bottom: 3px rgb(120, 62, 212) solid;
+  color: var(--main-button-color);
+  border-bottom: 3px var(--main-button-color) solid;
 }
 
 .options-btn:hover {
   background-color: rgb(233, 233, 233);
-  color: rgb(120, 62, 212);
+  color: var(--main-button-color);
 }
 
 .title-ctn {
@@ -127,13 +127,14 @@
 
 .text-ctn textarea {
   padding: 0.5rem;
+  resize: vertical;
+  border: none;
   width: 100%;
   height: 100%;
-  resize: vertical;
 }
 
 .link-input-ctn {
-  border: 2px rgb(219, 219, 219) solid;
+  border: 2px var(--main-gray-color) solid;
   width: 100%;
   height: 100%;
   border-radius: 3px;
@@ -164,7 +165,7 @@
 }
 
 .post-submit-btn {
-  background-color: rgb(124, 92, 243);
+  background-color: var(--main-button-color);
   color: white;
   font-weight: 600;
   padding: 0.5rem 1rem;
@@ -182,7 +183,7 @@
 }
 
 .post-submit-btn:hover {
-  background-color: rgb(113, 80, 233);
+  background-color: rgb(62, 72, 202);
 }
 
 .post-submit-btn:disabled {

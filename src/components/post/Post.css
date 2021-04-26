@@ -3,20 +3,20 @@
   justify-content: center;
   flex-direction: column;
   cursor: pointer;
-  border: 2px rgb(209, 209, 209) solid;
+  border: 2px var(--main-gray-color) solid;
   border-radius: 3px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
-  margin: 2rem 0.5rem;
+  margin: 0.5rem 0.25rem;
 }
 
 .post-info-ctn {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  padding: 0.35rem;
+  padding: 0.25rem;
   text-align: start;
   font-size: 0.9rem;
 }
@@ -46,7 +46,7 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  color: rgb(71, 71, 71);
+  color: rgb(105, 105, 105);
   text-decoration: underline;
   margin-bottom: 0.5rem;
 }
@@ -60,7 +60,8 @@
   flex-direction: column;
   width: 100%;
   text-align: left;
-  padding: 0.5rem 1rem;
+  color: rgb(41, 40, 40);
+  padding: 0.5rem;
   border-bottom: 2px rgb(226, 225, 225) solid;
   border-top: 2px rgb(226, 225, 225) solid;
 }
@@ -70,30 +71,23 @@
   justify-content: space-between;
   align-items: center;
   width: 25%;
-  color: rgb(65, 65, 65);
-  padding: 0.25rem 0.5rem;
+  color: rgb(114, 115, 116);
+  padding: 0.25rem 0.75rem;
 }
 
-.arrow-ctn {
+.votes-ctn {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.arrow-ctn span {
-  padding: 0 0.25rem;
+.number-ctn {
+  padding: 0 0.35rem;
+  text-align: center;
 }
 
 .arrow-up-icon:hover {
   color: rgb(251, 86, 7);
-}
-
-.arrow-up-icon {
-  max-width: 1.1rem;
-}
-
-.arrow-down-icon {
-  max-width: 1.1rem;
 }
 
 .arrow-down-icon:hover {
@@ -104,7 +98,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0 2.5rem;
+  margin: 0 3rem;
 }
 
 .post-comments-ctn span {
@@ -126,5 +120,5 @@
 }
 
 .post-save-ctn:hover {
-  color: green;
+  color: rgb(26, 147, 111);
 }

@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Redirect, withRouter } from "react-router";
+import React, { useContext, useState } from "react";
+import { Redirect } from "react-router";
 import { createNewUser } from "../../services/signUpHandler";
 import { AuthContext } from "../../Auth";
 import { XIcon } from "@heroicons/react/solid";
@@ -12,20 +12,29 @@ const SignUp = ({
   manageLoginWindow,
   manageSignUpWindow,
 }) => {
+  const [errorMsg, setErrorMsg] = useState(null);
   const { currentUser } = useContext(AuthContext);
 
   const handleSignUp = (e) => {
     e.preventDefault();
 
+    manageLoader(true);
+
+    setErrorMsg(null);
+
     const { email, password, confirmpassword, nickname } = e.target.elements;
 
     if (password.value !== confirmpassword.value) {
+      setErrorMsg("The passwords do not match. Try again.");
+
+      manageLoader(false);
+
       return;
     }
 
-    manageLoader(true);
+    createNewUser(email, password, nickname).then((res) => {
+      setErrorMsg(res?.message);
 
-    createNewUser(email, password, nickname).then(() => {
       manageLoader(false);
     });
   };
@@ -45,17 +54,26 @@ const SignUp = ({
         </div>
         <form className="form-ctn" onSubmit={(e) => handleSignUp(e)}>
           <h1>Sign Up</h1>
-          <input type="text" name="nickname" placeholder="Nickname" />
 
-          <input type="text" name="email" placeholder="Email" />
+          <input type="text" name="nickname" placeholder="Nickname" required />
 
-          <input type="password" name="password" placeholder="Password" />
+          <input type="text" name="email" placeholder="Email" required />
+
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+          />
 
           <input
             type="password"
             name="confirmpassword"
             placeholder="Confirm Password"
+            required
           />
+
+          {errorMsg ? <span className="error-msg">{errorMsg}</span> : null}
 
           <button type="submit" className="form-btn">
             <div className="form-btn-content">
@@ -73,4 +91,4 @@ const SignUp = ({
   );
 };
 
-export default withRouter(SignUp);
+export default SignUp;
