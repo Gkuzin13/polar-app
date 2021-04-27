@@ -17,7 +17,7 @@ const PostComment = ({ currentPost }) => {
             </div>
           );
         }
-        const comments = Object.values(data?.postComments);
+        const comments = Object.values(data.postComments);
 
         return comments.map((comment, i) => {
           return (

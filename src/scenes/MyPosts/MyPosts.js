@@ -41,7 +41,7 @@ const MyPosts = ({
       });
     });
 
-    getUserData(currentUser?.uid).then((data) => {
+    getUserData(currentUser.uid).then((data) => {
       setUserData(() => data);
     });
 

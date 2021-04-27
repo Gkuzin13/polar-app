@@ -205,7 +205,7 @@ const Post = ({
 
             <div className="post-content-ctn">
               <h1 className="post-title">{post.postTitle}</h1>
-              <p>{post?.postContent}</p>
+              <p>{post.postContent}</p>
 
               {/* Checks if url exists */}
               {!post.postContentUrl ? null : (
