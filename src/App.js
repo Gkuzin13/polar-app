@@ -18,8 +18,6 @@ const App = () => {
   const [loginWindow, setLoginWindow] = useState(false);
   const [signUpWindow, setSignUpWindow] = useState(false);
 
-  console.log(loading);
-
   const manageLoginWindow = (action) => {
     setLoginWindow(action);
     setSignUpWindow(false);
@@ -90,6 +88,9 @@ const App = () => {
                 manageLoader={manageLoader}
                 loading={loading}
                 manageLoginWindow={manageLoginWindow}
+                manageSignUpWindow={manageSignUpWindow}
+                loginWindow={loginWindow}
+                signUpWindow={signUpWindow}
               />
             )}
           />

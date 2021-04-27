@@ -34,8 +34,6 @@ const Login = ({
     return <Redirect to="/" />;
   }
 
-  console.log(errorMsg);
-
   return (
     <div className="form-window-ctn">
       <div className="window-inner-ctn">

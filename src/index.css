@@ -83,7 +83,7 @@ input {
 }
 
 .borderline {
-  border: 2px rgb(231, 231, 231) solid;
+  border-top: 3px rgb(230, 230, 230) solid;
   width: 100%;
   margin-bottom: 2rem;
   border-radius: 3px;

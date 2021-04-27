@@ -187,7 +187,7 @@ const Post = ({
         };
 
         return (
-          <div key={i} className="post-ctn">
+          <div key={post.postId} className="post-ctn">
             {/* Post Main Info */}
             <div className="post-info-ctn">
               <span className="post-info-group">{`g/${post.postSubGroup}`}</span>

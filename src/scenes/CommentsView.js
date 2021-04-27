@@ -37,12 +37,16 @@ const CommentsView = ({
     });
 
     getUserData(currentUser?.uid).then((data) => {
-      setUserData(() => data);
-      manageLoader(false);
+      if (isMounted) {
+        setUserData(() => data);
+        manageLoader(false);
+      }
     });
 
     return () => {
       isMounted = false;
+
+      manageLoader(false);
 
       dispatch({
         type: ACTIONS.SET_DATA,
@@ -82,7 +86,9 @@ const CommentsView = ({
         />
       ) : null}
 
-      <div className="borderline"></div>
+      <div className="border-ctn">
+        <span className="borderline"></span>
+      </div>
 
       <PostComment currentPost={postData} />
     </div>

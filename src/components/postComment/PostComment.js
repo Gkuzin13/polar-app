@@ -8,7 +8,7 @@ const PostComment = ({ currentPost }) => {
       {currentPost.map((data, i) => {
         if (!data.postComments) {
           return (
-            <div key={i} className="no-comments-ctn">
+            <div key={data.commentId} className="no-comments-ctn">
               <div className="no-comments-main">
                 <ChatAlt2Icon className="chat-icon" />
                 <span>No Comments Yet</span>
@@ -19,9 +19,9 @@ const PostComment = ({ currentPost }) => {
         }
         const comments = Object.values(data.postComments);
 
-        return comments.map((comment, i) => {
+        return comments.map((comment) => {
           return (
-            <div className="post-comment-ctn" key={i}>
+            <div className="post-comment-ctn" key={comment.commentId}>
               <div>
                 <span className="comment-owner">
                   {comment.commentOwnerName}

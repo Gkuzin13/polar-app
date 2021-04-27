@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
-  padding: 0 1rem;
+  padding: 0 0.25rem;
 }
 
 .savedposts-heading {
