@@ -90,3 +90,13 @@
 .form-footer-ctn strong:hover {
   text-decoration: underline;
 }
+
+@media screen and (min-width: 800px) {
+  .window-inner-ctn {
+    min-width: 25vw;
+    max-width: 30vw;
+  }
+
+  .form-ctn {
+  }
+}

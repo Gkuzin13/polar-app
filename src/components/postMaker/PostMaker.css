@@ -195,3 +195,29 @@
   cursor: auto;
   background-color: rgb(175, 175, 175);
 }
+
+@media screen and (min-width: 800px) {
+  .post-maker-ctn {
+    padding: 2rem 0;
+    min-width: 60vw;
+    max-width: 65vw;
+    margin: 0 auto;
+  }
+
+  .post-maker-ctn h1 {
+    font-size: 1.8rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .post-maker-ctn {
+    padding: 2rem 0;
+    min-width: 25vw;
+    max-width: 40vw;
+    margin: 0 auto;
+  }
+
+  .post-maker-ctn h1 {
+    font-size: 1.8rem;
+  }
+}

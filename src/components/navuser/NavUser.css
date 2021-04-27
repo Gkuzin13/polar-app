@@ -73,3 +73,21 @@
 .dropdown-user strong {
   color: var(--main-button-color);
 }
+
+@media screen and (min-width: 800px) {
+  .navuser-dropdown {
+    min-width: 20%;
+    max-width: 25%;
+  }
+
+  .navuser-btn {
+    margin-right: 2rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .navuser-dropdown {
+    min-width: 15%;
+    max-width: 20%;
+  }
+}
