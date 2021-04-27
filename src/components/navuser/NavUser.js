@@ -47,8 +47,8 @@ const NavUser = ({ currentUser }) => {
 
         <div className="dropdown-border"></div>
 
-        <Link to="/">
-          <button onClick={() => setDropDown(false)}>Home Page</button>
+        <Link to="/create">
+          <button onClick={() => setDropDown(false)}>Create Post</button>
         </Link>
 
         <Link to="/myposts">

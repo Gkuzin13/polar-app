@@ -53,7 +53,7 @@
 .navuser-dropdown button {
   text-align: left;
   width: 100%;
-  color: black;
+  color: rgb(44, 44, 44);
 }
 
 .navuser-dropdown button:hover {
@@ -68,4 +68,8 @@
 
 .dropdown-user {
   padding: 0.5rem 1rem;
+}
+
+.dropdown-user strong {
+  color: var(--main-button-color);
 }

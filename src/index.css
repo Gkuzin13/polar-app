@@ -77,14 +77,15 @@ input {
   border: none;
 }
 
-.borderline {
+.border-ctn {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  margin-bottom: 3rem;
-  border-top: 1px rgb(221, 221, 221) solid;
-  width: 96vw;
+  padding: 0 0.65rem;
+}
+
+.borderline {
+  border: 2px rgb(231, 231, 231) solid;
+  width: 100%;
+  margin-bottom: 2rem;
   border-radius: 3px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;

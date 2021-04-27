@@ -5,8 +5,15 @@ import { getUserData } from "../../services/userDataHandler";
 import { ACTIONS } from "../../reducers/reducers";
 import Post from "../../components/post/Post";
 import "./MyPosts.css";
+import Loader from "../../components/Loader/Loader";
 
-const MyPosts = ({ dispatch, manageLoader, postData, manageLoginWindow }) => {
+const MyPosts = ({
+  dispatch,
+  manageLoader,
+  postData,
+  manageLoginWindow,
+  loading,
+}) => {
   const [userData, setUserData] = useState([]);
 
   const { currentUser } = useContext(AuthContext);
@@ -50,8 +57,13 @@ const MyPosts = ({ dispatch, manageLoader, postData, manageLoginWindow }) => {
 
   return (
     <div className="my-posts-ctn">
-      <h1>My Posts</h1>
-      <span className="borderline"></span>
+      <h1 className="myposts-heading">My Posts</h1>
+
+      <div className="border-ctn">
+        <span className="borderline"></span>
+      </div>
+
+      {loading ? <Loader /> : null}
 
       <Post
         currentUser={currentUser}

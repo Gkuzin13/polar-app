@@ -30,6 +30,8 @@ const Home = ({
           type: ACTIONS.SET_DATA,
           data: posts,
         });
+
+        manageLoader(() => false);
       }
     });
 
@@ -39,10 +41,8 @@ const Home = ({
           setUserData(() => data);
         });
 
-        manageLoader(() => false);
+        return;
       }
-
-      manageLoader(() => false);
     });
 
     return () => {

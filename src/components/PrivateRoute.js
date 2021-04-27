@@ -7,6 +7,7 @@ const PrivateRoute = ({
   postData,
   dispatch,
   manageLoader,
+  loading,
   ...rest
 }) => {
   const { currentUser } = useContext(AuthContext);
@@ -22,6 +23,7 @@ const PrivateRoute = ({
             dispatch={dispatch}
             currentUser={currentUser}
             manageLoader={manageLoader}
+            loading={loading}
           />
         ) : (
           <Redirect to="/" />

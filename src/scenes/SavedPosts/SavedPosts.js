@@ -55,8 +55,11 @@ const SavedPosts = ({
 
   return (
     <div className="saved-posts-ctn">
-      <h1>My Saved Posts</h1>
-      <span className="borderline"></span>
+      <h1 className="savedposts-heading">My Saved Posts</h1>
+
+      <div className="border-ctn">
+        <span className="borderline"></span>
+      </div>
 
       <Post
         currentUser={currentUser}

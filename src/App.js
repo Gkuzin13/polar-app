@@ -100,7 +100,7 @@ const App = () => {
             postData={postData}
             dispatch={dispatch}
             manageLoader={manageLoader}
-            manageLoginWindow={manageLoginWindow}
+            loading={loading}
           />
 
           <PrivateRoute
@@ -109,7 +109,7 @@ const App = () => {
             postData={postData}
             dispatch={dispatch}
             manageLoader={manageLoader}
-            manageLoginWindow={manageLoginWindow}
+            loading={loading}
           />
 
           <PrivateRoute path="/create" component={CreateNewPost} />
