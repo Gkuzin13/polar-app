@@ -7,6 +7,7 @@ import Post from "../components/post/Post";
 import HomeActions from "../components/homeActions/HomeActions";
 import Loader from "../components/Loader/Loader";
 import app from "../firebase/firebase";
+import "./Home.css";
 
 const Home = ({
   manageLoginWindow,
@@ -14,6 +15,7 @@ const Home = ({
   postData,
   manageLoader,
   loading,
+  windowSize,
 }) => {
   const [userData, setUserData] = useState([]);
 
@@ -60,8 +62,12 @@ const Home = ({
   }
 
   return (
-    <div>
-      <HomeActions currentUser={currentUser} dispatch={dispatch} />
+    <div className="home-main-ctn">
+      <HomeActions
+        currentUser={currentUser}
+        dispatch={dispatch}
+        windowSize={windowSize}
+      />
 
       <Post
         currentUser={currentUser}

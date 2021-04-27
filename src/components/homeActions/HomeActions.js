@@ -4,8 +4,9 @@ import groupList from "../../groups";
 import { ACTIONS } from "../../reducers/reducers";
 import "./HomeActions.css";
 import { Link } from "react-router-dom";
+import Sidebar from "../Sidebar/Sidebar";
 
-const HomeActions = ({ dispatch, currentUser }) => {
+const HomeActions = ({ dispatch, currentUser, windowSize }) => {
   const [value, setValue] = useState("all");
 
   useEffect(() => {
@@ -35,6 +36,18 @@ const HomeActions = ({ dispatch, currentUser }) => {
   const onValuechange = (e) => {
     setValue(() => e.target.value);
   };
+  console.log(windowSize);
+
+  if (windowSize?.width > 600) {
+    return (
+      <Sidebar
+        onValuechange={onValuechange}
+        value={value}
+        groupList={groupList}
+        currentUser={currentUser}
+      />
+    );
+  }
 
   return (
     <div className="home-actions-ctn">

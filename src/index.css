@@ -92,3 +92,9 @@ input {
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
 }
+
+ul,
+li {
+  padding: 0;
+  list-style: none;
+}

@@ -1,0 +1,21 @@
+@media screen and (min-width: 600px) {
+  .home-main-ctn {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: row-reverse;
+    margin: 1rem 2.5rem;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .home-main-ctn {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-direction: row-reverse;
+    width: 80vw;
+    padding: 2rem 5rem;
+    margin: 0 auto;
+  }
+}

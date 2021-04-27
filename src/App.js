@@ -11,12 +11,15 @@ import CreateNewPost from "./scenes/CreateNewPost";
 import SavedPosts from "./scenes/SavedPosts/SavedPosts";
 import MyPosts from "./scenes/MyPosts/MyPosts";
 import PrivateRoute from "./components/PrivateRoute";
+import useWindowSize from "./utils/useWindowSize";
 
 const App = () => {
   const [postData, dispatch] = useReducer(reducer, []);
   const [loading, setLoading] = useState(false);
   const [loginWindow, setLoginWindow] = useState(false);
   const [signUpWindow, setSignUpWindow] = useState(false);
+
+  const windowSize = useWindowSize();
 
   const manageLoginWindow = (action) => {
     setLoginWindow(action);
@@ -75,6 +78,7 @@ const App = () => {
                 manageLoader={manageLoader}
                 loading={loading}
                 manageLoginWindow={manageLoginWindow}
+                windowSize={windowSize}
               />
             )}
           />

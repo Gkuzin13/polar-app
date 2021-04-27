@@ -1,4 +1,8 @@
 .post-ctn {
+  width: 100%;
+}
+
+.post-inner-ctn {
   display: flex;
   justify-content: center;
   flex-direction: column;

@@ -8,7 +8,7 @@ const PostComment = ({ currentPost }) => {
       {currentPost.map((data, i) => {
         if (!data.postComments) {
           return (
-            <div key={data.commentId} className="no-comments-ctn">
+            <div key={i} className="no-comments-ctn">
               <div className="no-comments-main">
                 <ChatAlt2Icon className="chat-icon" />
                 <span>No Comments Yet</span>

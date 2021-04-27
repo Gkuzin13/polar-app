@@ -168,7 +168,7 @@ const Post = ({
   };
 
   return (
-    <div>
+    <div className="post-ctn">
       {sorted.map((post, i) => {
         const userVoteData = () => {
           if (!votedPosts) {
@@ -187,7 +187,7 @@ const Post = ({
         };
 
         return (
-          <div key={post.postId} className="post-ctn">
+          <div key={post.postId} className="post-inner-ctn">
             {/* Post Main Info */}
             <div className="post-info-ctn">
               <span className="post-info-group">{`g/${post.postSubGroup}`}</span>
