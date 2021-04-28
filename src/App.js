@@ -6,7 +6,7 @@ import Navbar from "./components/navbar/Navbar";
 import SignUp from "./components/signup/SignUp";
 import Login from "./components/Login/Login";
 import Commentsview from "./scenes/CommentsView";
-import Home from "./scenes/Home";
+import Home from "./scenes/Home/Home";
 import CreateNewPost from "./scenes/CreateNewPost";
 import SavedPosts from "./scenes/SavedPosts/SavedPosts";
 import MyPosts from "./scenes/MyPosts/MyPosts";

@@ -1,12 +1,12 @@
 import { useEffect, useState, useContext } from "react";
-import { AuthContext } from "../Auth";
-import { fetchPosts } from "../services/postHandler";
-import { ACTIONS } from "../reducers/reducers";
-import { getUserData } from "../services/userDataHandler";
-import Post from "../components/post/Post";
-import HomeActions from "../components/homeActions/HomeActions";
-import Loader from "../components/Loader/Loader";
-import app from "../firebase/firebase";
+import { AuthContext } from "../../Auth";
+import { fetchPosts } from "../../services/postHandler";
+import { ACTIONS } from "../../reducers/reducers";
+import { getUserData } from "../../services/userDataHandler";
+import Post from "../../components/post/Post";
+import HomeActions from "../../components/homeActions/HomeActions";
+import Loader from "../../components/Loader/Loader";
+import app from "../../firebase/firebase";
 import "./Home.css";
 
 const Home = ({
