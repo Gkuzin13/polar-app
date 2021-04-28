@@ -6,7 +6,7 @@ import "./HomeActions.css";
 import { Link } from "react-router-dom";
 import Sidebar from "../Sidebar/Sidebar";
 
-const HomeActions = ({ dispatch, currentUser, windowSize }) => {
+const HomeActions = ({ dispatch, currentUser, windowSize, manageLoader }) => {
   const [value, setValue] = useState("all");
 
   useEffect(() => {
@@ -21,6 +21,8 @@ const HomeActions = ({ dispatch, currentUser, windowSize }) => {
           data: value === "all" ? posts : filteredPosts,
         });
       });
+
+      manageLoader(false);
     };
 
     filterPosts();
@@ -31,12 +33,12 @@ const HomeActions = ({ dispatch, currentUser, windowSize }) => {
         data: [],
       });
     };
-  }, [value, dispatch]);
+  }, [value, dispatch, manageLoader]);
 
   const onValuechange = (e) => {
     setValue(() => e.target.value);
+    manageLoader(true);
   };
-  console.log(windowSize);
 
   if (windowSize?.width > 600) {
     return (

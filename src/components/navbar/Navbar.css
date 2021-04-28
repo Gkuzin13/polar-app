@@ -28,7 +28,7 @@
 .nav-login-btn {
   background-color: rgb(230, 230, 230);
   color: rgb(24, 24, 24);
-  margin-right: 0.5rem;
+  margin-right: 1rem;
 }
 
 .nav-login-btn:hover {
@@ -37,7 +37,7 @@
 }
 
 @media screen and (min-width: 800px) {
-  .nav-actions-ctn {
-    margin-right: 2rem;
+  .navbar-ctn {
+    padding: 0.5rem 3.5rem;
   }
 }

@@ -54,12 +54,10 @@ const Home = ({
         type: ACTIONS.SET_DATA,
         data: [],
       });
+
+      manageLoader(false);
     };
   }, [dispatch, manageLoader, currentUser]);
-
-  if (loading) {
-    return <Loader />;
-  }
 
   return (
     <div className="home-main-ctn">
@@ -67,15 +65,20 @@ const Home = ({
         currentUser={currentUser}
         dispatch={dispatch}
         windowSize={windowSize}
+        manageLoader={manageLoader}
       />
 
-      <Post
-        currentUser={currentUser}
-        dispatch={dispatch}
-        postData={postData}
-        userData={userData}
-        manageLoginWindow={manageLoginWindow}
-      />
+      {loading ? (
+        <Loader />
+      ) : (
+        <Post
+          currentUser={currentUser}
+          dispatch={dispatch}
+          postData={postData}
+          userData={userData}
+          manageLoginWindow={manageLoginWindow}
+        />
+      )}
     </div>
   );
 };

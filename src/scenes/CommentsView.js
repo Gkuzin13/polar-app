@@ -7,6 +7,7 @@ import { fetchCurrentPost } from "../services/postHandler";
 import { getUserData } from "../services/userDataHandler";
 import { ACTIONS } from "../reducers/reducers";
 import Loader from "../components/Loader/Loader";
+import "./CommentsView.css";
 
 const CommentsView = ({
   manageLoginWindow,
@@ -69,7 +70,7 @@ const CommentsView = ({
   }
 
   return (
-    <div>
+    <div className="comments-view-ctn">
       <Post
         currentUser={currentUser}
         postData={postData}

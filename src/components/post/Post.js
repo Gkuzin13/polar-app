@@ -169,7 +169,7 @@ const Post = ({
 
   return (
     <div className="post-ctn">
-      {sorted.map((post, i) => {
+      {sorted.map((post) => {
         const userVoteData = () => {
           if (!votedPosts) {
             return;
@@ -189,23 +189,34 @@ const Post = ({
         return (
           <div key={post.postId} className="post-inner-ctn">
             {/* Post Main Info */}
-            <div className="post-info-ctn">
-              <span className="post-info-group">{`g/${post.postSubGroup}`}</span>
-              <div className="op-info">
-                <span>
-                  Posted by <strong>{post.postOwner}</strong>
-                </span>
-                <div className="post-date">
-                  <ReactTimeAgo date={post.postDate} />
+            <a
+              aria-label={`Show comments for this post, 
+                with the title ${post.postTitle}. Created by ${post.postOwner} `}
+              href={`/g/${post.postSubGroup}/${post.postId}`}
+            >
+              <div className="post-info-ctn">
+                <span className="post-info-group">{`g/${post.postSubGroup}`}</span>
+                <div className="op-info">
+                  <span>
+                    Posted by <strong>{post.postOwner}</strong>
+                  </span>
+                  <div className="post-date">
+                    <ReactTimeAgo date={post.postDate} />
+                  </div>
                 </div>
               </div>
-            </div>
-
+            </a>
             {/* Post Content */}
 
             <div className="post-content-ctn">
-              <h1 className="post-title">{post.postTitle}</h1>
-              <p>{post.postContent}</p>
+              <a
+                aria-label={`Show comments for this post, 
+                with the title ${post.postTitle}. Created by ${post.postOwner} `}
+                href={`/g/${post.postSubGroup}/${post.postId}`}
+              >
+                <h1 className="post-title">{post.postTitle}</h1>
+                <p>{post.postContent}</p>
+              </a>
 
               {/* Checks if url exists */}
               {!post.postContentUrl ? null : (

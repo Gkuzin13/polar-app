@@ -79,10 +79,6 @@
     min-width: 20%;
     max-width: 25%;
   }
-
-  .navuser-btn {
-    margin-right: 2rem;
-  }
 }
 
 @media screen and (min-width: 1024px) {

@@ -2,18 +2,17 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: rem;
+  width: 100%;
+  margin: 2rem 0;
 }
 
 .loader {
-  width: 2.5rem;
-  height: 2.5rem;
-  animation-name: spin;
-  animation-duration: 750ms;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  border: 3px rgb(196, 196, 196) solid;
-  border-top: 3px rgb(99, 99, 99) solid;
+  width: 3rem;
+  height: 3rem;
+  animation: spin 1s ease infinite;
+  -webkit-animation: spin 0.8s ease infinite;
+  border: 4px rgb(196, 196, 196) solid;
+  border-top: 4px rgb(97, 103, 117) solid;
   border-radius: 50px;
   -webkit-border-radius: 50px;
   -moz-border-radius: 50px;
