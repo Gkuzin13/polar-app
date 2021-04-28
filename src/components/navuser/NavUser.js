@@ -28,6 +28,7 @@ const NavUser = ({ currentUser }) => {
   return (
     <div>
       <button
+        aria-label="Open user navigation"
         type="button"
         className="navuser-btn"
         onClick={() => setDropDown(true)}

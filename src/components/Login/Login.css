@@ -5,7 +5,8 @@
   z-index: 9;
   display: grid;
   place-items: center;
-  position: absolute;
+  position: fixed;
+  top: 0;
 }
 
 .window-inner-ctn {

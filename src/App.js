@@ -38,6 +38,12 @@ const App = () => {
     [setLoading]
   );
 
+  if (loginWindow || signUpWindow) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "scroll";
+  }
+
   return (
     <AuthProvider>
       <Router>
@@ -67,58 +73,60 @@ const App = () => {
           signUpWindow={signUpWindow}
         />
 
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => (
-              <Home
-                postData={postData}
-                dispatch={dispatch}
-                manageLoader={manageLoader}
-                loading={loading}
-                manageLoginWindow={manageLoginWindow}
-                windowSize={windowSize}
-              />
-            )}
-          />
-          <Route
-            path="/g/:groupId/:postId"
-            render={({ match }) => (
-              <Commentsview
-                postData={postData}
-                match={match}
-                dispatch={dispatch}
-                manageLoader={manageLoader}
-                loading={loading}
-                manageLoginWindow={manageLoginWindow}
-                manageSignUpWindow={manageSignUpWindow}
-                loginWindow={loginWindow}
-                signUpWindow={signUpWindow}
-              />
-            )}
-          />
+        <main>
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <Home
+                  postData={postData}
+                  dispatch={dispatch}
+                  manageLoader={manageLoader}
+                  loading={loading}
+                  manageLoginWindow={manageLoginWindow}
+                  windowSize={windowSize}
+                />
+              )}
+            />
+            <Route
+              path="/g/:groupId/:postId"
+              render={({ match }) => (
+                <Commentsview
+                  postData={postData}
+                  match={match}
+                  dispatch={dispatch}
+                  manageLoader={manageLoader}
+                  loading={loading}
+                  manageLoginWindow={manageLoginWindow}
+                  manageSignUpWindow={manageSignUpWindow}
+                  loginWindow={loginWindow}
+                  signUpWindow={signUpWindow}
+                />
+              )}
+            />
 
-          <PrivateRoute
-            path="/myposts"
-            component={MyPosts}
-            postData={postData}
-            dispatch={dispatch}
-            manageLoader={manageLoader}
-            loading={loading}
-          />
+            <PrivateRoute
+              path="/myposts"
+              component={MyPosts}
+              postData={postData}
+              dispatch={dispatch}
+              manageLoader={manageLoader}
+              loading={loading}
+            />
 
-          <PrivateRoute
-            path="/savedposts"
-            component={SavedPosts}
-            postData={postData}
-            dispatch={dispatch}
-            manageLoader={manageLoader}
-            loading={loading}
-          />
+            <PrivateRoute
+              path="/savedposts"
+              component={SavedPosts}
+              postData={postData}
+              dispatch={dispatch}
+              manageLoader={manageLoader}
+              loading={loading}
+            />
 
-          <PrivateRoute path="/create" component={CreateNewPost} />
-        </Switch>
+            <PrivateRoute path="/create" component={CreateNewPost} />
+          </Switch>
+        </main>
       </Router>
     </AuthProvider>
   );

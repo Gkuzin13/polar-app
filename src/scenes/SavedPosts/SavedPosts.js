@@ -5,12 +5,14 @@ import { getUserData } from "../../services/userDataHandler";
 import { ACTIONS } from "../../reducers/reducers";
 import Post from "../../components/post/Post";
 import "./SavedPosts.css";
+import Loader from "../../components/Loader/Loader";
 
 const SavedPosts = ({
   dispatch,
   manageLoader,
   postData,
   manageLoginWindow,
+  loading,
 }) => {
   const [userData, setUserData] = useState([]);
 
@@ -60,6 +62,8 @@ const SavedPosts = ({
       <div className="border-ctn">
         <span className="borderline"></span>
       </div>
+
+      {loading ? <Loader /> : null}
 
       <Post
         currentUser={currentUser}

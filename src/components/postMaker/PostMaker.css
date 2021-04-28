@@ -3,7 +3,8 @@
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  margin: 0 0.5rem;
+  margin: 1rem 0.5rem;
+  height: 50vh;
 }
 
 .post-maker-ctn h1 {
@@ -213,7 +214,7 @@
   .post-maker-ctn {
     padding: 2rem 0;
     min-width: 25vw;
-    max-width: 40vw;
+    max-width: 35vw;
     margin: 0 auto;
   }
 

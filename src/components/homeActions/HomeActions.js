@@ -52,7 +52,11 @@ const HomeActions = ({ dispatch, currentUser, windowSize }) => {
   return (
     <div className="home-actions-ctn">
       <div className="group-select">
-        <select value={value} onChange={(e) => onValuechange(e)}>
+        <select
+          aria-label="Select a group"
+          value={value}
+          onChange={(e) => onValuechange(e)}
+        >
           {groupList.map((group, i) => {
             return (
               <option value={group} key={i}>

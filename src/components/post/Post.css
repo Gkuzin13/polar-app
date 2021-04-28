@@ -7,7 +7,7 @@
   justify-content: center;
   flex-direction: column;
   cursor: pointer;
-  border: 2px var(--main-gray-color) solid;
+  border: 2px rgb(223, 223, 223) solid;
   border-radius: 3px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -15,7 +15,7 @@
   -o-border-radius: 3px;
   margin: 0.5rem 0.25rem;
   margin-bottom: 1rem;
-  background-color: var(--element-bg-color);
+  background-color: white;
 }
 
 .post-info-ctn {
@@ -123,5 +123,5 @@
 }
 
 .post-save-ctn:hover {
-  color: rgb(26, 147, 111);
+  color: rgb(44, 125, 102);
 }

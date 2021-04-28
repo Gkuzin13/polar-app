@@ -250,7 +250,11 @@ const Post = ({
                 </div>
               </div>
 
-              <a href={`/g/${post.postSubGroup}/${post.postId}`}>
+              <a
+                aria-label={`Show comments for this post, 
+                with the title ${post.postTitle}. Created by ${post.postOwner} `}
+                href={`/g/${post.postSubGroup}/${post.postId}`}
+              >
                 <div className="post-comments-ctn">
                   <div className="icon-ctn">
                     <ChatAltIcon className="icon" />
@@ -271,7 +275,7 @@ const Post = ({
               {currentUser ? (
                 <div
                   style={
-                    userSavedPosts() ? { color: "rgb(26, 147, 111)" } : null
+                    userSavedPosts() ? { color: "rgb(44, 125, 102)" } : null
                   }
                   onClick={() => toggleSavePost(userSavedPosts(), post.postId)}
                   className="post-save-ctn"
