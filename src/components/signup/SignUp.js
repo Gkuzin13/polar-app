@@ -75,11 +75,13 @@ const SignUp = ({
 
           {errorMsg ? <span className="error-msg">{errorMsg}</span> : null}
 
-          <button type="submit" className="form-btn">
-            <div className="form-btn-content">
-              {loading ? <Loader /> : "Sign Up"}
-            </div>
-          </button>
+          {loading ? (
+            <Loader />
+          ) : (
+            <button type="submit" className="form-btn">
+              Sign In
+            </button>
+          )}
 
           <div className="form-footer-ctn">
             Already have an account?
