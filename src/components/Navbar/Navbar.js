@@ -16,7 +16,7 @@ const Navbar = ({
     return (
       <nav className="navbar-ctn">
         <a href="/" className="logo">
-          fatch.
+          Polar
         </a>
       </nav>
     );

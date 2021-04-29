@@ -44,11 +44,11 @@ const PostMaker = ({ currentUser }) => {
 
     pushNewPostToDb(newPost).then(() => {
       updateUserPosts(newPostId, currentUser.uid);
-
-      setValues(initialState);
-
-      setSubmited(true);
     });
+
+    setValues(initialState);
+
+    setSubmited(true);
   };
 
   if (submited) {
