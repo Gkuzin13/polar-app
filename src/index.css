@@ -4,7 +4,6 @@
   --main-button-color: rgb(78, 88, 230);
   --main-gray-color: rgb(221, 221, 221);
   --main-black-color: rgb(69, 70, 90);
-  --element-bg-color: rgb(252, 252, 252);
 }
 
 * {
@@ -17,7 +16,7 @@ html,
 body {
   font-family: "Rubik", sans-serif;
   font-size: 14px;
-  background-color: rgb(243, 243, 243);
+  background-color: rgb(245, 245, 245);
 }
 
 .icon {

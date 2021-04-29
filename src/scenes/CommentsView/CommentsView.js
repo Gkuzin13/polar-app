@@ -1,12 +1,12 @@
 import { useEffect, useState, useContext } from "react";
-import { AuthContext } from "../Auth";
-import Post from "../components/post/Post";
-import PostComment from "../components/postComment/PostComment";
-import CommentMaker from "../components/CommentMaker/CommentMaker";
-import { fetchCurrentPost } from "../services/postHandler";
-import { getUserData } from "../services/userDataHandler";
-import { ACTIONS } from "../reducers/reducers";
-import Loader from "../components/Loader/Loader";
+import { AuthContext } from "../../Auth";
+import Post from "../../components/Post/Post";
+import PostComment from "../../components/PostComment/PostComment";
+import CommentMaker from "../../components/CommentMaker/CommentMaker";
+import { fetchCurrentPost } from "../../services/postHandler";
+import { getUserData } from "../../services/userDataHandler";
+import { ACTIONS } from "../../reducers/reducers";
+import Loader from "../../components/Loader/Loader";
 import "./CommentsView.css";
 
 const CommentsView = ({

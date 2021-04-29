@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import loginHandler from "../../services/loginHandler";
 import { AuthContext } from "../../Auth";
@@ -13,7 +13,18 @@ const Login = ({
   manageLoginWindow,
 }) => {
   const [errorMsg, setErrorMsg] = useState(null);
+
   const { currentUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (currentUser) {
+      return <Redirect to="/" />;
+    }
+
+    return () => {
+      manageLoginWindow(false);
+    };
+  }, [manageLoginWindow, currentUser]);
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -29,10 +40,6 @@ const Login = ({
       manageLoader(false);
     });
   };
-
-  if (currentUser) {
-    return <Redirect to="/" />;
-  }
 
   return (
     <div className="form-window-ctn">

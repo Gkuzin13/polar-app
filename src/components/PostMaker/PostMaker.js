@@ -42,13 +42,13 @@ const PostMaker = ({ currentUser }) => {
       postComments: [],
     };
 
-    pushNewPostToDb(newPost);
+    pushNewPostToDb(newPost).then(() => {
+      updateUserPosts(newPostId, currentUser.uid);
 
-    updateUserPosts(newPostId, currentUser.uid);
+      setValues(initialState);
 
-    setValues(initialState);
-
-    setSubmited(true);
+      setSubmited(true);
+    });
   };
 
   if (submited) {

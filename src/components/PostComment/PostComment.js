@@ -1,4 +1,4 @@
-import "./postComment.css";
+import "./PostComment.css";
 import ReactTimeAgo from "react-time-ago";
 import { ChatAlt2Icon } from "@heroicons/react/solid";
 

@@ -8,10 +8,8 @@ export const createNewUser = async (email, password, nickname) => {
         .createUserWithEmailAndPassword(email.value, password.value)
     ).user.updateProfile({ displayName: nickname.value });
 
-    await app.auth().onAuthStateChanged(() => {
-      const userUid = app.auth().currentUser.uid;
-
-      pushNewUserToDb(userUid, email.value, nickname.value);
+    await app.auth().onAuthStateChanged((user) => {
+      pushNewUserToDb(user.uid, email.value, nickname.value);
     });
   } catch (err) {
     return err;

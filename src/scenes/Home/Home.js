@@ -3,8 +3,8 @@ import { AuthContext } from "../../Auth";
 import { fetchPosts } from "../../services/postHandler";
 import { ACTIONS } from "../../reducers/reducers";
 import { getUserData } from "../../services/userDataHandler";
-import Post from "../../components/post/Post";
-import HomeActions from "../../components/homeActions/HomeActions";
+import Post from "../../components/Post/Post";
+import HomeActions from "../../components/HomeActions/HomeActions";
 import Loader from "../../components/Loader/Loader";
 import app from "../../firebase/firebase";
 import "./Home.css";
@@ -39,7 +39,7 @@ const Home = ({
 
     app.auth().onAuthStateChanged((user) => {
       if (user) {
-        getUserData(currentUser?.uid).then((data) => {
+        getUserData(user.uid).then((data) => {
           setUserData(() => data);
         });
 

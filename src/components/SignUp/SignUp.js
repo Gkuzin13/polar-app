@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Redirect } from "react-router";
 import { createNewUser } from "../../services/signUpHandler";
 import { AuthContext } from "../../Auth";
@@ -14,6 +14,16 @@ const SignUp = ({
 }) => {
   const [errorMsg, setErrorMsg] = useState(null);
   const { currentUser } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (currentUser) {
+      return <Redirect to="/" />;
+    }
+
+    return () => {
+      manageSignUpWindow(false);
+    };
+  }, [currentUser, manageSignUpWindow]);
 
   const handleSignUp = (e) => {
     e.preventDefault();
@@ -38,10 +48,6 @@ const SignUp = ({
       manageLoader(false);
     });
   };
-
-  if (currentUser) {
-    return <Redirect to="/" />;
-  }
 
   return (
     <div className="form-window-ctn">

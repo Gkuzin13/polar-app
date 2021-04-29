@@ -4,7 +4,7 @@
   align-items: center;
   border: 2px rgb(226, 226, 226) solid;
   margin: 0.5rem 0.25rem 1rem 0.25rem;
-  background-color: var(--element-bg-color);
+  background-color: rgb(255, 255, 255);
 }
 
 .group-select {
@@ -17,7 +17,7 @@
   padding: 0.6rem;
   cursor: pointer;
   background-color: rgb(255, 255, 255);
-  border: 2px rgb(240, 240, 240) solid;
+  border: 2px rgba(32, 35, 190, 0.205) solid;
   width: 100%;
   border-radius: 3px;
   -webkit-border-radius: 3px;

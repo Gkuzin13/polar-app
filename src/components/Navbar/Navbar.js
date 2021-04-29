@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../../Auth";
-import NavUser from "../navuser/NavUser";
+import NavUser from "../Navuser/NavUser";
 import "./Navbar.css";
 
 const Navbar = ({
@@ -16,7 +16,7 @@ const Navbar = ({
     return (
       <nav className="navbar-ctn">
         <a href="/" className="logo">
-          Squid.
+          fatch.
         </a>
       </nav>
     );
@@ -25,7 +25,7 @@ const Navbar = ({
   return (
     <nav className="navbar-ctn">
       <a href="/" className="logo">
-        Squid.
+        Polar
       </a>
 
       <div className="nav-actions-ctn">

@@ -224,7 +224,7 @@ const Post = ({
                   {post.postContentUrl.length > 60
                     ? `${post.postContentUrl.slice(0, 60)}...`
                     : post.postContentUrl}
-                  <ExternalLinkIcon className="icon" />
+                  <ExternalLinkIcon className="url-icon" />
                 </a>
               )}
             </div>

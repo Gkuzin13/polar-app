@@ -1,4 +1,4 @@
-import PostMaker from "../components/postMaker/PostMaker";
+import PostMaker from "../components/PostMaker/PostMaker";
 
 const CreateNewPost = ({ currentUser }) => {
   return (

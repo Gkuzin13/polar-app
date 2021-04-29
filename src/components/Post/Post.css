@@ -54,9 +54,19 @@
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  color: rgb(105, 105, 105);
+  color: rgb(95, 95, 95);
   text-decoration: underline;
   margin-bottom: 0.5rem;
+}
+
+.url-icon {
+  display: flex;
+  align-items: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  margin-left: 0.25rem;
+  padding-bottom: 0.15rem;
+  color: rgba(78, 93, 230, 0.4);
 }
 
 .post-content-url:hover {
