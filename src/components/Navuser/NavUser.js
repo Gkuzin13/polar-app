@@ -26,7 +26,7 @@ const NavUser = ({ currentUser }) => {
   }, [dropDown]);
 
   return (
-    <div>
+    <div className="navuser-ctn">
       <button
         aria-label="Open user navigation"
         type="button"

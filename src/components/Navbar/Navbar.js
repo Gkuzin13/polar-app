@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../Auth";
 import NavUser from "../Navuser/NavUser";
 import "./Navbar.css";
+import iceberg from "../../img/logo.png";
 
 const Navbar = ({
   loading,
@@ -16,7 +17,8 @@ const Navbar = ({
     return (
       <nav className="navbar-ctn">
         <a href="/" className="logo">
-          Polar
+          <img src={iceberg} alt="logo"></img>
+          <span>Polar</span>
         </a>
       </nav>
     );
@@ -25,7 +27,8 @@ const Navbar = ({
   return (
     <nav className="navbar-ctn">
       <a href="/" className="logo">
-        Polar
+        <img src={iceberg} alt="logo"></img>
+        <span>Polar</span>
       </a>
 
       <div className="nav-actions-ctn">

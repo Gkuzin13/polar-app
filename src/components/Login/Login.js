@@ -17,7 +17,11 @@ const Login = ({
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
+    manageLoginWindow(true);
+
     if (currentUser) {
+      manageLoginWindow(false);
+
       return <Redirect to="/" />;
     }
 
@@ -52,7 +56,7 @@ const Login = ({
         </div>
 
         <form onSubmit={handleLogin} className="form-ctn">
-          <h1>Sign In</h1>
+          <h1>Log In</h1>
 
           <input type="text" name="email" placeholder="Email" required />
 
@@ -69,13 +73,13 @@ const Login = ({
             <Loader />
           ) : (
             <button type="submit" className="form-btn">
-              Sign In
+              Log in
             </button>
           )}
 
           <div className="form-footer-ctn">
             New to this website?
-            <strong onClick={() => manageSignUpWindow(true)}> Sign up.</strong>
+            <strong onClick={() => manageSignUpWindow(true)}> Sign Up.</strong>
           </div>
         </form>
       </div>
