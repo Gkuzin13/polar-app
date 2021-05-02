@@ -1,25 +1,22 @@
-import { useContext } from "react";
-import { AuthContext } from "../../Auth";
 import NavUser from "../Navuser/NavUser";
 import "./Navbar.css";
 import iceberg from "../../img/logo.png";
 
 const Navbar = ({
-  loading,
   manageSignUpWindow,
   manageLoginWindow,
   loginWindow,
   signUpWindow,
+  currentUser,
 }) => {
-  const { currentUser } = useContext(AuthContext);
-
-  if (loading) {
+  if (currentUser) {
     return (
       <nav className="navbar-ctn">
         <a href="/" className="logo">
           <img src={iceberg} alt="logo"></img>
           <span>Polar</span>
         </a>
+        <NavUser currentUser={currentUser} />
       </nav>
     );
   }
@@ -35,19 +32,13 @@ const Navbar = ({
         <button
           className="nav-login-btn"
           onClick={() => manageLoginWindow(!loginWindow)}
-          style={currentUser ? { display: "none" } : null}
         >
           Log In
         </button>
 
-        <button
-          onClick={() => manageSignUpWindow(!signUpWindow)}
-          style={currentUser ? { display: "none" } : null}
-        >
+        <button onClick={() => manageSignUpWindow(!signUpWindow)}>
           Sign Up
         </button>
-
-        {currentUser ? <NavUser currentUser={currentUser} /> : null}
       </div>
     </nav>
   );

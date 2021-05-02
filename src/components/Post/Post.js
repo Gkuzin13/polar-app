@@ -20,10 +20,6 @@ const Post = ({
   const [votedPosts, setVotedPosts] = useState([]);
   const [savedPosts, setSavedPosts] = useState([]);
 
-  const sorted = [...postData].sort((a, b) => {
-    return b.postDate - a.postDate;
-  });
-
   useEffect(() => {
     setSavedPosts(() => userData?.userSavedPosts);
     setVotedPosts(() => userData?.userVotedPosts);
@@ -169,7 +165,7 @@ const Post = ({
 
   return (
     <div className="post-ctn">
-      {sorted.map((post) => {
+      {postData.map((post) => {
         const userVoteData = () => {
           if (!votedPosts) {
             return;

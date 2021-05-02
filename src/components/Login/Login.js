@@ -1,7 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import loginHandler from "../../services/loginHandler";
-import { AuthContext } from "../../Auth";
 import { XIcon } from "@heroicons/react/solid";
 import Loader from "../Loader/Loader";
 import "./Login.css";
@@ -11,10 +10,9 @@ const Login = ({
   loading,
   manageSignUpWindow,
   manageLoginWindow,
+  currentUser,
 }) => {
   const [errorMsg, setErrorMsg] = useState(null);
-
-  const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
     manageLoginWindow(true);
