@@ -1,5 +1,4 @@
-import { useEffect, useState, useContext } from "react";
-import { AuthContext } from "../../Auth";
+import { useEffect, useState } from "react";
 import Post from "../../components/Post/Post";
 import PostComment from "../../components/PostComment/PostComment";
 import CommentMaker from "../../components/CommentMaker/CommentMaker";
@@ -16,10 +15,9 @@ const CommentsView = ({
   match,
   manageLoader,
   loading,
+  currentUser,
 }) => {
   const [userData, setUserData] = useState([]);
-
-  const { currentUser } = useContext(AuthContext);
 
   const postId = match.params.postId;
 
