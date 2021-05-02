@@ -1,5 +1,7 @@
 export const ACTIONS = {
   SET_DATA: "setdata",
+  SORT_POST_BY_NEW: "sort-post-by-new",
+  SORT_POST_BY_TOP: "sort-post-by-top",
   UPVOTE_POST: "upvote",
   DOWNVOTE_POST: "downvote",
   UPVOTE_FROM_DOWNVOTE: "upvote-from-downvote",
@@ -11,6 +13,16 @@ export function reducer(data, action) {
   switch (action.type) {
     case ACTIONS.SET_DATA:
       return action.data;
+
+    case ACTIONS.SORT_POST_BY_NEW:
+      return action.data.sort((a, b) => {
+        return b.postDate - a.postDate;
+      });
+
+    case ACTIONS.SORT_POST_BY_TOP:
+      return action.data.sort((a, b) => {
+        return b.postVotes - a.postVotes;
+      });
 
     case ACTIONS.UPVOTE_POST:
       return data.map((post) => {
