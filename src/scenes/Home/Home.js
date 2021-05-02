@@ -1,10 +1,10 @@
-import { useEffect, useState, useContext } from "react";
-import { AuthContext } from "../../Auth";
+import { useEffect, useState } from "react";
 import { fetchPosts } from "../../services/postHandler";
 import { ACTIONS } from "../../reducers/reducers";
 import { getUserData } from "../../services/userDataHandler";
+import PostSorter from "../../components/PostSorter/PostSorter";
 import Post from "../../components/Post/Post";
-import HomeActions from "../../components/HomeActions/HomeActions";
+import GroupSelect from "../../components/GroupSelect/GroupSelect";
 import Loader from "../../components/Loader/Loader";
 import app from "../../firebase/firebase";
 import "./Home.css";
@@ -16,10 +16,9 @@ const Home = ({
   manageLoader,
   loading,
   windowSize,
+  currentUser,
 }) => {
   const [userData, setUserData] = useState([]);
-
-  const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
     let isMounted = true;
@@ -29,7 +28,7 @@ const Home = ({
     fetchPosts().then((posts) => {
       if (isMounted) {
         dispatch({
-          type: ACTIONS.SET_DATA,
+          type: ACTIONS.SORT_POST_BY_NEW,
           data: posts,
         });
 
@@ -61,24 +60,27 @@ const Home = ({
 
   return (
     <div className="home-main-ctn">
-      <HomeActions
+      <GroupSelect
         currentUser={currentUser}
         dispatch={dispatch}
         windowSize={windowSize}
         manageLoader={manageLoader}
       />
 
-      {loading ? (
-        <Loader />
-      ) : (
-        <Post
-          currentUser={currentUser}
-          dispatch={dispatch}
-          postData={postData}
-          userData={userData}
-          manageLoginWindow={manageLoginWindow}
-        />
-      )}
+      <div className="home-posts-ctn">
+        <PostSorter dispatch={dispatch} manageLoader={manageLoader} />
+        {loading ? (
+          <Loader />
+        ) : (
+          <Post
+            currentUser={currentUser}
+            dispatch={dispatch}
+            postData={postData}
+            userData={userData}
+            manageLoginWindow={manageLoginWindow}
+          />
+        )}
+      </div>
     </div>
   );
 };
