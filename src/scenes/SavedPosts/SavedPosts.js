@@ -1,5 +1,4 @@
-import { useEffect, useState, useContext } from "react";
-import { AuthContext } from "../../Auth";
+import { useEffect, useState } from "react";
 import { fetchPosts } from "../../services/postHandler";
 import { getUserData } from "../../services/userDataHandler";
 import { ACTIONS } from "../../reducers/reducers";
@@ -13,10 +12,9 @@ const SavedPosts = ({
   postData,
   manageLoginWindow,
   loading,
+  currentUser,
 }) => {
   const [userData, setUserData] = useState([]);
-
-  const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
     let isMounted = true;
