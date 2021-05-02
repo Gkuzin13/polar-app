@@ -17,6 +17,8 @@ const HomeActions = ({
 
   useEffect(() => {
     const filterPosts = () => {
+      manageLoader(true);
+
       fetchPosts().then((posts) => {
         const filteredPosts = posts.filter(
           (post) => post.postSubGroup === value
@@ -26,14 +28,16 @@ const HomeActions = ({
           type: ACTIONS.SET_DATA,
           data: value === "all" ? posts : filteredPosts,
         });
-      });
 
-      manageLoader(false);
+        manageLoader(false);
+      });
     };
 
     filterPosts();
 
     return () => {
+      manageLoader(false);
+
       dispatch({
         type: ACTIONS.SET_DATA,
         data: [],
@@ -43,7 +47,6 @@ const HomeActions = ({
 
   const onValuechange = (e) => {
     setValue(() => e.target.value);
-    manageLoader(true);
   };
 
   if (windowSize?.width > 600) {
