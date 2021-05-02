@@ -1,7 +1,7 @@
-import React, { useReducer, useState, useCallback } from "react";
+import React, { useReducer, useState, useCallback, useContext } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { AuthProvider } from "./Auth";
 import { reducer } from "./reducers/reducers";
+import { AuthContext } from "./services/Auth";
 import Navbar from "./components/Navbar/Navbar";
 import SignUp from "./components/SignUp/SignUp";
 import Login from "./components/Login/Login";
@@ -18,6 +18,8 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [loginWindow, setLoginWindow] = useState(false);
   const [signUpWindow, setSignUpWindow] = useState(false);
+
+  const { currentUser } = useContext(AuthContext);
 
   const windowSize = useWindowSize();
 
@@ -41,29 +43,35 @@ const App = () => {
   if (loginWindow || signUpWindow) {
     document.body.style.overflow = "hidden";
   } else {
-    document.body.style.overflow = "scroll";
+    document.body.style.overflow = "auto";
+  }
+
+  if (typeof currentUser === "undefined") {
+    return <></>;
   }
 
   return (
-    <AuthProvider>
+    <>
       <Router>
-        {loginWindow ? (
+        {loginWindow && (
           <Login
             manageLoader={manageLoader}
             loading={loading}
             manageLoginWindow={manageLoginWindow}
             manageSignUpWindow={manageSignUpWindow}
+            currentUser={currentUser}
           />
-        ) : null}
+        )}
 
-        {signUpWindow ? (
+        {signUpWindow && (
           <SignUp
             manageLoader={manageLoader}
             loading={loading}
             manageSignUpWindow={manageSignUpWindow}
             manageLoginWindow={manageLoginWindow}
+            currentUser={currentUser}
           />
-        ) : null}
+        )}
 
         <Navbar
           loading={loading}
@@ -71,6 +79,7 @@ const App = () => {
           manageSignUpWindow={manageSignUpWindow}
           loginWindow={loginWindow}
           signUpWindow={signUpWindow}
+          currentUser={currentUser}
         />
 
         <main>
@@ -86,6 +95,7 @@ const App = () => {
                   loading={loading}
                   manageLoginWindow={manageLoginWindow}
                   windowSize={windowSize}
+                  currentUser={currentUser}
                 />
               )}
             />
@@ -102,6 +112,7 @@ const App = () => {
                   manageSignUpWindow={manageSignUpWindow}
                   loginWindow={loginWindow}
                   signUpWindow={signUpWindow}
+                  currentUser={currentUser}
                 />
               )}
             />
@@ -113,6 +124,7 @@ const App = () => {
               dispatch={dispatch}
               manageLoader={manageLoader}
               loading={loading}
+              currentUser={currentUser}
             />
 
             <PrivateRoute
@@ -122,13 +134,18 @@ const App = () => {
               dispatch={dispatch}
               manageLoader={manageLoader}
               loading={loading}
+              currentUser={currentUser}
             />
 
-            <PrivateRoute path="/create" component={CreateNewPost} />
+            <PrivateRoute
+              path="/create"
+              component={CreateNewPost}
+              currentUser={currentUser}
+            />
           </Switch>
         </main>
       </Router>
-    </AuthProvider>
+    </>
   );
 };
 
