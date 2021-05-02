@@ -3,8 +3,7 @@
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  margin: 1rem 0.5rem;
-  height: 50vh;
+  margin: 3rem 0.5rem;
 }
 
 .post-maker-ctn h1 {
@@ -192,11 +191,11 @@
   background-color: rgb(175, 175, 175);
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 600px) {
   .post-maker-ctn {
     padding: 2rem 0;
-    min-width: 60vw;
-    max-width: 65vw;
+    width: 35rem;
+    min-width: 25vw;
     margin: 0 auto;
   }
 
@@ -207,13 +206,7 @@
 
 @media screen and (min-width: 1024px) {
   .post-maker-ctn {
-    padding: 2rem 0;
+    width: 35rem;
     min-width: 25vw;
-    max-width: 35vw;
-    margin: 0 auto;
-  }
-
-  .post-maker-ctn h1 {
-    font-size: 1.8rem;
   }
 }

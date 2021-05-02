@@ -1,18 +1,10 @@
-import { Link } from "react-router-dom";
+import CreatePostButton from "../CreatePostButton/CreatePostButton";
 import "./Sidebar.css";
 
-const Sidebar = ({ value, onValuechange, groupList, currentUser }) => {
+const Sidebar = ({ value, onValuechange, groupList, currentUser, loading }) => {
   return (
     <div className="sidebar-ctn">
-      {currentUser ? (
-        <div>
-          <Link to="/create">
-            <button type="button" className="sidebar-add-btn">
-              Create Post
-            </button>
-          </Link>
-        </div>
-      ) : null}
+      {currentUser ? <CreatePostButton /> : null}
 
       <div className="sidebar-options-ctn">
         {groupList.map((group, i) => {

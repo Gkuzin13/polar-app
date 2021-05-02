@@ -31,9 +31,6 @@ body {
   -o-transition: color 0.05s linear;
 }
 
-.icon-ctn {
-}
-
 a,
 a:visited {
   color: var(--main-black-color);
