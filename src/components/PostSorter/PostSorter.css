@@ -1,0 +1,56 @@
+.post-sorter-ctn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(255, 255, 255);
+  border: 2px rgb(223, 223, 223) solid;
+  margin: 0 0.25rem;
+  padding: 0.25rem 0;
+}
+
+.post-sorter-ctn label {
+  font-weight: 600;
+  color: rgb(70, 70, 70);
+  margin: 0 0.25rem;
+}
+
+.post-sort-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  color: rgb(70, 70, 70);
+  margin: 0 0.5rem;
+  padding: 0.5rem 1.25rem;
+}
+
+.post-sort-btn span {
+  padding-right: 0.5rem;
+}
+
+.post-sort-btn:hover {
+  background-color: rgb(245, 245, 245);
+  color: rgb(68, 68, 68);
+}
+
+.icon-ctn {
+  margin-right: 0.25rem;
+}
+
+.active-sort-btn {
+  background-color: rgb(240, 240, 240);
+  color: black;
+}
+
+.active-sort-btn .star-icon {
+  color: rgba(251, 84, 7, 0.801);
+}
+
+.active-sort-btn .chart-icon {
+  color: rgb(58, 134, 255);
+}
+
+.active-sort-btn:hover {
+  background-color: rgb(240, 240, 240);
+  color: black;
+}
