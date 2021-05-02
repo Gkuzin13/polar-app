@@ -35,7 +35,7 @@ export const getUserVotedPosts = async (currentUserUid) => {
         return [];
       });
   } catch (err) {
-    return console.log(err);
+    console.log(err);
   }
 };
 

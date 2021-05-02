@@ -1,4 +1,4 @@
-import app from '../firebase/firebase';
+import app from "../firebase/firebase";
 
 export const handleSignOut = async (e) => {
   e.preventDefault();
@@ -6,6 +6,6 @@ export const handleSignOut = async (e) => {
   try {
     await app.auth().signOut();
   } catch (err) {
-    alert(err);
+    console.log(err);
   }
 };
