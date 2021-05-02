@@ -1,0 +1,47 @@
+.add-post-btn a {
+  background-color: var(--main-button-color);
+  text-align: center;
+  color: white;
+  font-weight: 500;
+  margin: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 3px var(--main-button-color) solid;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -ms-border-radius: 3px;
+  -o-border-radius: 3px;
+  transition: background-color 0.1s linear;
+  -webkit-transition: background-color 0.1s linear;
+  -moz-transition: background-color 0.1s linear;
+  -ms-transition: background-color 0.1s linear;
+  -o-transition: background-color 0.1s linear;
+  text-decoration: none;
+  white-space: nowrap;
+  width: 100%;
+}
+
+.add-post-btn:hover a:hover {
+  background-color: rgb(88, 97, 235);
+}
+
+.add-post-btn a:active {
+  background-color: var(--main-button-color);
+}
+
+.add-post-btn a:visited {
+  background-color: var(--main-button-color);
+  color: white;
+}
+
+@media screen and (min-width: 600px) {
+  .add-post-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .add-post-btn a {
+    margin: 0rem;
+  }
+}
