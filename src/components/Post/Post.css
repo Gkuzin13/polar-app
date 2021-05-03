@@ -95,11 +95,13 @@
 
 .votes-ctn {
   display: flex;
+  align-items: center;
 }
 
 .number-ctn {
-  padding: 0 0.35rem;
   text-align: center;
+  padding-right: 0.25rem;
+  width: 1rem;
 }
 
 .arrow-up-icon:hover {
