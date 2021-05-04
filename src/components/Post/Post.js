@@ -228,33 +228,27 @@ const Post = ({
             {/* Post Actions */}
             <div className="post-actions-ctn">
               <div className="votes-ctn">
-                <div className="icon-ctn">
-                  <ArrowUpIcon
-                    style={
-                      userVoteData()?.upVoted
-                        ? { color: "rgb(251, 86, 7)" }
-                        : null
-                    }
-                    className="icon arrow-up-icon"
-                    onClick={() => toggleUpVote(post, userVoteData())}
-                  />
-                </div>
+                <ArrowUpIcon
+                  style={
+                    userVoteData()?.upVoted
+                      ? { color: "rgb(251, 86, 7)" }
+                      : null
+                  }
+                  className="icon arrow-up-icon"
+                  onClick={() => toggleUpVote(post, userVoteData())}
+                />
 
-                <div className="number-ctn">
-                  <span>{post.postVotes}</span>
-                </div>
+                <span>{post.postVotes}</span>
 
-                <div className="icon-ctn">
-                  <ArrowDownIcon
-                    style={
-                      userVoteData()?.downVoted
-                        ? { color: "rgb(58, 134, 255)" }
-                        : null
-                    }
-                    className="icon arrow-down-icon"
-                    onClick={() => toggleDownVote(post, userVoteData())}
-                  />
-                </div>
+                <ArrowDownIcon
+                  style={
+                    userVoteData()?.downVoted
+                      ? { color: "rgb(58, 134, 255)" }
+                      : null
+                  }
+                  className="icon arrow-down-icon"
+                  onClick={() => toggleDownVote(post, userVoteData())}
+                />
               </div>
 
               <a
@@ -263,23 +257,18 @@ const Post = ({
                 href={`/g/${post.postSubGroup}/${post.postId}`}
               >
                 <div className="post-comments-ctn">
-                  <div className="icon-ctn">
-                    <ChatAltIcon className="icon" />
-                  </div>
+                  <ChatAltIcon className="icon" />
 
-                  <div className="number-ctn">
+                  <span>
                     {post.postComments
                       ? Object.values(post.postComments).length
                       : 0}
-                  </div>
-
-                  <div>
-                    <span> Comments</span>
-                  </div>
+                  </span>
+                  <span>Comments</span>
                 </div>
               </a>
 
-              {currentUser ? (
+              {currentUser && (
                 <div
                   style={
                     userSavedPosts() ? { color: "rgb(44, 125, 102)" } : null
@@ -287,13 +276,11 @@ const Post = ({
                   onClick={() => toggleSavePost(userSavedPosts(), post.postId)}
                   className="post-save-ctn"
                 >
-                  <div>
-                    <BookmarkIcon className="icon" />
-                  </div>
+                  <BookmarkIcon className="icon" />
 
                   <span>Save</span>
                 </div>
-              ) : null}
+              )}
             </div>
           </div>
         );

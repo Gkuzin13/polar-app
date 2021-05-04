@@ -98,12 +98,8 @@
   align-items: center;
 }
 
-.number-ctn {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  padding-right: 0.25rem;
-  width: 1rem;
+.votes-ctn span {
+  margin: 0 0.25rem;
 }
 
 .arrow-up-icon:hover {
@@ -121,8 +117,12 @@
   margin: 0 3rem;
 }
 
+.post-comments-ctn .icon {
+  margin-right: 0.25rem;
+}
+
 .post-comments-ctn span {
-  margin-right: 0.35rem;
+  margin-right: 0.25rem;
 }
 
 .post-comments-ctn:hover {

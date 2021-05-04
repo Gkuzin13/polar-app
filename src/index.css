@@ -20,15 +20,8 @@ body {
 }
 
 .icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 1.1rem;
-  transition: color 0.05s linear;
-  -webkit-transition: color 0.05s linear;
-  -moz-transition: color 0.05s linear;
-  -ms-transition: color 0.05s linear;
-  -o-transition: color 0.05s linear;
+  width: 1.1rem;
 }
 
 a,
