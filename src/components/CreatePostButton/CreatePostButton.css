@@ -1,51 +1,33 @@
 .create-post-btn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.create-post-btn a {
+  display: block;
   background-color: var(--main-button-color);
   text-align: center;
   color: white;
   font-weight: 500;
   margin-right: 0.5rem;
   padding: 0.5rem 1rem;
-  border: 2px var(--main-button-color) solid;
+  border: 3px var(--main-button-color) solid;
   border-radius: 3px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
-  transition: background-color 0.1s linear;
-  -webkit-transition: background-color 0.1s linear;
-  -moz-transition: background-color 0.1s linear;
-  -ms-transition: background-color 0.1s linear;
-  -o-transition: background-color 0.1s linear;
-  width: 100%;
 }
 
-.create-post-btn:hover a:hover {
+.create-post-btn:hover {
   background-color: rgb(88, 97, 235);
 }
 
-.create-post-btn a:active {
+.create-post-btn:active {
   background-color: var(--main-button-color);
 }
 
-.create-post-btn a:visited {
-  background-color: var(--main-button-color);
+.create-post-btn:visited {
   color: white;
 }
 
 @media screen and (min-width: 600px) {
   .create-post-btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .create-post-btn a {
     margin: 0rem;
   }
 }
