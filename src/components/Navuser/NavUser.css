@@ -27,6 +27,19 @@
   width: 1.5rem;
   height: 1.5rem;
   color: rgb(155, 153, 153);
+  transition: transform 0.1s linear;
+  -webkit-transition: transform 0.1s linear;
+  -moz-transition: transform 0.1s linear;
+  -ms-transition: transform 0.1s linear;
+  -o-transition: transform 0.1s linear;
+}
+
+.rotate-icon {
+  transform: rotate(-180deg);
+  -webkit-transform: rotate(-180deg);
+  -moz-transform: rotate(-180deg);
+  -ms-transform: rotate(-180deg);
+  -o-transform: rotate(-180deg);
 }
 
 .navuser-btn:hover,
@@ -38,7 +51,7 @@
 .navuser-dropdown {
   position: absolute;
   right: 0rem;
-  width: 15rem;
+  width: 12rem;
   margin-top: 0.25rem;
   padding: 0.5rem 0.25rem;
   background-color: rgb(245, 245, 245);
@@ -52,6 +65,7 @@
 
 .navuser-dropdown button {
   background-color: rgb(245, 245, 245);
+  font-size: 1rem;
 }
 
 .navuser-dropdown button {

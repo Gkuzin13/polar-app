@@ -34,7 +34,10 @@ const NavUser = ({ currentUser }) => {
         onClick={() => setDropDown(true)}
       >
         <UserCircleIcon className="user-icon" />
-        <ChevronDownIcon className="chevron-icon" />
+
+        <ChevronDownIcon
+          className={dropDown ? "chevron-icon rotate-icon" : "chevron-icon"}
+        />
       </button>
 
       <div

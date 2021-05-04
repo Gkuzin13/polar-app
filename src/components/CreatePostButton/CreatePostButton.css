@@ -1,5 +1,7 @@
 .create-post-btn {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .create-post-btn a {
@@ -9,7 +11,7 @@
   font-weight: 500;
   margin-right: 0.5rem;
   padding: 0.5rem 1rem;
-  border: 3px var(--main-button-color) solid;
+  border: 2px var(--main-button-color) solid;
   border-radius: 3px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;

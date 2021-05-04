@@ -52,9 +52,8 @@ const PostSorter = ({ dispatch, manageLoader }) => {
         }
         onClick={() => sortByNew()}
       >
-        <div className="icon-ctn">
-          <StarIcon className="icon star-icon" />
-        </div>
+        <StarIcon className="icon star-icon" />
+
         <span>New</span>
       </button>
       <button
@@ -63,9 +62,8 @@ const PostSorter = ({ dispatch, manageLoader }) => {
         }
         onClick={() => sortByTop()}
       >
-        <div className="icon-ctn">
-          <ChartBarIcon className="icon chart-icon" />
-        </div>
+        <ChartBarIcon className="icon chart-icon" />
+
         <span>Top</span>
       </button>
     </div>

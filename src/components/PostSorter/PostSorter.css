@@ -45,6 +45,14 @@
   color: black;
 }
 
+.star-icon {
+  margin-right: 0.25rem;
+}
+
+.chart-icon {
+  margin-right: 0.25rem;
+}
+
 .active-sort-btn .star-icon {
   color: rgba(251, 84, 7, 0.801);
 }
