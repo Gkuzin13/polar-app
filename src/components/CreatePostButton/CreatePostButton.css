@@ -1,4 +1,8 @@
-.add-post-btn a {
+.create-post-btn {
+  display: block;
+}
+
+.create-post-btn a {
   background-color: var(--main-button-color);
   text-align: center;
   color: white;
@@ -19,27 +23,27 @@
   width: 100%;
 }
 
-.add-post-btn:hover a:hover {
+.create-post-btn:hover a:hover {
   background-color: rgb(88, 97, 235);
 }
 
-.add-post-btn a:active {
+.create-post-btn a:active {
   background-color: var(--main-button-color);
 }
 
-.add-post-btn a:visited {
+.create-post-btn a:visited {
   background-color: var(--main-button-color);
   color: white;
 }
 
 @media screen and (min-width: 600px) {
-  .add-post-btn {
+  .create-post-btn {
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  .add-post-btn a {
+  .create-post-btn a {
     margin: 0rem;
   }
 }
