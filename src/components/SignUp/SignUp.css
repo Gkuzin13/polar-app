@@ -1,10 +1,11 @@
 .form-window-ctn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: rgba(0, 0, 0, 0.308);
   width: 100%;
   height: 100vh;
   z-index: 9;
-  display: grid;
-  place-items: center;
   position: fixed;
   top: 0;
 }

@@ -29,3 +29,10 @@
 .group-select select option {
   font-weight: 600;
 }
+
+@media screen and (max-width: 600px) {
+  .group-select-main-ctn {
+    margin: 0 0.25rem;
+    border-bottom: none;
+  }
+}

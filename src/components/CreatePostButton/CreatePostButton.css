@@ -3,7 +3,7 @@
   text-align: center;
   color: white;
   font-weight: 500;
-  margin: 0.5rem;
+  margin-right: 0.5rem;
   padding: 0.5rem 1rem;
   border: 3px var(--main-button-color) solid;
   border-radius: 3px;
@@ -16,8 +16,6 @@
   -moz-transition: background-color 0.1s linear;
   -ms-transition: background-color 0.1s linear;
   -o-transition: background-color 0.1s linear;
-  text-decoration: none;
-  white-space: nowrap;
   width: 100%;
 }
 

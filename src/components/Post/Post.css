@@ -14,7 +14,6 @@
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
   margin: 0.5rem 0.25rem;
-  margin-bottom: 1rem;
   background-color: white;
 }
 
@@ -95,10 +94,14 @@
 
 .votes-ctn {
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .number-ctn {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
   padding-right: 0.25rem;
   width: 1rem;
 }
@@ -113,6 +116,8 @@
 
 .post-comments-ctn {
   display: flex;
+  justify-content: center;
+  align-items: center;
   margin: 0 3rem;
 }
 
@@ -126,6 +131,8 @@
 
 .post-save-ctn {
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .post-save-ctn .icon {

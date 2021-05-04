@@ -19,17 +19,12 @@
   color: rgb(75, 75, 75);
 }
 
-.no-comments-ctn {
-  display: grid;
-  place-items: auto center;
-}
-
 .no-comments-main {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 22rem;
+  padding-top: 2rem;
 }
 
 .no-comments-main span {
