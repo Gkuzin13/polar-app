@@ -3,7 +3,7 @@ import "./CreatePostButton.css";
 
 const CreatePostButton = () => {
   return (
-    <Link class="create-post-btn" to="/create">
+    <Link className="create-post-btn" to="/create">
       <span>Create Post</span>
     </Link>
   );
