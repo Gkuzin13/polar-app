@@ -47,7 +47,7 @@ const App = () => {
   }
 
   if (typeof currentUser === "undefined") {
-    return null;
+    return <></>;
   }
 
   return (
