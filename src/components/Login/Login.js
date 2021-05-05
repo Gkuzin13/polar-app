@@ -39,6 +39,7 @@ const Login = ({
 
     loginHandler(email, password).then((res) => {
       setErrorMsg(res?.message);
+
       manageLoader(false);
     });
   };
@@ -65,7 +66,7 @@ const Login = ({
             required
           />
 
-          {errorMsg ? <span className="error-msg">{errorMsg}</span> : null}
+          {errorMsg && <span className="error-msg">{errorMsg}</span>}
 
           {loading ? (
             <Loader />
@@ -77,7 +78,7 @@ const Login = ({
 
           <div className="form-footer-ctn">
             New to this website?
-            <strong onClick={() => manageSignUpWindow(true)}> Sign Up.</strong>
+            <strong onClick={() => manageSignUpWindow(true)}> Sign Up</strong>
           </div>
         </form>
       </div>
