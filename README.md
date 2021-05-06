@@ -2,7 +2,7 @@
 
 ![Demo Screenshot](../assets/home-screenshot.png)
 
-### A simple fullstack reddit clone written in React and powered by Firebase
+### Polar is a fullstack reddit clone written in React and it has the backend powered by Firebase.
 
 [Link to the website](https://polar-app-psi.vercel.app)
 
