@@ -12,7 +12,6 @@ import SavedPosts from "./scenes/SavedPosts/SavedPosts";
 import MyPosts from "./scenes/MyPosts/MyPosts";
 import PrivateRoute from "./components/PrivateRoute";
 import useWindowSize from "./utils/useWindowSize";
-import Loader from "./components/Loader/Loader";
 
 const App = () => {
   const [postData, dispatch] = useReducer(reducer, []);
