@@ -10,8 +10,6 @@
   </p>
 </p>
 
-<br />
-
 ### Screenshot
 
 ![Demo Screenshot](../assets/home-screenshot.png)
@@ -23,11 +21,11 @@
 
 <!-- GETTING STARTED -->
 
+## Prerequisites
+
+- <p>npm</p>
+
 ## Installation
-
-#### Prerequisites
-
-- npm
 
 1. Clone the repo
    ```sh
