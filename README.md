@@ -1,4 +1,4 @@
-## Polar
+# Polar
 
 ![Demo Screenshot](../assets/home-screenshot.png)
 
