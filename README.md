@@ -1,47 +1,15 @@
-<p align="center">
-
-  <h3 align="center">Polar</h3>
-  
-  <p align="center">
-    A minimalistic Reddit clone i made to learn more about React.
-    <br />
-    <a href="https://polar-app-psi.vercel.app/"><strong>Live</strong</a>
-    
-  </p>
-</p>
-
-### Screenshot
+## Polar
 
 ![Demo Screenshot](../assets/home-screenshot.png)
+
+### A simple fullstack reddit clone written in React and powered by Firebase
+
+[Link to the website](https://polar-app-psi.vercel.app)
 
 ### Built With
 
 - [React](https://reactjs.org)
 - [Firebase](https://firebase.google.com)
-
-<!-- GETTING STARTED -->
-
-## Prerequisites
-
-- <p>npm</p>
-
-## Installation
-
-1. Clone the repo
-   ```sh
-   git clone git@github.com:Gkuzin13/polar-app.git
-   ```
-2. Install npm packages
-   ```sh
-   npm install
-   ```
-3. Start the development server
-
-   ```sh
-   npm start
-   ```
-
-   In browser, open http://localhost:3000
 
 ## License
 
