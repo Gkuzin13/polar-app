@@ -68,13 +68,13 @@ input {
 
 .border-ctn {
   display: flex;
-  padding: 0 0.65rem;
+  padding: 0.25rem 0.35rem;
 }
 
 .borderline {
   border-top: 3px rgb(230, 230, 230) solid;
   width: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   border-radius: 3px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;

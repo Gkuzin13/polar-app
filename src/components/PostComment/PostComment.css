@@ -1,6 +1,6 @@
 .post-comment-ctn {
   padding: 0.75rem;
-  margin: 2rem 0.5rem;
+  margin: 0 0.25rem 0.5rem 0.25rem;
   border: 2px rgb(219, 219, 219) solid;
   background-color: white;
 }
