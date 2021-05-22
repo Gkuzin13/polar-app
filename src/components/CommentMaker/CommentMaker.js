@@ -13,6 +13,9 @@ const CommentMaker = ({ currentUser, postId, updatePostData }) => {
   };
 
   const handleNewComment = (currentUser, content) => {
+    if (!textInput.length) {
+      return;
+    }
     setLoading(true);
 
     const newCommentId = uuid();
@@ -33,7 +36,7 @@ const CommentMaker = ({ currentUser, postId, updatePostData }) => {
   };
 
   return (
-    <div className="comment-maker-ctn">
+    <form className="comment-maker-ctn">
       <label htmlFor="comment">
         Comment as{" "}
         <span className="comment-username">{currentUser?.displayName}</span>
@@ -46,15 +49,19 @@ const CommentMaker = ({ currentUser, postId, updatePostData }) => {
         cols="33"
         placeholder="What are your thoughts?"
         value={textInput}
+        required
         onChange={(e) => handleInput(e.target.value)}
       />
 
       <div className="comment-maker-btn">
-        <button onClick={() => handleNewComment(currentUser, textInput)}>
+        <button
+          type="submit"
+          onClick={() => handleNewComment(currentUser, textInput)}
+        >
           {loading ? <Loader /> : "Comment"}
         </button>
       </div>
-    </div>
+    </form>
   );
 };
 
