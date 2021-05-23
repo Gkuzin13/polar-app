@@ -2,7 +2,7 @@ import app from "../firebase/firebase";
 
 const loginHandler = async (email, password) => {
   try {
-    await app.auth().signInWithEmailAndPassword(email.value, password.value);
+    await app.auth().signInWithEmailAndPassword(email, password);
   } catch (err) {
     return err;
   }
