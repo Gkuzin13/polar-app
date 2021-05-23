@@ -37,6 +37,24 @@ const Login = ({
 
     manageLoader(true);
 
+    loginHandler(email.value, password.value).then((res) => {
+      setErrorMsg(res?.message);
+
+      manageLoader(false);
+    });
+  };
+
+  const testDriveLogin = (e) => {
+    e.preventDefault();
+    setErrorMsg(null);
+
+    manageLoader(true);
+
+    const { email, password } = {
+      email: "tester@mail.com",
+      password: "tester",
+    };
+
     loginHandler(email, password).then((res) => {
       setErrorMsg(res?.message);
 
@@ -72,7 +90,7 @@ const Login = ({
             <Loader />
           ) : (
             <button type="submit" className="form-btn">
-              Log in
+              Log In
             </button>
           )}
 
@@ -81,6 +99,15 @@ const Login = ({
             <strong onClick={() => manageSignUpWindow(true)}> Sign Up</strong>
           </div>
         </form>
+        <div className="form-footer-ctn">
+          <button
+            onClick={(e) => testDriveLogin(e)}
+            className="login-test-btn"
+            type="button"
+          >
+            Log in as guest
+          </button>
+        </div>
       </div>
     </div>
   );
