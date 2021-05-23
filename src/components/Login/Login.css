@@ -1,4 +1,8 @@
 .window-inner-ctn {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: center;
   margin: 1rem;
   background-color: rgb(255, 255, 255);
   box-shadow: 0px 0px 13px 3px rgba(0, 0, 0, 0.205);
@@ -8,8 +12,7 @@
 }
 
 .window-exit-ctn {
-  display: flex;
-  justify-content: flex-end;
+  align-self: flex-end;
   align-items: center;
   padding: 0.75rem;
 }
@@ -35,7 +38,8 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  padding: 1rem 3.5rem;
+  padding: 2rem 3.5rem;
+  width: 100%;
 }
 
 .form-ctn h1 {
@@ -59,12 +63,12 @@
 
 .form-btn {
   padding: 0.75rem 0;
-  margin: 0.5rem 0 2.5rem 0;
+  margin: 0.5rem 0 1.5rem 0;
 }
 
 .form-footer-ctn {
   text-align: center;
-  margin: 1rem 0;
+  margin: 0.5rem 0;
   color: rgb(51, 51, 51);
 }
 
@@ -75,6 +79,20 @@
 
 .form-footer-ctn strong:hover {
   text-decoration: underline;
+}
+
+.login-test-btn {
+  align-self: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(230, 230, 230);
+  color: rgb(24, 24, 24);
+}
+
+.login-test-btn:hover,
+.login-test-btn:active {
+  background-color: rgb(221, 221, 221);
 }
 
 @media screen and (min-width: 600px) {
