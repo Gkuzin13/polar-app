@@ -2,7 +2,7 @@
 
 ![Demo Screenshot](../assets/home-screenshot.png)
 
-### Polar is a reddit clone written in React and it has the backend powered by Firebase.
+### Polar is a reddit like web app written in React and it has the backend powered by Firebase.
 
 #### [Link to the website](https://polar-app-psi.vercel.app)
 
@@ -15,7 +15,6 @@
 
 ## Acknowledgements
 
-- [Vercel](https://vercel.com)
 - [Heroicons](https://heroicons.com)
 
 ## License
