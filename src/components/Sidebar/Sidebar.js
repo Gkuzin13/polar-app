@@ -1,25 +1,24 @@
-import CreatePostButton from "../CreatePostButton/CreatePostButton";
-import "./Sidebar.css";
+import CreatePostButton from '../CreatePostButton/CreatePostButton';
+import './Sidebar.css';
 
-const Sidebar = ({ value, onValuechange, groupList, currentUser, loading }) => {
+const Sidebar = ({ value, onValuechange, groupList, currentUser }) => {
   return (
-    <div className="sidebar-ctn">
+    <div className='sidebar-ctn'>
       {currentUser ? <CreatePostButton /> : null}
 
-      <div className="sidebar-options-ctn">
+      <div className='sidebar-options-ctn'>
         {groupList.map((group, i) => {
           return (
             <button
               className={
                 value === group
-                  ? "sidebar-option-btn sidebar-option-active "
-                  : "sidebar-option-btn"
+                  ? 'sidebar-option-btn sidebar-option-active '
+                  : 'sidebar-option-btn'
               }
               value={group}
               defaultValue={group}
               key={i}
-              onClick={(e) => onValuechange(e)}
-            >
+              onClick={(e) => onValuechange(e)}>
               {`/${group}`}
             </button>
           );

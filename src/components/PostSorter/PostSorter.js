@@ -1,8 +1,8 @@
-import "./PostSorter.css";
-import { ACTIONS } from "../../reducers/reducers";
-import { fetchPosts } from "../../services/postHandler";
-import { useState } from "react";
-import { ChartBarIcon, StarIcon } from "@heroicons/react/solid";
+import './PostSorter.css';
+import { ACTIONS } from '../../reducers/reducers';
+import { fetchPosts } from '../../services/postHandler';
+import { useState } from 'react';
+import { ChartBarIcon, StarIcon } from '@heroicons/react/solid';
 
 const PostSorter = ({ dispatch, manageLoader }) => {
   const [sortBy, setSortBy] = useState({ top: false, new: true });
@@ -43,26 +43,24 @@ const PostSorter = ({ dispatch, manageLoader }) => {
     });
   };
   return (
-    <div className="post-sorter-ctn">
+    <div className='post-sorter-ctn'>
       <label>Sort by: </label>
 
       <button
         className={
-          sortBy.new ? "post-sort-btn active-sort-btn" : "post-sort-btn"
+          sortBy.new ? 'post-sort-btn active-sort-btn' : 'post-sort-btn'
         }
-        onClick={() => sortByNew()}
-      >
-        <StarIcon className="icon star-icon" />
+        onClick={() => sortByNew()}>
+        <StarIcon className='icon star-icon' />
 
         <span>New</span>
       </button>
       <button
         className={
-          sortBy.top ? "post-sort-btn active-sort-btn" : "post-sort-btn"
+          sortBy.top ? 'post-sort-btn active-sort-btn' : 'post-sort-btn'
         }
-        onClick={() => sortByTop()}
-      >
-        <ChartBarIcon className="icon chart-icon" />
+        onClick={() => sortByTop()}>
+        <ChartBarIcon className='icon chart-icon' />
 
         <span>Top</span>
       </button>

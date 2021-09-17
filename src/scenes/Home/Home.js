@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
-import { fetchPosts } from "../../services/postHandler";
-import { ACTIONS } from "../../reducers/reducers";
-import { getUserData } from "../../services/userDataHandler";
-import PostSorter from "../../components/PostSorter/PostSorter";
-import Post from "../../components/Post/Post";
-import GroupSelect from "../../components/GroupSelect/GroupSelect";
-import Loader from "../../components/Loader/Loader";
-import app from "../../firebase/firebase";
-import "./Home.css";
+import { useEffect, useState, useContext } from 'react';
+import { AuthContext } from '../../services/Auth';
+import { fetchPosts } from '../../services/postHandler';
+import { ACTIONS } from '../../reducers/reducers';
+import { getUserData } from '../../services/userDataHandler';
+import PostSorter from '../../components/PostSorter/PostSorter';
+import Post from '../../components/Post/Post';
+import GroupSelect from '../../components/GroupSelect/GroupSelect';
+import Loader from '../../components/Loader/Loader';
+import './Home.css';
 
 const Home = ({
   manageLoginWindow,
@@ -16,9 +16,10 @@ const Home = ({
   manageLoader,
   loading,
   windowSize,
-  currentUser,
 }) => {
   const [userData, setUserData] = useState([]);
+
+  const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
     let isMounted = true;
@@ -36,15 +37,11 @@ const Home = ({
       }
     });
 
-    app.auth().onAuthStateChanged((user) => {
-      if (user) {
-        getUserData(user.uid).then((data) => {
-          setUserData(() => data);
-        });
-
-        return;
-      }
-    });
+    if (currentUser) {
+      getUserData(currentUser.uid).then((data) => {
+        setUserData(data);
+      });
+    }
 
     return () => {
       isMounted = false;
@@ -59,27 +56,28 @@ const Home = ({
   }, [dispatch, manageLoader, currentUser]);
 
   return (
-    <div className="home-main-ctn">
+    <div className='home-main-ctn'>
       <GroupSelect
         currentUser={currentUser}
         dispatch={dispatch}
         windowSize={windowSize}
         manageLoader={manageLoader}
       />
-
-      <div className="home-posts-ctn">
+      <div className='home-posts-ctn'>
         <PostSorter dispatch={dispatch} manageLoader={manageLoader} />
-        {loading ? (
-          <Loader />
-        ) : (
-          <Post
-            currentUser={currentUser}
-            dispatch={dispatch}
-            postData={postData}
-            userData={userData}
-            manageLoginWindow={manageLoginWindow}
-          />
-        )}
+        <div className='posts-ctn'>
+          {loading ? (
+            <Loader />
+          ) : (
+            <Post
+              currentUser={currentUser}
+              dispatch={dispatch}
+              postData={postData}
+              userData={userData}
+              manageLoginWindow={manageLoginWindow}
+            />
+          )}
+        </div>
       </div>
     </div>
   );
