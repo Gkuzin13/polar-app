@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
-import { updateUpVote, updateDownVote } from "../../services/postHandler";
-import { updateSavedPosts } from "../../services/userDataHandler";
-import { ArrowUpIcon } from "@heroicons/react/solid";
-import { ArrowDownIcon } from "@heroicons/react/solid";
-import { ChatAltIcon } from "@heroicons/react/solid";
-import { BookmarkIcon } from "@heroicons/react/solid";
-import { ExternalLinkIcon } from "@heroicons/react/solid";
-import { ACTIONS } from "../../reducers/reducers";
-import "./Post.css";
-import ReactTimeAgo from "react-time-ago";
+import { useEffect, useState } from 'react';
+import { updateUpVote, updateDownVote } from '../../services/postHandler';
+import { updateSavedPosts } from '../../services/userDataHandler';
+import { ArrowUpIcon } from '@heroicons/react/solid';
+import { ArrowDownIcon } from '@heroicons/react/solid';
+import { ChatAltIcon } from '@heroicons/react/solid';
+import { BookmarkIcon } from '@heroicons/react/solid';
+import { ExternalLinkIcon } from '@heroicons/react/solid';
+import { ACTIONS } from '../../reducers/reducers';
+import './Post.css';
+import ReactTimeAgo from 'react-time-ago';
 
 const Post = ({
   dispatch,
@@ -21,17 +21,17 @@ const Post = ({
   const [savedPosts, setSavedPosts] = useState([]);
 
   useEffect(() => {
-    setSavedPosts(() => userData?.userSavedPosts);
-    setVotedPosts(() => userData?.userVotedPosts);
+    setSavedPosts(userData?.userSavedPosts);
+    setVotedPosts(userData?.userVotedPosts);
 
     if (!currentUser) {
-      setSavedPosts(() => []);
-      setVotedPosts(() => []);
+      setSavedPosts([]);
+      setVotedPosts([]);
     }
 
     return () => {
-      setSavedPosts(() => []);
-      setVotedPosts(() => []);
+      setSavedPosts([]);
+      setVotedPosts([]);
     };
   }, [userData, currentUser]);
 
@@ -62,7 +62,7 @@ const Post = ({
       manageLoginWindow(true);
       return;
     }
-    if (typeof postVoteData === "undefined") {
+    if (typeof postVoteData === 'undefined') {
       postVoteData = {
         upVoted: false,
         downVoted: false,
@@ -115,7 +115,7 @@ const Post = ({
       manageLoginWindow(true);
       return;
     }
-    if (typeof postVoteData === "undefined") {
+    if (typeof postVoteData === 'undefined') {
       postVoteData = {
         upVoted: false,
         downVoted: false,
@@ -164,7 +164,7 @@ const Post = ({
   };
 
   return (
-    <div className="post-ctn">
+    <div className='post-ctn'>
       {postData.map((post) => {
         const userVoteData = () => {
           if (!votedPosts) {
@@ -183,20 +183,19 @@ const Post = ({
         };
 
         return (
-          <div key={post.postId} className="post-inner-ctn">
+          <div key={post.postId} className='post-inner-ctn'>
             {/* Post Main Info */}
             <a
               aria-label={`Show comments for this post, 
                 with the title ${post.postTitle}. Created by ${post.postOwner} `}
-              href={`/g/${post.postSubGroup}/${post.postId}`}
-            >
-              <div className="post-info-ctn">
-                <span className="post-info-group">{`g/${post.postSubGroup}`}</span>
-                <div className="op-info">
+              href={`/g/${post.postSubGroup}/${post.postId}`}>
+              <div className='post-info-ctn'>
+                <span className='post-info-group'>{`g/${post.postSubGroup}`}</span>
+                <div className='op-info'>
                   <span>
                     Posted by <strong>{post.postOwner}</strong>
                   </span>
-                  <div className="post-date">
+                  <div className='post-date'>
                     <ReactTimeAgo date={post.postDate} />
                   </div>
                 </div>
@@ -204,37 +203,36 @@ const Post = ({
             </a>
             {/* Post Content */}
 
-            <div className="post-content-ctn">
+            <div className='post-content-ctn'>
               <a
                 aria-label={`Show comments for this post, 
                 with the title ${post.postTitle}. Created by ${post.postOwner} `}
-                href={`/g/${post.postSubGroup}/${post.postId}`}
-              >
-                <h1 className="post-title">{post.postTitle}</h1>
+                href={`/g/${post.postSubGroup}/${post.postId}`}>
+                <h1 className='post-title'>{post.postTitle}</h1>
                 <p>{post.postContent}</p>
               </a>
 
               {/* Checks if url exists */}
               {!post.postContentUrl ? null : (
-                <a href={post.postContentUrl} className="post-content-url">
+                <a href={post.postContentUrl} className='post-content-url'>
                   {post.postContentUrl.length > 60
                     ? `${post.postContentUrl.slice(0, 60)}...`
                     : post.postContentUrl}
-                  <ExternalLinkIcon className="url-icon" />
+                  <ExternalLinkIcon className='url-icon' />
                 </a>
               )}
             </div>
 
             {/* Post Actions */}
-            <div className="post-actions-ctn">
-              <div className="votes-ctn">
+            <div className='post-actions-ctn'>
+              <div className='votes-ctn'>
                 <ArrowUpIcon
                   style={
                     userVoteData()?.upVoted
-                      ? { color: "rgb(251, 86, 7)" }
+                      ? { color: 'rgb(251, 86, 7)' }
                       : null
                   }
-                  className="icon arrow-up-icon"
+                  className='icon arrow-up-icon'
                   onClick={() => toggleUpVote(post, userVoteData())}
                 />
 
@@ -243,10 +241,10 @@ const Post = ({
                 <ArrowDownIcon
                   style={
                     userVoteData()?.downVoted
-                      ? { color: "rgb(58, 134, 255)" }
+                      ? { color: 'rgb(58, 134, 255)' }
                       : null
                   }
-                  className="icon arrow-down-icon"
+                  className='icon arrow-down-icon'
                   onClick={() => toggleDownVote(post, userVoteData())}
                 />
               </div>
@@ -254,10 +252,9 @@ const Post = ({
               <a
                 aria-label={`Show comments for this post, 
                 with the title ${post.postTitle}. Created by ${post.postOwner} `}
-                href={`/g/${post.postSubGroup}/${post.postId}`}
-              >
-                <div className="post-comments-ctn">
-                  <ChatAltIcon className="icon" />
+                href={`/g/${post.postSubGroup}/${post.postId}`}>
+                <div className='post-comments-ctn'>
+                  <ChatAltIcon className='icon' />
 
                   <span>
                     {post.postComments
@@ -271,12 +268,11 @@ const Post = ({
               {currentUser && (
                 <div
                   style={
-                    userSavedPosts() ? { color: "rgb(44, 125, 102)" } : null
+                    userSavedPosts() ? { color: 'rgb(44, 125, 102)' } : null
                   }
                   onClick={() => toggleSavePost(userSavedPosts(), post.postId)}
-                  className="post-save-ctn"
-                >
-                  <BookmarkIcon className="icon" />
+                  className='post-save-ctn'>
+                  <BookmarkIcon className='icon' />
 
                   <span>Save</span>
                 </div>

@@ -13,7 +13,8 @@
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
-  margin: 0.5rem 0.25rem;
+  margin: 0rem 0.25rem;
+  margin-bottom: 0.5rem;
   background-color: white;
 }
 
