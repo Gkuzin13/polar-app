@@ -1,17 +1,17 @@
-import React, { useReducer, useState, useCallback, useContext } from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { reducer } from "./reducers/reducers";
-import { AuthContext } from "./services/Auth";
-import Navbar from "./components/Navbar/Navbar";
-import SignUp from "./components/SignUp/SignUp";
-import Login from "./components/Login/Login";
-import Commentsview from "./scenes/CommentsView/CommentsView";
-import Home from "./scenes/Home/Home";
-import CreateNewPost from "./scenes/CreateNewPost";
-import SavedPosts from "./scenes/SavedPosts/SavedPosts";
-import MyPosts from "./scenes/MyPosts/MyPosts";
-import PrivateRoute from "./components/PrivateRoute";
-import useWindowSize from "./utils/useWindowSize";
+import React, { useReducer, useState, useCallback, useContext } from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { reducer } from './reducers/reducers';
+import { AuthContext } from './services/Auth';
+import Navbar from './components/Navbar/Navbar';
+import SignUp from './components/SignUp/SignUp';
+import Login from './components/Login/Login';
+import Commentsview from './scenes/CommentsView/CommentsView';
+import Home from './scenes/Home/Home';
+import CreateNewPost from './scenes/CreateNewPost';
+import SavedPosts from './scenes/SavedPosts/SavedPosts';
+import MyPosts from './scenes/MyPosts/MyPosts';
+import PrivateRoute from './components/PrivateRoute';
+import useWindowSize from './utils/useWindowSize';
 
 const App = () => {
   const [postData, dispatch] = useReducer(reducer, []);
@@ -19,7 +19,7 @@ const App = () => {
   const [loginWindow, setLoginWindow] = useState(false);
   const [signUpWindow, setSignUpWindow] = useState(false);
 
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, loadingUser } = useContext(AuthContext);
 
   const windowSize = useWindowSize();
 
@@ -41,13 +41,13 @@ const App = () => {
   );
 
   if (loginWindow || signUpWindow) {
-    document.body.style.overflow = "hidden";
+    document.body.style.overflow = 'hidden';
   } else {
-    document.body.style.overflow = "auto";
+    document.body.style.overflow = 'auto';
   }
 
-  if (typeof currentUser === "undefined") {
-    return null;
+  if (loadingUser) {
+    return <></>;
   }
 
   return (
@@ -86,7 +86,7 @@ const App = () => {
           <Switch>
             <Route
               exact
-              path="/"
+              path='/'
               render={() => (
                 <Home
                   postData={postData}
@@ -95,12 +95,11 @@ const App = () => {
                   loading={loading}
                   manageLoginWindow={manageLoginWindow}
                   windowSize={windowSize}
-                  currentUser={currentUser}
                 />
               )}
             />
             <Route
-              path="/g/:groupId/:postId"
+              path='/g/:groupId/:postId'
               render={({ match }) => (
                 <Commentsview
                   postData={postData}
@@ -118,7 +117,7 @@ const App = () => {
             />
 
             <PrivateRoute
-              path="/myposts"
+              path='/myposts'
               component={MyPosts}
               postData={postData}
               dispatch={dispatch}
@@ -128,7 +127,7 @@ const App = () => {
             />
 
             <PrivateRoute
-              path="/savedposts"
+              path='/savedposts'
               component={SavedPosts}
               postData={postData}
               dispatch={dispatch}
@@ -138,7 +137,7 @@ const App = () => {
             />
 
             <PrivateRoute
-              path="/create"
+              path='/create'
               component={CreateNewPost}
               currentUser={currentUser}
             />
