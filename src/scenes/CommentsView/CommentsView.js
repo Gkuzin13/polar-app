@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import Post from "../../components/Post/Post";
-import PostComment from "../../components/PostComment/PostComment";
-import CommentMaker from "../../components/CommentMaker/CommentMaker";
-import { fetchCurrentPost } from "../../services/postHandler";
-import { getUserData } from "../../services/userDataHandler";
-import { ACTIONS } from "../../reducers/reducers";
-import Loader from "../../components/Loader/Loader";
-import "./CommentsView.css";
+import { useEffect, useState } from 'react';
+import Post from '../../components/Post/Post';
+import PostComment from '../../components/PostComment/PostComment';
+import CommentMaker from '../../components/CommentMaker/CommentMaker';
+import { fetchCurrentPost } from '../../services/postHandler';
+import { getUserData } from '../../services/userDataHandler';
+import { ACTIONS } from '../../reducers/reducers';
+import Loader from '../../components/Loader/Loader';
+import './CommentsView.css';
 
 const CommentsView = ({
   manageLoginWindow,
@@ -22,31 +22,25 @@ const CommentsView = ({
   const postId = match.params.postId;
 
   useEffect(() => {
-    let isMounted = true;
-
     manageLoader(true);
 
     fetchCurrentPost(postId).then((post) => {
-      if (isMounted) {
-        dispatch({
-          type: ACTIONS.SET_DATA,
-          data: [post],
+      if (currentUser) {
+        getUserData(currentUser?.uid).then((data) => {
+          setUserData(() => data);
         });
       }
-    });
 
-    getUserData(currentUser?.uid).then((data) => {
-      if (isMounted) {
-        setUserData(() => data);
-        manageLoader(false);
-      }
+      dispatch({
+        type: ACTIONS.SET_DATA,
+        data: [post],
+      });
+
+      manageLoader(false);
     });
 
     return () => {
-      isMounted = false;
-
       manageLoader(false);
-
       dispatch({
         type: ACTIONS.SET_DATA,
         data: [],
@@ -68,7 +62,7 @@ const CommentsView = ({
   }
 
   return (
-    <div className="comments-view-ctn">
+    <div className='comments-view-ctn'>
       <Post
         currentUser={currentUser}
         postData={postData}
@@ -77,16 +71,16 @@ const CommentsView = ({
         manageLoginWindow={manageLoginWindow}
       />
 
-      {currentUser ? (
+      {currentUser && (
         <CommentMaker
           currentUser={currentUser}
           postId={postId}
           updatePostData={updatePostData}
         />
-      ) : null}
+      )}
 
-      <div className="border-ctn">
-        <span className="borderline"></span>
+      <div className='border-ctn'>
+        <span className='borderline'></span>
       </div>
 
       <PostComment currentPost={postData} />

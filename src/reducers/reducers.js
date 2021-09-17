@@ -1,12 +1,12 @@
 export const ACTIONS = {
-  SET_DATA: "setdata",
-  SORT_POST_BY_NEW: "sort-post-by-new",
-  SORT_POST_BY_TOP: "sort-post-by-top",
-  UPVOTE_POST: "upvote",
-  DOWNVOTE_POST: "downvote",
-  UPVOTE_FROM_DOWNVOTE: "upvote-from-downvote",
-  DOWNVOTE_FROM_UPVOTE: "downvote-from-upvote",
-  SAVE_POST: "savepost",
+  SET_DATA: 'setdata',
+  SORT_POST_BY_NEW: 'sort-post-by-new',
+  SORT_POST_BY_TOP: 'sort-post-by-top',
+  UPVOTE_POST: 'upvote',
+  DOWNVOTE_POST: 'downvote',
+  UPVOTE_FROM_DOWNVOTE: 'upvote-from-downvote',
+  DOWNVOTE_FROM_UPVOTE: 'downvote-from-upvote',
+  SAVE_POST: 'savepost',
 };
 
 export function reducer(data, action) {

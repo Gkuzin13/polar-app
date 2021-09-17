@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
-import { fetchPosts } from "../../services/postHandler";
-import { getUserData } from "../../services/userDataHandler";
-import { ACTIONS } from "../../reducers/reducers";
-import Post from "../../components/Post/Post";
-import "./MyPosts.css";
-import Loader from "../../components/Loader/Loader";
+import { useEffect, useState } from 'react';
+import { fetchPosts } from '../../services/postHandler';
+import { getUserData } from '../../services/userDataHandler';
+import { ACTIONS } from '../../reducers/reducers';
+import Post from '../../components/Post/Post';
+import './MyPosts.css';
+import Loader from '../../components/Loader/Loader';
 
 const MyPosts = ({
   dispatch,
@@ -17,35 +17,26 @@ const MyPosts = ({
   const [userData, setUserData] = useState([]);
 
   useEffect(() => {
-    let isMounted = true;
-
     manageLoader(true);
 
     getUserData(currentUser.uid).then((data) => {
       const myPosts = data?.userPosts;
+      setUserData(() => data);
 
       fetchPosts().then((posts) => {
         const filteredposts = posts.filter((post) =>
           myPosts.includes(post.postId)
         );
 
-        if (isMounted) {
-          dispatch({
-            type: ACTIONS.SET_DATA,
-            data: filteredposts,
-          });
-          manageLoader(() => false);
-        }
+        dispatch({
+          type: ACTIONS.SET_DATA,
+          data: filteredposts,
+        });
+        manageLoader(false);
       });
     });
 
-    getUserData(currentUser.uid).then((data) => {
-      setUserData(() => data);
-    });
-
     return () => {
-      isMounted = false;
-
       dispatch({
         type: ACTIONS.SET_DATA,
         data: [],
@@ -54,11 +45,11 @@ const MyPosts = ({
   }, [dispatch, manageLoader, currentUser]);
 
   return (
-    <div className="my-posts-ctn">
-      <h1 className="myposts-heading">My Posts</h1>
+    <div className='my-posts-ctn'>
+      <h1 className='myposts-heading'>My Posts</h1>
 
-      <div className="border-ctn">
-        <span className="borderline"></span>
+      <div className='border-ctn'>
+        <span className='borderline'></span>
       </div>
 
       {loading ? <Loader /> : null}

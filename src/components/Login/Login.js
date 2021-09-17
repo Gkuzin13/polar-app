@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Redirect } from "react-router-dom";
-import loginHandler from "../../services/loginHandler";
-import { XIcon } from "@heroicons/react/solid";
-import Loader from "../Loader/Loader";
-import "./Login.css";
+import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router-dom';
+import loginHandler from '../../services/loginHandler';
+import { XIcon } from '@heroicons/react/solid';
+import Loader from '../Loader/Loader';
+import './Login.css';
 
 const Login = ({
   manageLoader,
@@ -20,7 +20,7 @@ const Login = ({
     if (currentUser) {
       manageLoginWindow(false);
 
-      return <Redirect to="/" />;
+      return <Redirect to='/' />;
     }
 
     return () => {
@@ -51,8 +51,8 @@ const Login = ({
     manageLoader(true);
 
     const { email, password } = {
-      email: "tester@mail.com",
-      password: "tester",
+      email: 'tester@mail.com',
+      password: 'tester',
     };
 
     loginHandler(email, password).then((res) => {
@@ -63,48 +63,47 @@ const Login = ({
   };
 
   return (
-    <div className="form-window-ctn">
-      <div className="window-inner-ctn">
-        <div className="window-exit-ctn">
+    <div className='form-window-ctn'>
+      <div className='window-inner-ctn'>
+        <div className='window-exit-ctn'>
           <XIcon
-            className="exit-icon"
+            className='exit-icon'
             onClick={() => manageLoginWindow(false)}
           />
         </div>
 
-        <form onSubmit={handleLogin} className="form-ctn">
+        <form onSubmit={handleLogin} className='form-ctn'>
           <h1>Log In</h1>
 
-          <input type="text" name="email" placeholder="Email" required />
+          <input type='text' name='email' placeholder='Email' required />
 
           <input
-            type="password"
-            name="password"
-            placeholder="Password"
+            type='password'
+            name='password'
+            placeholder='Password'
             required
           />
 
-          {errorMsg && <span className="error-msg">{errorMsg}</span>}
+          {errorMsg && <span className='error-msg'>{errorMsg}</span>}
 
           {loading ? (
             <Loader />
           ) : (
-            <button type="submit" className="form-btn">
+            <button type='submit' className='form-btn'>
               Log In
             </button>
           )}
 
-          <div className="form-footer-ctn">
+          <div className='form-footer-ctn'>
             New to this website?
             <strong onClick={() => manageSignUpWindow(true)}> Sign Up</strong>
           </div>
         </form>
-        <div className="form-footer-ctn">
+        <div className='form-footer-ctn'>
           <button
             onClick={(e) => testDriveLogin(e)}
-            className="login-test-btn"
-            type="button"
-          >
+            className='login-test-btn'
+            type='button'>
             Log in as guest
           </button>
         </div>
