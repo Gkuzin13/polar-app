@@ -1,9 +1,6 @@
 .sidebar-ctn {
   margin: 0rem 1rem 0 3rem;
   background-color: rgb(235, 235, 235);
-  width: 35vw;
-  min-width: 25vw;
-  height: fit-content;
   padding: 0.5rem;
   border: 2px rgb(223, 223, 223) solid;
   border-radius: 3px;
@@ -11,6 +8,10 @@
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
+  position: fixed;
+  right: 10%;
+  margin-right: 3rem;
+  box-shadow: 0px 6px 10px 1px rgba(0, 0, 0, 0.075);
 }
 
 .sidebar-options-ctn {
@@ -45,16 +46,16 @@
   border-right: 0.5rem var(--main-button-color) solid;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 1024px) {
   .sidebar-ctn {
     width: 20rem;
-    min-width: 20vw;
-    box-shadow: 0px 6px 10px 1px rgba(0, 0, 0, 0.075);
+    right: 10%;
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (max-width: 1024px) {
   .sidebar-ctn {
-    min-width: 15vw;
+    width: 15rem;
+    right: 0%;
   }
 }
