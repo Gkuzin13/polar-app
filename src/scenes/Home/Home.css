@@ -1,5 +1,6 @@
 .home-main-ctn {
   margin-bottom: 1rem;
+  width: 100%;
 }
 
 .home-posts-ctn {
@@ -11,25 +12,35 @@
   margin-top: 0.5rem;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 768px) {
   .home-main-ctn {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    flex-direction: row-reverse;
-    margin: 2rem;
-    width: 75%;
     margin: 0 auto;
+    padding: 1rem;
+    width: 100%;
+    position: relative;
+    margin-left: 3rem;
   }
 
   .home-posts-ctn {
-    width: 75%;
-    margin-right: 2rem;
+    width: 60%;
   }
 }
 
 @media screen and (min-width: 1024px) {
   .home-main-ctn {
-    padding: 1rem 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 0 auto;
+    padding: 1rem 0 5rem 0;
+    width: 75%;
+    position: relative;
+  }
+
+  .home-posts-ctn {
+    width: 70%;
   }
 }

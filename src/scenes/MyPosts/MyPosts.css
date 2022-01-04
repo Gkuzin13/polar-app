@@ -14,6 +14,12 @@
   margin: 1rem 0.5rem 0.75rem 0.5rem;
 }
 
+.no-posts {
+  text-align: center;
+  font-weight: 500;
+  color: gray;
+}
+
 @media screen and (min-width: 600px) {
   .my-posts-ctn {
     padding: 2rem 0;
