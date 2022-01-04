@@ -6,18 +6,12 @@ import Post from '../../components/Post/Post';
 import './SavedPosts.css';
 import Loader from '../../components/Loader/Loader';
 
-const SavedPosts = ({
-  dispatch,
-  manageLoader,
-  postData,
-  manageLoginWindow,
-  loading,
-  currentUser,
-}) => {
+const SavedPosts = ({ postData, dispatch, currentUser, manageLoginWindow }) => {
   const [userData, setUserData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    manageLoader(true);
+    setIsLoading(true);
 
     getUserData(currentUser.uid).then((data) => {
       const savedPosts = data.userSavedPosts;
@@ -25,15 +19,17 @@ const SavedPosts = ({
       setUserData(() => data);
 
       fetchPosts().then((posts) => {
-        const filteredposts = posts.filter((post) =>
-          savedPosts.includes(post.postId)
-        );
+        if (posts) {
+          const filteredposts = posts.filter((post) =>
+            savedPosts.includes(post.postId)
+          );
 
-        dispatch({
-          type: ACTIONS.SET_DATA,
-          data: filteredposts,
-        });
-        manageLoader(false);
+          dispatch({
+            type: ACTIONS.SET_DATA,
+            data: filteredposts,
+          });
+        }
+        setIsLoading(false);
       });
     });
 
@@ -43,25 +39,34 @@ const SavedPosts = ({
         data: [],
       });
     };
-  }, [dispatch, manageLoader, currentUser]);
+  }, [dispatch, currentUser]);
 
   return (
     <div className='saved-posts-ctn'>
       <h1 className='savedposts-heading'>My Saved Posts</h1>
-
       <div className='border-ctn'>
         <span className='borderline'></span>
       </div>
+      {!postData.length && !isLoading && (
+        <span className='no-posts'>Empty here.. :(</span>
+      )}
 
-      {loading && <Loader />}
-
-      <Post
-        currentUser={currentUser}
-        dispatch={dispatch}
-        postData={postData}
-        userData={userData}
-        manageLoginWindow={manageLoginWindow}
-      />
+      {isLoading ? (
+        <Loader />
+      ) : (
+        postData.map((post) => {
+          return (
+            <Post
+              key={post.postId}
+              currentUser={currentUser}
+              dispatch={dispatch}
+              post={post}
+              userData={userData}
+              manageLoginWindow={manageLoginWindow}
+            />
+          );
+        })
+      )}
     </div>
   );
 };
