@@ -1,4 +1,4 @@
-import React, { useReducer, useState, useCallback, useContext } from 'react';
+import React, { useReducer, useState, useContext } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { reducer } from './reducers/reducers';
 import { AuthContext } from './services/Auth';
@@ -15,12 +15,10 @@ import useWindowSize from './utils/useWindowSize';
 
 const App = () => {
   const [postData, dispatch] = useReducer(reducer, []);
-  const [loading, setLoading] = useState(false);
   const [loginWindow, setLoginWindow] = useState(false);
   const [signUpWindow, setSignUpWindow] = useState(false);
 
   const { currentUser, loadingUser } = useContext(AuthContext);
-
   const windowSize = useWindowSize();
 
   const manageLoginWindow = (action) => {
@@ -33,19 +31,6 @@ const App = () => {
     setLoginWindow(false);
   };
 
-  const manageLoader = useCallback(
-    (action) => {
-      return setLoading(action);
-    },
-    [setLoading]
-  );
-
-  if (loginWindow || signUpWindow) {
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = 'auto';
-  }
-
   if (loadingUser) {
     return <></>;
   }
@@ -55,18 +40,13 @@ const App = () => {
       <Router>
         {loginWindow && (
           <Login
-            manageLoader={manageLoader}
-            loading={loading}
             manageLoginWindow={manageLoginWindow}
             manageSignUpWindow={manageSignUpWindow}
             currentUser={currentUser}
           />
         )}
-
         {signUpWindow && (
           <SignUp
-            manageLoader={manageLoader}
-            loading={loading}
             manageSignUpWindow={manageSignUpWindow}
             manageLoginWindow={manageLoginWindow}
             currentUser={currentUser}
@@ -74,14 +54,12 @@ const App = () => {
         )}
 
         <Navbar
-          loading={loading}
           manageLoginWindow={manageLoginWindow}
           manageSignUpWindow={manageSignUpWindow}
           loginWindow={loginWindow}
           signUpWindow={signUpWindow}
           currentUser={currentUser}
         />
-
         <main>
           <Switch>
             <Route
@@ -91,8 +69,6 @@ const App = () => {
                 <Home
                   postData={postData}
                   dispatch={dispatch}
-                  manageLoader={manageLoader}
-                  loading={loading}
                   manageLoginWindow={manageLoginWindow}
                   windowSize={windowSize}
                 />
@@ -105,8 +81,6 @@ const App = () => {
                   postData={postData}
                   match={match}
                   dispatch={dispatch}
-                  manageLoader={manageLoader}
-                  loading={loading}
                   manageLoginWindow={manageLoginWindow}
                   manageSignUpWindow={manageSignUpWindow}
                   loginWindow={loginWindow}
@@ -121,8 +95,6 @@ const App = () => {
               component={MyPosts}
               postData={postData}
               dispatch={dispatch}
-              manageLoader={manageLoader}
-              loading={loading}
               currentUser={currentUser}
             />
 
@@ -131,8 +103,6 @@ const App = () => {
               component={SavedPosts}
               postData={postData}
               dispatch={dispatch}
-              manageLoader={manageLoader}
-              loading={loading}
               currentUser={currentUser}
             />
 
