@@ -37,7 +37,7 @@ const HomeActions = ({ dispatch, windowSize, loading, currentUser }) => {
     setValue(() => e.target.value);
   };
 
-  if (windowSize?.width > 600) {
+  if (windowSize?.width > 768) {
     return (
       <Sidebar
         onValuechange={onValuechange}
