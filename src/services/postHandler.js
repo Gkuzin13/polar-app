@@ -18,6 +18,25 @@ export const fetchPosts = async () => {
   }
 };
 
+export const fetchUserPosts = async (id) => {
+  try {
+    const posts = await db
+      .ref('posts')
+      .orderByChild('postOwnerId')
+      .equalTo(id)
+      .get()
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          return Object.values(snapshot.val());
+        }
+      });
+
+    return posts;
+  } catch (err) {
+    return console.log(err);
+  }
+};
+
 export const fetchCurrentPost = async (postId) => {
   if (postId === undefined) {
     postId = '';
