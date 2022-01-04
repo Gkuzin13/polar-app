@@ -13,40 +13,37 @@ const CommentsView = ({
   dispatch,
   postData,
   match,
-  manageLoader,
-  loading,
   currentUser,
 }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [userData, setUserData] = useState([]);
 
   const postId = match.params.postId;
 
   useEffect(() => {
-    manageLoader(true);
-
+    setIsLoading(true);
+    if (currentUser) {
+      getUserData(currentUser?.uid).then((data) => {
+        setUserData(() => data);
+      });
+    }
     fetchCurrentPost(postId).then((post) => {
-      if (currentUser) {
-        getUserData(currentUser?.uid).then((data) => {
-          setUserData(() => data);
-        });
-      }
-
       dispatch({
         type: ACTIONS.SET_DATA,
         data: [post],
       });
 
-      manageLoader(false);
+      setIsLoading(false);
     });
 
     return () => {
-      manageLoader(false);
+      setIsLoading(false);
       dispatch({
         type: ACTIONS.SET_DATA,
         data: [],
       });
     };
-  }, [dispatch, postId, manageLoader, currentUser]);
+  }, [dispatch, postId, currentUser]);
 
   const updatePostData = () => {
     fetchCurrentPost(postId).then((post) => {
@@ -57,19 +54,24 @@ const CommentsView = ({
     });
   };
 
-  if (loading) {
+  if (isLoading) {
     return <Loader />;
   }
 
   return (
     <div className='comments-view-ctn'>
-      <Post
-        currentUser={currentUser}
-        postData={postData}
-        userData={userData}
-        dispatch={dispatch}
-        manageLoginWindow={manageLoginWindow}
-      />
+      {postData.map((post) => {
+        return (
+          <Post
+            key={post.postId}
+            currentUser={currentUser}
+            post={post}
+            userData={userData}
+            dispatch={dispatch}
+            manageLoginWindow={manageLoginWindow}
+          />
+        );
+      })}
 
       {currentUser && (
         <CommentMaker
@@ -82,7 +84,6 @@ const CommentsView = ({
       <div className='border-ctn'>
         <span className='borderline'></span>
       </div>
-
       <PostComment currentPost={postData} />
     </div>
   );

@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { Redirect } from "react-router";
-import { createNewUser } from "../../services/signUpHandler";
-import { XIcon } from "@heroicons/react/solid";
-import Loader from "../Loader/Loader";
-import "./SignUp.css";
+import React, { useEffect, useState } from 'react';
+import { Redirect } from 'react-router';
+import Loader from '../Loader/Loader';
+import { createNewUser } from '../../services/signUpHandler';
+import { XIcon } from '@heroicons/react/solid';
+import './SignUp.css';
 
-const SignUp = ({
-  loading,
-  manageLoader,
-  manageLoginWindow,
-  manageSignUpWindow,
-  currentUser,
-}) => {
+const SignUp = ({ manageLoginWindow, manageSignUpWindow, currentUser }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState(null);
 
   useEffect(() => {
@@ -19,8 +14,7 @@ const SignUp = ({
 
     if (currentUser) {
       manageSignUpWindow(false);
-
-      return <Redirect to="/" />;
+      return <Redirect to='/' />;
     }
 
     return () => {
@@ -30,69 +24,61 @@ const SignUp = ({
 
   const handleSignUp = (e) => {
     e.preventDefault();
-
-    manageLoader(true);
-
+    setIsLoading(true);
     setErrorMsg(null);
 
     const { email, password, confirmpassword, nickname } = e.target.elements;
 
     if (password.value !== confirmpassword.value) {
-      setErrorMsg("The passwords do not match. Try again.");
-
-      manageLoader(false);
-
+      setErrorMsg('The passwords do not match. Try again.');
+      setIsLoading(false);
       return;
     }
 
     createNewUser(email, password, nickname).then((res) => {
-      setErrorMsg(res?.message);
-
-      manageLoader(false);
+      if (res?.message) {
+        setErrorMsg(res.message);
+        setIsLoading(false);
+      }
     });
   };
 
   return (
-    <div className="form-window-ctn">
-      <div className="window-inner-ctn">
-        <div className="window-exit-ctn">
+    <div className='form-window-ctn'>
+      <div className='window-inner-ctn'>
+        <div className='window-exit-ctn'>
           <XIcon
-            className="exit-icon"
+            className='exit-icon'
             onClick={() => manageSignUpWindow(false)}
           />
         </div>
-        <form className="form-ctn" onSubmit={(e) => handleSignUp(e)}>
+        <form className='form-ctn' onSubmit={(e) => handleSignUp(e)}>
           <h1>Sign Up</h1>
-
-          <input type="text" name="nickname" placeholder="Nickname" required />
-
-          <input type="text" name="email" placeholder="Email" required />
-
+          <input type='text' name='nickname' placeholder='Nickname' required />
+          <input type='text' name='email' placeholder='Email' required />
           <input
-            type="password"
-            name="password"
-            placeholder="Password"
+            type='password'
+            name='password'
+            placeholder='Password'
             required
           />
-
           <input
-            type="password"
-            name="confirmpassword"
-            placeholder="Confirm Password"
+            type='password'
+            name='confirmpassword'
+            placeholder='Confirm Password'
             required
           />
+          {errorMsg ? <span className='error-msg'>{errorMsg}</span> : null}
 
-          {errorMsg ? <span className="error-msg">{errorMsg}</span> : null}
-
-          {loading ? (
+          {isLoading ? (
             <Loader />
           ) : (
-            <button type="submit" className="form-btn">
+            <button type='submit' className='form-btn'>
               Sign Up
             </button>
           )}
 
-          <div className="form-footer-ctn">
+          <div className='form-footer-ctn'>
             Already have an account?
             <strong onClick={() => manageLoginWindow(true)}> Log in</strong>
           </div>

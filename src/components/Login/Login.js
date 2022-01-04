@@ -1,28 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import loginHandler from '../../services/loginHandler';
-import { XIcon } from '@heroicons/react/solid';
 import Loader from '../Loader/Loader';
+import { XIcon } from '@heroicons/react/solid';
 import './Login.css';
 
-const Login = ({
-  manageLoader,
-  loading,
-  manageSignUpWindow,
-  manageLoginWindow,
-  currentUser,
-}) => {
+const Login = ({ manageSignUpWindow, manageLoginWindow, currentUser }) => {
   const [errorMsg, setErrorMsg] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     manageLoginWindow(true);
 
     if (currentUser) {
       manageLoginWindow(false);
-
       return <Redirect to='/' />;
     }
-
     return () => {
       manageLoginWindow(false);
     };
@@ -30,25 +23,23 @@ const Login = ({
 
   const handleLogin = (e) => {
     e.preventDefault();
-
+    setIsLoading(true);
     setErrorMsg(null);
 
     const { email, password } = e.target.elements;
 
-    manageLoader(true);
-
     loginHandler(email.value, password.value).then((res) => {
-      setErrorMsg(res?.message);
-
-      manageLoader(false);
+      if (res?.message) {
+        setErrorMsg(res.message);
+        setIsLoading(false);
+      }
     });
   };
 
   const testDriveLogin = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     setErrorMsg(null);
-
-    manageLoader(true);
 
     const { email, password } = {
       email: 'tester@mail.com',
@@ -56,9 +47,10 @@ const Login = ({
     };
 
     loginHandler(email, password).then((res) => {
-      setErrorMsg(res?.message);
-
-      manageLoader(false);
+      if (res?.message) {
+        setErrorMsg(res.message);
+        setIsLoading(false);
+      }
     });
   };
 
@@ -71,12 +63,9 @@ const Login = ({
             onClick={() => manageLoginWindow(false)}
           />
         </div>
-
         <form onSubmit={handleLogin} className='form-ctn'>
           <h1>Log In</h1>
-
           <input type='text' name='email' placeholder='Email' required />
-
           <input
             type='password'
             name='password'
@@ -86,7 +75,7 @@ const Login = ({
 
           {errorMsg && <span className='error-msg'>{errorMsg}</span>}
 
-          {loading ? (
+          {isLoading ? (
             <Loader />
           ) : (
             <button type='submit' className='form-btn'>

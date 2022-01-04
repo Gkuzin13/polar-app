@@ -1,8 +1,8 @@
-import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { handleSignOut } from "../../services/logOutHandler";
-import { UserCircleIcon, ChevronDownIcon } from "@heroicons/react/solid";
-import "./NavUser.css";
+import { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { handleSignOut } from '../../services/logOutHandler';
+import { UserCircleIcon, ChevronDownIcon } from '@heroicons/react/solid';
+import './NavUser.css';
 
 const NavUser = ({ currentUser }) => {
   const [dropDown, setDropDown] = useState(false);
@@ -13,57 +13,54 @@ const NavUser = ({ currentUser }) => {
     const clickListener = (e) => {
       if (!modalRef.current.contains(e.target)) {
         setDropDown(false);
-
         return;
       }
     };
 
     if (dropDown) {
-      window.addEventListener("click", clickListener);
+      window.addEventListener('click', clickListener);
     }
 
-    return () => window.removeEventListener("click", clickListener);
+    return () => window.removeEventListener('click', clickListener);
   }, [dropDown]);
 
   return (
-    <div className="navuser-ctn">
+    <div className='navuser-ctn'>
       <button
-        aria-label="Open user navigation"
-        type="button"
-        className="navuser-btn"
-        onClick={() => setDropDown(true)}
-      >
-        <UserCircleIcon className="user-icon" />
+        aria-label='Open user navigation'
+        type='button'
+        className='navuser-btn'
+        onClick={() => setDropDown(true)}>
+        <UserCircleIcon className='user-icon' />
 
         <ChevronDownIcon
-          className={dropDown ? "chevron-icon rotate-icon" : "chevron-icon"}
+          className={dropDown ? 'chevron-icon rotate-icon' : 'chevron-icon'}
         />
       </button>
 
       <div
         ref={modalRef}
-        className="navuser-dropdown"
-        style={dropDown ? { display: "block" } : { display: "none" }}
-      >
-        <div className="dropdown-user">
+        className='navuser-dropdown'
+        style={dropDown ? { display: 'block' } : { display: 'none' }}>
+        <div className='dropdown-user'>
           Hi, <strong>{currentUser?.displayName}</strong>
         </div>
 
-        <div className="dropdown-border"></div>
+        <div className='dropdown-border'></div>
 
-        <Link to="/create">
+        <Link to='/create'>
           <button onClick={() => setDropDown(false)}>Create Post</button>
         </Link>
 
-        <Link to="/myposts">
+        <Link to='/myposts'>
           <button onClick={() => setDropDown(false)}>My Posts</button>
         </Link>
 
-        <Link to="/savedposts">
+        <Link to='/savedposts'>
           <button onClick={() => setDropDown(false)}>Saved Posts</button>
         </Link>
 
-        <div className="dropdown-border"></div>
+        <div className='dropdown-border'></div>
 
         <button onClick={(e) => handleSignOut(e)}>Logout</button>
       </div>

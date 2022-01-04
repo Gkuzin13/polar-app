@@ -1,38 +1,29 @@
 import { useEffect, useState } from 'react';
-import { fetchPosts } from '../../services/postHandler';
-import { getUserData } from '../../services/userDataHandler';
+import { fetchUserPosts } from '../../services/postHandler';
 import { ACTIONS } from '../../reducers/reducers';
 import Post from '../../components/Post/Post';
 import './MyPosts.css';
 import Loader from '../../components/Loader/Loader';
+import { getUserData } from '../../services/userDataHandler';
 
-const MyPosts = ({
-  dispatch,
-  manageLoader,
-  postData,
-  manageLoginWindow,
-  loading,
-  currentUser,
-}) => {
+const MyPosts = ({ dispatch, postData, manageLoginWindow, currentUser }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const [userData, setUserData] = useState([]);
 
   useEffect(() => {
-    manageLoader(true);
+    setIsLoading(true);
 
     getUserData(currentUser.uid).then((data) => {
-      const myPosts = data?.userPosts;
-      setUserData(() => data);
+      setUserData(data);
 
-      fetchPosts().then((posts) => {
-        const filteredposts = posts.filter((post) =>
-          myPosts.includes(post.postId)
-        );
-
-        dispatch({
-          type: ACTIONS.SET_DATA,
-          data: filteredposts,
-        });
-        manageLoader(false);
+      fetchUserPosts(currentUser.uid).then((posts) => {
+        if (posts) {
+          dispatch({
+            type: ACTIONS.SET_DATA,
+            data: posts,
+          });
+        }
+        setIsLoading(false);
       });
     });
 
@@ -42,25 +33,33 @@ const MyPosts = ({
         data: [],
       });
     };
-  }, [dispatch, manageLoader, currentUser]);
+  }, [dispatch, currentUser]);
 
   return (
     <div className='my-posts-ctn'>
       <h1 className='myposts-heading'>My Posts</h1>
-
       <div className='border-ctn'>
         <span className='borderline'></span>
       </div>
-
-      {loading ? <Loader /> : null}
-
-      <Post
-        currentUser={currentUser}
-        dispatch={dispatch}
-        postData={postData}
-        userData={userData}
-        manageLoginWindow={manageLoginWindow}
-      />
+      {!postData.length && !isLoading && (
+        <span className='no-posts'>Empty here.. :(</span>
+      )}
+      {isLoading ? (
+        <Loader />
+      ) : (
+        postData.map((post) => {
+          return (
+            <Post
+              key={post.postId}
+              currentUser={currentUser}
+              dispatch={dispatch}
+              post={post}
+              userData={userData}
+              manageLoginWindow={manageLoginWindow}
+            />
+          );
+        })
+      )}
     </div>
   );
 };

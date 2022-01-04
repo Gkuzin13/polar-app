@@ -9,51 +9,36 @@ import GroupSelect from '../../components/GroupSelect/GroupSelect';
 import Loader from '../../components/Loader/Loader';
 import './Home.css';
 
-const Home = ({
-  manageLoginWindow,
-  dispatch,
-  postData,
-  manageLoader,
-  loading,
-  windowSize,
-}) => {
+const Home = ({ manageLoginWindow, dispatch, postData, windowSize }) => {
   const [userData, setUserData] = useState([]);
-
+  const [isLoading, setIsLoading] = useState(false);
   const { currentUser } = useContext(AuthContext);
 
   useEffect(() => {
-    let isMounted = true;
-
-    manageLoader(true);
-
-    fetchPosts().then((posts) => {
-      if (isMounted) {
-        dispatch({
-          type: ACTIONS.SORT_POST_BY_NEW,
-          data: posts,
-        });
-
-        manageLoader(() => false);
-      }
-    });
-
     if (currentUser) {
       getUserData(currentUser.uid).then((data) => {
         setUserData(data);
       });
     }
 
-    return () => {
-      isMounted = false;
+    setIsLoading(true);
 
+    fetchPosts().then((posts) => {
+      dispatch({
+        type: ACTIONS.SORT_POST_BY_NEW,
+        data: posts,
+      });
+      setIsLoading(false);
+    });
+
+    return () => {
       dispatch({
         type: ACTIONS.SET_DATA,
         data: [],
       });
-
-      manageLoader(false);
+      setIsLoading(false);
     };
-  }, [dispatch, manageLoader, currentUser]);
+  }, [dispatch, currentUser]);
 
   return (
     <div className='home-main-ctn'>
@@ -61,21 +46,26 @@ const Home = ({
         currentUser={currentUser}
         dispatch={dispatch}
         windowSize={windowSize}
-        manageLoader={manageLoader}
+        manageLoader={setIsLoading}
       />
       <div className='home-posts-ctn'>
-        <PostSorter dispatch={dispatch} manageLoader={manageLoader} />
+        <PostSorter dispatch={dispatch} manageLoader={setIsLoading} />
         <div className='posts-ctn'>
-          {loading ? (
-            <Loader />
+          {!isLoading ? (
+            postData.map((post) => {
+              return (
+                <Post
+                  key={post.postId}
+                  currentUser={currentUser}
+                  dispatch={dispatch}
+                  post={post}
+                  userData={userData}
+                  manageLoginWindow={manageLoginWindow}
+                />
+              );
+            })
           ) : (
-            <Post
-              currentUser={currentUser}
-              dispatch={dispatch}
-              postData={postData}
-              userData={userData}
-              manageLoginWindow={manageLoginWindow}
-            />
+            <Loader />
           )}
         </div>
       </div>
